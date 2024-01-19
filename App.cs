@@ -37,7 +37,7 @@ public abstract class App
         pb.MouseMove += (o, e) => {
             this.Cursor = e.Location;
 
-            if (Memory.Mode == "debug") Debug.OnMouseMove();
+            if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
             this.OnMouseMove(o, e);
         };
 
@@ -59,12 +59,12 @@ public abstract class App
         };
 
         form.KeyDown += (o, e) => {
-            if (Memory.Mode == "debug") Debug.OnKeyDown();
+            if (Memory.Mode == "debug") Debug.OnKeyDown(o, e);
             this.OnKeyDown(o, e);
         };
 
         form.KeyUp += (o, e) => {
-            if (Memory.Mode == "debug") Debug.OnKeyUp();
+            if (Memory.Mode == "debug") Debug.OnKeyUp(o, e);
             this.OnKeyUp(o, e);
         };
 

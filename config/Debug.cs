@@ -12,17 +12,17 @@ public static class Debug
 
     }
 
-    public static void OnKeyDown()
+    public static void OnKeyDown(object o, KeyEventArgs e)
     {
 
     }
 
-    public static void OnKeyUp()
+    public static void OnKeyUp(object o, KeyEventArgs e)
     {
 
     }
 
-    public static void OnMouseMove()
+    public static void OnMouseMove(object o, MouseEventArgs e)
     {
 
     }
