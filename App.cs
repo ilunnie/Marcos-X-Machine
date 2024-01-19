@@ -37,6 +37,7 @@ public abstract class App
         pb.MouseMove += (o, e) => {
             this.Cursor = e.Location;
 
+            if (Memory.Mode == "debug") Debug.OnMouseMove();
             this.OnMouseMove(o, e);
         };
 
@@ -50,18 +51,29 @@ public abstract class App
             g.Clear(Color.DarkGray);
             pb.Refresh();
 
+            Camera.Size = new SizeF(bmp.Width, bmp.Height);
+
+            if (Memory.Mode == "debug") Debug.Open();
             this.Open();
             timer.Start();
         };
 
-        form.KeyDown += this.OnKeyDown;
+        form.KeyDown += (o, e) => {
+            if (Memory.Mode == "debug") Debug.OnKeyDown();
+            this.OnKeyDown(o, e);
+        };
 
-        form.KeyUp += this.OnKeyUp;
+        form.KeyUp += (o, e) => {
+            if (Memory.Mode == "debug") Debug.OnKeyUp();
+            this.OnKeyUp(o, e);
+        };
 
         timer.Tick += delegate
         {
             g.Clear(Color.DarkGray);
 
+            Camera.OnFrame();
+            if (Memory.Mode == "debug") Debug.OnFrame();
             this.OnFrame();
 
             pb.Refresh();
