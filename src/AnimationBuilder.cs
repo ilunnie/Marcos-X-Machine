@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 public static class AnimationBuilder
@@ -24,19 +25,28 @@ public static class AnimationBuilder
             entity.Animation.Next = animation;
     }
 
-    public static void AddStaticAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft)
+    public static void AddStaticAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft, int spritesQuantX = 4)
     {
         Image sprite = Bitmap.FromFile("src/Sprites/" + local);
         entity.AddAnimation(new StaticAnimation() {
-            Image = sprite.Cut((int) direction),
+            Image = sprite.Cut((int) direction, spritesQuantX: spritesQuantX),
         });
     }
 
-    public static void AddWalkingAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft)
+    public static void AddWalkingAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft, int spritesQuantX = 4)
     {
         Image sprite = Bitmap.FromFile("src/Sprites/" + local);
         entity.AddAnimation(new WalkingAnimation() {
-            Image = sprite.Cut((int) direction),
+            Image = sprite.Cut((int) direction, spritesQuantX: spritesQuantX),
+        });
+    }
+
+    public static void AddTestAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft, int spritesQuantX = 4)
+    {
+        Image sprite = Bitmap.FromFile("src/Sprites/" + local);
+        entity.AddAnimation(new WalkingAnimation() {
+            Image = sprite.Cut((int) direction, spritesQuantX: spritesQuantX),
+            Sprite = new Sprite(null, PointF.Empty, SizeF.Empty, 0, Random.Shared.Next(0, 5))
         });
     }
 }
