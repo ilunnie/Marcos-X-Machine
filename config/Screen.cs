@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public sealed class Screen : IScreen
@@ -36,28 +37,13 @@ public sealed class Screen : IScreen
 
     public void Sort()
     {
-        Sprite temp;
-        int index;
-        for (int i = 0; i < Sprites.Count; i++)
-        {
-            index = i;
-            for (int j = i + 1; j < Sprites.Count; j++)
-            {
-                if (Sprites[i] > Sprites[j] && Sprites[index] > Sprites[j])
-                    index = j;
-            }
-            if(index != i)
-            {
-                temp = Sprites[i];
-                Sprites[i] = Sprites[index];
-                Sprites[index] = temp;
-            }
-        }
-    }
+        Sprites.Sort();
+    }  
 
     public void Update(Graphics g)
     {
         this.Sort();
+
         foreach (var sprite in Sprites)
         {
             g.DrawImage(sprite);

@@ -4,13 +4,21 @@ using System.Windows.Forms;
 
 public static class Debug
 {
+
     public static void Open()
     {
-        for (int i = 0; i < 1000; i++)
+        var watch = new System.Diagnostics.Stopwatch();
+        watch.Start();
+
+        for (int i = 0; i < 500; i++)
         {
             var marcos = new Marcos(new PointF(Random.Shared.Next(0, 1921), Random.Shared.Next(0, 1081)));
             Memory.Entities.Add(marcos);
         }
+        
+        watch.Stop();
+        MessageBox.Show($"Execution Time: {watch.ElapsedMilliseconds} ms");
+
         Camera.MoveTo(1050, 600);
     }
 

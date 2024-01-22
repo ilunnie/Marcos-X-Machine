@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 
-public class Sprite
+public class Sprite : IComparable<Sprite>
 {
-    public Bitmap Image { get; set; }
+    public SubImage Image { get; set; }
     public Hitbox Hitbox { get; set; }
     public PointF Position { get; set; }
     public SizeF Size { get; set; }
@@ -12,7 +12,14 @@ public class Sprite
     public int Layer { get; set; }
     public int Preference = 0;
 
-    public Sprite(Bitmap image, Hitbox hitbox, PointF position, SizeF size, float angle = 0, int layer = 1)
+    public void Draw(Graphics g)
+    {
+        Image.Draw(g, new RectangleF(
+            Position, Size
+        ));
+    }
+
+    public Sprite(SubImage image, Hitbox hitbox, PointF position, SizeF size, float angle = 0, int layer = 1)
     {
         this.Image = image;
         this.Hitbox = hitbox;
@@ -30,7 +37,7 @@ public class Sprite
     /// <param name="position">Posição na tela que será desenhada</param>
     /// <param name="size">Tamanho da imagem</param>
     /// <param name="angle">Angulo de rotação da imagem</param>
-    public Sprite(Bitmap image, PointF position, SizeF size, float angle = 0, int layer = 1 )
+    public Sprite(SubImage image, PointF position, SizeF size, float angle = 0, int layer = 1 )
         : this(image, null, position, size, angle, layer) {}
 
     /// <summary>
@@ -52,17 +59,10 @@ public class Sprite
     /// <returns><c>true</c> caso ele deva ser desenhado antes</returns>
     public static bool operator <(Sprite s1, Sprite s2)
     {
-        if (s1.Layer > s2.Layer) return false;
-        if (s2.Preference > s1.Preference) return false;
-        if (s1.Position.Y > s2.Position.Y) return false;
-
-        if (
-            s1.Layer == s2.Layer && 
-            s1.Preference == s2.Preference && 
-            s1.Position.Y == s2.Position.Y
-        ) return false;
-
-        return true;
+        return s1 != s2 &&
+            s1.Layer < s2.Layer ||
+            s2.Preference < s1.Preference ||
+            s1.Position.Y < s2.Position.Y;
     }
 
     /// <summary>
@@ -73,17 +73,10 @@ public class Sprite
     /// <returns><c>true</c> caso ele deva ser desenhado depois</returns>
     public static bool operator >(Sprite s1, Sprite s2)
     {
-        if (s1.Layer < s2.Layer) return false;
-        if (s2.Preference < s1.Preference) return false;
-        if (s1.Position.Y < s2.Position.Y) return false;
-
-        if (
-            s1.Layer == s2.Layer && 
-            s1.Preference == s2.Preference && 
-            s1.Position.Y == s2.Position.Y
-        ) return false;
-
-        return true;
+        return s1 != s2 &&
+            s1.Layer > s2.Layer ||
+            s2.Preference > s1.Preference ||
+            s1.Position.Y > s2.Position.Y;
     }
 
     /// <summary>
@@ -94,9 +87,10 @@ public class Sprite
     /// <returns><c>true</c> caso ele deva ser desenhado depois</returns>
     public static bool operator ==(Sprite s1, Sprite s2)
     {
-        if (s1 < s2) return false;
-        if (s1 > s2) return false;
-        return true;
+        return 
+            s1.Layer == s2.Layer &&
+            s2.Preference == s1.Preference &&
+            s1.Position.Y == s2.Position.Y;
     }
 
     /// <summary>
@@ -107,8 +101,10 @@ public class Sprite
     /// <returns><c>true</c> caso ele deva ser desenhado depois</returns>
     public static bool operator !=(Sprite s1, Sprite s2)
     {
-        if (s1 == s2) return false;
-        return true;
+        return 
+            s1.Layer != s2.Layer ||
+            s2.Preference != s1.Preference ||
+            s1.Position.Y != s2.Position.Y;
     }
 
     public override bool Equals(object obj)
@@ -135,5 +131,14 @@ public class Sprite
             ^ Anchor.GetHashCode()
             ^ Layer.GetHashCode()
             ^ Preference.GetHashCode();
+    }
+
+    public int CompareTo(Sprite other)
+    {
+        int layer = this.Layer - other.Layer;
+        int pref = this.Preference - other.Preference;
+        int dy = (int)(this.Position.Y - other.Position.Y);
+
+        return dy + 65_000 * (pref + 10 * layer);
     }
 }

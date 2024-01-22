@@ -21,13 +21,8 @@ public static class Functions
             -(sprite.Anchor.Position.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0)),
             -(sprite.Anchor.Position.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0))
         );
-
-        g.DrawImage(
-            sprite.Image,
-            sprite.Position.X,
-            sprite.Position.Y,
-            sprite.Size.Width, sprite.Size.Height
-        );
+        
+        sprite.Draw(g);
         if (Memory.Mode == "debug" && sprite.Hitbox is not null)
             sprite.Hitbox.Draw(g, new PointF(
                 sprite.Position.X,

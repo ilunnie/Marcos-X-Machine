@@ -6,7 +6,7 @@ public class TestAnimation : IAnimation
 {
     private IAnimation next = null;
     public IAnimation Next { get => next; set => next = value; }
-    public Bitmap Image = null;
+    public SubImage Image { get; set; } = null;
     private Sprite sprite = null;
     public Sprite Sprite
     {
