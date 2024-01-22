@@ -5,10 +5,10 @@ public static class AnimationBuilder
 {
     public static SubImage Cut(this Image sprite, int x = 0, int y = 0, int spritesQuantX = 4, int spritesQuantY = 1)
     {
-        RectangleF rect = new RectangleF(
+        Rectangle rect = new Rectangle(
             sprite.Width / spritesQuantX * x, 
             sprite.Height / spritesQuantY * y, 
-            sprite.Width / spritesQuantX, 
+            sprite.Width / spritesQuantX - 1, 
             sprite.Height / spritesQuantY);
 
         return new SubImage(sprite, rect);;

@@ -21,7 +21,6 @@ public class WalkingAnimation : IAnimation
     public Walk Direction = Walk.Front;
     public float Speed = .05f;
     public int Frame = 0;
-    Stopwatch stopwatch = new Stopwatch();
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
     {
@@ -37,8 +36,7 @@ public class WalkingAnimation : IAnimation
 
     public IAnimation NextFrame()
     {
-        stopwatch.Stop();
-        Sprite.Angle += Speed * (int)Direction * stopwatch.ElapsedMilliseconds;
+        Sprite.Angle += Speed * (int)Direction * Memory.Frame;
 
         if (Sprite.Angle > 5)
             Direction = Walk.Back;
@@ -49,7 +47,6 @@ public class WalkingAnimation : IAnimation
             return this.Skip();
 
         Frame++;
-        stopwatch.Restart();
         return this;
     }
 

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ public abstract class App
     /// </summary>
     public void Run()
     {
+        Stopwatch stopwatch = new Stopwatch();
         ApplicationConfiguration.Initialize();
 
         PictureBox pb = new PictureBox()
@@ -70,6 +72,8 @@ public abstract class App
 
         timer.Tick += delegate
         {
+            stopwatch.Stop();
+            Memory.Frame = stopwatch.ElapsedMilliseconds;
             g.Clear(Color.DarkGray);
 
             Camera.OnFrame();
@@ -78,6 +82,7 @@ public abstract class App
             
             Screen.Queue.Update(g);
             pb.Refresh();
+            stopwatch.Restart();
         };
 
         Application.Run(form);

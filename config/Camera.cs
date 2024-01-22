@@ -5,7 +5,7 @@ public static class Camera
 {
     public static PointF Position { get; set; } = new PointF(0, 0);
     public static SizeF Size { get; set; }
-    private static float zoom = 1;
+    private static float zoom = 2;
     private static float speed = 0.9f;
     public static float Zoom
     {

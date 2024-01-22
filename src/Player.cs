@@ -31,8 +31,11 @@ public class Player : Mob
     }
 
     public override void OnDestroy()
+        => this.Entity.AddAnimation(new MarcosDying());
+
+    public override void OnMouseMove(object o, MouseEventArgs e)
     {
-        this.Entity.AddAnimation(new MarcosDying());
+        
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

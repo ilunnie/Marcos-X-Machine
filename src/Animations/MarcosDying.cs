@@ -5,15 +5,21 @@ public class MarcosDying : IAnimation
     private IAnimation next = null;
     public IAnimation Next { get => next; set => next = value; }
 
-    private Image image = SpriteBuffer.Current.Get("src/Sprites/marcos/marcos-dying-sprites.png");
-    public SubImage Image { get; private set; }
+    private Image Image = SpriteBuffer.Current.Get("src/Sprites/marcos/marcos-dying-sprites.png");
 
     int Frame = 0;
     int State = 0;
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
     {
-        throw new System.NotImplementedException();
+        int state = State >= 16 ? 15 : State % 16;
+        SubImage frame = Image.Cut(state, 0, 16);
+
+        SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size);
+        PointF camPosition = position.PositionOnCam();
+
+        Sprite sprite = new Sprite(frame, hitbox, camPosition, relativeSize, angle, layer);
+        Screen.Queue.Add(sprite);
     }
 
     public IAnimation NextFrame()
@@ -36,7 +42,6 @@ public class MarcosDying : IAnimation
 
     public IAnimation Clone() => new MarcosDying()
     {
-        Next = this.Next,
-        Image = this.Image
+        Next = this.Next
     };
 }
