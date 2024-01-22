@@ -8,7 +8,10 @@ public abstract class Entity
     public int damage { get; set; } = 0;
     public int cooldown { get; set; } = 0;
 
-    public Entity(Graphics g) {
+    public IAnimation Animation { get; set; }
+    public Hitbox Hitbox { get; set; }
+
+    public Entity() {
         this.Spawn();
     }
 
@@ -19,5 +22,8 @@ public abstract class Entity
     public virtual void OnCollision(Entity entity) {}
     public virtual void Move(PointF position)
         => this.Position = position;
-    public virtual void Draw() {}
+    public virtual void Draw() {
+        this.Animation.Draw(Position, Size, Hitbox);
+        Animation = Animation.NextFrame();
+    }
 }

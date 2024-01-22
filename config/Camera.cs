@@ -32,16 +32,24 @@ public static class Camera
         double t = speed * (distance / (Camera.Size.Width / Zoom));
         Position = Position.LinearInterpolation(Destiny, t);
     }
-    public static void FocusCam(this Entity entity, bool motion = true)
+
+    public static void MoveTo(float X, float Y, bool motion = true)
     {
-        float x = entity.Position.X + entity.Size.Width / 2 - Camera.Size.Width / (2 * Zoom);
-        float y = entity.Position.Y + entity.Size.Height / 2 - Camera.Size.Height / (2 * Zoom);
+        float x = X - Camera.Size.Width / (2 * Zoom);
+        float y = Y - Camera.Size.Height / (2 * Zoom);
 
         if (!motion)
             Position = new PointF(x, y);
         else
             Destiny = new PointF(x, y);
     }
+    public static void MoveTo(PointF position, bool motion = true)
+        => MoveTo(position.X, position.Y, motion);
+    public static void FocusCam(this Entity entity, bool motion = true)
+        => MoveTo(
+            entity.Position.X + entity.Size.Width / 2,
+            entity.Position.Y + entity.Size.Height / 2,
+        motion);
     public static PointF PositionOnCam(this PointF point)
     {
         float x = (point.X - Camera.Position.X) * Zoom;

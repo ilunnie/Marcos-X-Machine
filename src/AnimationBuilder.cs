@@ -15,4 +15,28 @@ public static class AnimationBuilder
 
         return frame;
     }
+
+    public static void AddAnimation(this Entity entity, IAnimation animation)
+    {
+        if (entity.Animation is null)
+            entity.Animation = animation;
+        else
+            entity.Animation.Next = animation;
+    }
+
+    public static void AddStaticAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft)
+    {
+        Image sprite = Bitmap.FromFile("src/Sprites/" + local);
+        entity.AddAnimation(new StaticAnimation() {
+            Image = sprite.Cut((int) direction),
+        });
+    }
+
+    public static void AddWalkingAnimation(this Entity entity, string local, Direction direction = Direction.BottomLeft)
+    {
+        Image sprite = Bitmap.FromFile("src/Sprites/" + local);
+        entity.AddAnimation(new WalkingAnimation() {
+            Image = sprite.Cut((int) direction),
+        });
+    }
 }

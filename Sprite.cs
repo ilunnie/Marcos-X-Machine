@@ -4,6 +4,7 @@ using System.Drawing;
 public class Sprite
 {
     public Bitmap Image { get; set; }
+    public Hitbox Hitbox { get; set; }
     public PointF Position { get; set; }
     public SizeF Size { get; set; }
     public float Angle { get; set; }
@@ -11,6 +12,17 @@ public class Sprite
     public int Layer { get; set; }
     public int Preference = 0;
 
+    public Sprite(Bitmap image, Hitbox hitbox, PointF position, SizeF size, float angle = 0, int layer = 1)
+    {
+        this.Image = image;
+        this.Hitbox = hitbox;
+        this.Position = position;
+        this.Size = size;
+        this.Angle = angle;
+        this.Anchor = new Anchor(
+            new PointF(0, 0));
+        this.Layer = layer;
+    }
     /// <summary>
     /// Objetos que serão desenhados na tela
     /// </summary>
@@ -19,15 +31,7 @@ public class Sprite
     /// <param name="size">Tamanho da imagem</param>
     /// <param name="angle">Angulo de rotação da imagem</param>
     public Sprite(Bitmap image, PointF position, SizeF size, float angle = 0, int layer = 1 )
-    {
-        this.Image = image;
-        this.Position = position;
-        this.Size = size;
-        this.Angle = angle;
-        this.Anchor = new Anchor(
-            new PointF(0, 0));
-        this.Layer = layer;
-    }
+        : this(image, null, position, size, angle, layer) {}
 
     /// <summary>
     /// <para>Define a ancora do sprite</para>

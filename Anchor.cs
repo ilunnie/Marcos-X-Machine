@@ -5,13 +5,7 @@ public class Anchor
     public PointF Position { get; set; }
     public bool ScreenReference { get; set; }
 
-    public Anchor(PointF position)
-    {
-        this.Position = position;
-        this.ScreenReference = true;
-    }
-
-    public Anchor(PointF position, bool screenReference)
+    public Anchor(PointF position, bool screenReference = true)
     {
         this.Position = position;
         this.ScreenReference = screenReference;

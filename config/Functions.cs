@@ -11,23 +11,28 @@ public static class Functions
     public static void DrawImage(this Graphics g, Sprite sprite)
     {
         g.TranslateTransform(
-            sprite.Anchor.Position.X + (sprite.Anchor.ScreenReference ? sprite.Position.X : 0),
-            sprite.Anchor.Position.Y + (sprite.Anchor.ScreenReference ? sprite.Position.Y : 0)
+            sprite.Anchor.Position.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0),
+            sprite.Anchor.Position.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0)
         );
 
         g.RotateTransform(sprite.Angle);
 
         g.TranslateTransform(
-            -(sprite.Anchor.Position.X + (sprite.Anchor.ScreenReference ? sprite.Position.X : 0)),
-            -(sprite.Anchor.Position.Y + (sprite.Anchor.ScreenReference ? sprite.Position.Y : 0))
+            -(sprite.Anchor.Position.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0)),
+            -(sprite.Anchor.Position.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0))
         );
 
         g.DrawImage(
             sprite.Image,
-            sprite.Position.X + sprite.Anchor.Position.X * (sprite.Anchor.ScreenReference ? 1 : -1),
-            sprite.Position.Y + sprite.Anchor.Position.Y * (sprite.Anchor.ScreenReference ? 1 : -1),
+            sprite.Position.X,
+            sprite.Position.Y,
             sprite.Size.Width, sprite.Size.Height
         );
+        if (Memory.Mode == "debug" && sprite.Hitbox is not null)
+            sprite.Hitbox.Draw(g, new PointF(
+                sprite.Position.X,
+                sprite.Position.Y
+            ));
 
         g.ResetTransform();
     }
@@ -59,7 +64,7 @@ public static class Functions
     /// Calcula a interpolação linear entre ponto A e B
     /// </summary>
     /// <param name="t">Número de 0 a 1 que representa uma distancia entre ambos os pontos</param>
-    /// <returns></returns>
+    /// <returns><c>PointF</c> com a posição calculada</returns>
     public static PointF LinearInterpolation(float Ax, float Ay, float Bx, float By, double t)
     {
         return new PointF(
@@ -81,4 +86,28 @@ public static class Functions
     /// <returns></returns>
     public static PointF LinearInterpolation(this PointF A, float Bx, float By, double t)
         => LinearInterpolation(A.X, A.Y, Bx, By, t);
+
+    /// <summary>
+    /// Calcula o tamanho da imagem com base na escala informada sem distorce-la
+    /// </summary>
+    /// <param name="originalSize">Tamanho original</param>
+    /// <param name="scale">Escala desejada</param>
+    /// <returns>O tamanho que deve ter para não distorcer</returns>
+    public static SizeF ProportionalSize(float Width, float Height, float scale)
+    {
+        return new SizeF(
+            Width * scale * Camera.Zoom,
+            Height * scale * Camera.Zoom
+        );
+    }
+    /// <summary>
+    /// Calcula o tamanho da imagem com base na escala informada sem distorce-la
+    /// </summary>
+    /// <param name="originalSize">Tamanho original</param>
+    /// <param name="scaledSize">Tamanho máximo</param>
+    /// <returns>O tamanho que deve ter para não distorcer</returns>
+    public static SizeF ProportionalSize(float Width, float Height, SizeF scaledSize)
+        => ProportionalSize(Width, Height,
+            Math.Min(scaledSize.Width / (float)Width, scaledSize.Height / (float)Height)
+        );
 }

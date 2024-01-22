@@ -75,7 +75,8 @@ public abstract class App
             Camera.OnFrame();
             if (Memory.Mode == "debug") Debug.OnFrame();
             this.OnFrame();
-
+            
+            Screen.Queue.Update(g);
             pb.Refresh();
         };
 

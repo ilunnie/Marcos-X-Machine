@@ -4,7 +4,7 @@ public static class Debug
 {
     public static void Open()
     {
-        MessageBox.Show("Ta debugado");
+        
     }
 
     public static void OnFrame()
