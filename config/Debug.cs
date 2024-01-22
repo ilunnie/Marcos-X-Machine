@@ -10,7 +10,7 @@ public static class Debug
         var watch = new System.Diagnostics.Stopwatch();
         watch.Start();
 
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 10; i++)
         {
             var marcos = new Marcos(new PointF(Random.Shared.Next(0, 1921), Random.Shared.Next(0, 1081)));
             Memory.Entities.Add(marcos);
