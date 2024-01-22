@@ -4,7 +4,7 @@ using System.Drawing;
 public class Hitbox
 {
     public List<RectangleF> rectangles { get; set; }
-    public Pen pen = Pens.Blue;
+    public Pen Pen = Pens.Blue;
 
     public Hitbox(List<RectangleF> rectangles)
         => this.rectangles = rectangles;
@@ -24,7 +24,7 @@ public class Hitbox
                 (int)(rectangle.Width * Camera.Zoom),
                 (int)(rectangle.Height * Camera.Zoom)
             );
-            g.DrawRectangle(pen, rect);
+            g.DrawRectangle(Pen, rect);
         }
     }
 }

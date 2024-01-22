@@ -18,7 +18,7 @@ public abstract class Entity
     public virtual void Interact() {}
     public virtual void Spawn() {}
     public virtual void Destroy() {}
-    public virtual void OnHit() {}
+    public virtual void OnHit(Entity entity) {}
     public virtual void OnCollision(Entity entity) {}
     public virtual void Move(PointF position)
         => this.Position = position;

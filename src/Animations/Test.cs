@@ -1,6 +1,5 @@
+using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Windows.Forms.Layout;
 
 public class TestAnimation : IAnimation
 {
@@ -20,6 +19,7 @@ public class TestAnimation : IAnimation
     public Walk Direction = Walk.Front;
     public float Speed = .7f;
     public int Frame = 0;
+    Stopwatch stopwatch = new Stopwatch();
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
     {
@@ -35,7 +35,8 @@ public class TestAnimation : IAnimation
 
     public IAnimation NextFrame()
     {
-        Sprite.Angle += Speed * (int)Direction;
+        stopwatch.Stop();
+        Sprite.Angle += Speed * (int)Direction * stopwatch.ElapsedMilliseconds;
 
         if (Sprite.Angle > 5)
             Direction = Walk.Back;
@@ -46,6 +47,7 @@ public class TestAnimation : IAnimation
             return this.Skip();
 
         Frame++;
+        stopwatch.Start();
         return this;
     }
 

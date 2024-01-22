@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +9,13 @@ public class Game : App
         var marcos = new Marcos(new PointF(300, 100));
         Memory.Entities.Add(marcos);
         marcos.FocusCam(false);
+
+        // for (int i = 0; i < 1000; i++)
+        // {
+        //     var sla = new Marcos(new PointF(Random.Shared.Next(0, 1921), Random.Shared.Next(0, 1081)));
+        //     Memory.Entities.Add(sla);
+        // }
+        // Camera.MoveTo(1050, 600);
     }
     public override void OnFrame()
     {
@@ -15,5 +23,6 @@ public class Game : App
         {
             entity.Draw();
         }
+        Collision.VerifyCollision();
     }
 }
