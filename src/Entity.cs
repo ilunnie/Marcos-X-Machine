@@ -8,6 +8,7 @@ public abstract class Entity
     public int damage { get; set; } = 0;
     public int cooldown { get; set; } = 0;
 
+    public Mob Mob = null;
     public IAnimation Animation { get; set; }
     public Hitbox Hitbox { get; set; }
 
