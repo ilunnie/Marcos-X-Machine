@@ -13,7 +13,6 @@ public class Mob
         }
     }
     public List<Hand> Hands { get; set; } = new List<Hand>();
-
     public float MaxLife;
     public float Life;
     public float Speed = 10;
