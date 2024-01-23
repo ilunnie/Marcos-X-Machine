@@ -46,6 +46,6 @@ public static class Debug
 
     public static void OnMouseMove(object o, MouseEventArgs e)
     {
-
+        
     }
 }
