@@ -33,7 +33,7 @@ public static class TileSets
 
                 RectangleF spriteRect = new RectangleF(x, y, spriteWidth, spriteHeight);
 
-                SubImage subImage = new SubImage(img, spriteRect);
+                SubImage subImage = new SubImage(img, spriteRect); // teste
 
 
                 if(spritesRows == 13) 
