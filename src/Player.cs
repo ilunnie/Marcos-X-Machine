@@ -8,24 +8,17 @@ public class Player : Mob
     private bool isMovingRight { get; set; } = false;
     private bool isMovingUp { get; set; } = false;
     private bool isMovingDown { get; set; } = false;
-    public Walk WalkX = Walk.Stop;
-    public Walk WalkY = Walk.Stop;
+    public Walk WalkXLeft = Walk.Stop;
+    public Walk WalkXRight = Walk.Stop;
+    public Walk WalkYUp = Walk.Stop;
+    public Walk WalkYDown = Walk.Stop;
 
     public override void OnFrame()
     {
-        if(isMovingLeft)
-            WalkX = Walk.Back;
-        else if(isMovingRight)
-            WalkX = Walk.Front;
-        else if(isMovingUp)
-            WalkY = Walk.Back;
-        else if(isMovingDown)
-            WalkY = Walk.Front;
-        else
-        {
-            WalkX = Walk.Stop;
-            WalkY = Walk.Stop;
-        }
+        WalkXLeft = isMovingLeft == true ? Walk.Back : Walk.Stop;
+        WalkXRight = isMovingRight == true ? Walk.Front : Walk.Stop;
+        WalkYUp = isMovingUp == true ? Walk.Back : Walk.Stop;
+        WalkYDown = isMovingDown == true ? Walk.Front : Walk.Stop;
 
         this.Move();
     }
@@ -77,5 +70,5 @@ public class Player : Mob
     }
 
     private void Move()
-        => Entity.Move(new PointF(Entity.Position.X + Speed * (int)WalkX, Entity.Position.Y + Speed * (int)WalkY));
+        => Entity.Move(new PointF(Entity.Position.X + Speed *  ((int)WalkXRight + (int)WalkXLeft), Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown)));
 }
