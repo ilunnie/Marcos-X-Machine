@@ -7,7 +7,7 @@ public enum Walk
 
 public enum Direction
 {
-    BottomRigth,
+    BottomRight,
     BottomLeft,
     TopLeft,
     TopRight

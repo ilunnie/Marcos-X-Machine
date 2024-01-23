@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,13 +17,17 @@ public class Player : Mob
     public Player()
     {
         var revolver = new RevolverEntity();
-        Memory.Entities.Add(revolver);
         this.Hands.Add(new Hand(this, revolver, 10));
     }
 
     public override void OnFrame()
     {
         this.Hands[0].Draw();
+        if(isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
+            this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
+        else
+            this.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction);
+        this.Entity.Animation = this.Entity.Animation.Skip();
 
         WalkXLeft = isMovingLeft == true ? Walk.Back : Walk.Stop;
         WalkXRight = isMovingRight == true ? Walk.Front : Walk.Stop;
@@ -38,6 +43,14 @@ public class Player : Mob
     public override void OnMouseMove(object o, MouseEventArgs e)
     {
         this.Hands[0].Set(e.Location);
+        PointF player = this.Entity.Position.PositionOnCam();
+        PointF mouse = e.Location;
+
+        double angle = Math.Atan2((player.Y + Entity.Size.Height / 2) - mouse.Y , (player.X + Entity.Size.Width / 2) - mouse.X);
+        double angleInDegrees = angle * (180f / Math.PI);
+        int spriteIndex = (int)Math.Floor(angleInDegrees / 90f) % 4;
+
+        Direction = (Direction)(spriteIndex + 2);
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)
@@ -79,5 +92,5 @@ public class Player : Mob
     }
 
     private void Move()
-        => Entity.Move(new PointF(Entity.Position.X + Speed *  ((int)WalkXRight + (int)WalkXLeft), Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown)));
+        => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
 }
