@@ -9,8 +9,6 @@ public abstract class App
     protected Bitmap bmp = null;
     protected Graphics g = null;
 
-    public PointF Cursor { get; private set; } = PointF.Empty;
-
     /// <summary>
     /// Inicia o Aplicativo
     /// </summary>
@@ -37,7 +35,7 @@ public abstract class App
         };
 
         pb.MouseMove += (o, e) => {
-            this.Cursor = e.Location;
+            Memory.Cursor = e.Location;
 
             if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
             this.OnMouseMove(o, e);

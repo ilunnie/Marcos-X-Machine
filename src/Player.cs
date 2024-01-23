@@ -17,11 +17,12 @@ public class Player : Mob
     public Player()
     {
         var revolver = new RevolverEntity();
-        this.Hands.Add(new Hand(this, revolver, 10));
+        this.Hands.Add(new Hand(this, revolver, 100));
     }
 
     public override void OnFrame()
     {
+        this.Hands[0].Set(Memory.Cursor);
         this.Hands[0].Draw();
         if(isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
@@ -42,13 +43,12 @@ public class Player : Mob
 
     public override void OnMouseMove(object o, MouseEventArgs e)
     {
-        this.Hands[0].Set(e.Location);
         PointF player = this.Entity.Position.PositionOnCam();
         PointF mouse = e.Location;
 
-        double angle = Math.Atan2((player.Y + Entity.Size.Height / 2) - mouse.Y , (player.X + Entity.Size.Width / 2) - mouse.X);
-        double angleInDegrees = angle * (180f / Math.PI);
-        int spriteIndex = (int)Math.Floor(angleInDegrees / 90f) % 4;
+        var theta = Math.Atan2(player.Y - mouse.Y, player.X - mouse.X);
+        double angle = theta * (180f / Math.PI);
+        int spriteIndex = (int)Math.Floor(angle / 90f) % 4;
 
         Direction = (Direction)(spriteIndex + 2);
     }
