@@ -11,6 +11,9 @@ public class Sprite : IComparable<Sprite>
     public Anchor Anchor { get; private set; }
     public int Layer { get; set; }
     public int Preference = 0;
+    
+    /// <returns>Uma cópia do Sprite</returns>
+    public Sprite Clone => new Sprite(Image, Position, Size, Angle, Layer);
 
     public void Draw(Graphics g)
     {
