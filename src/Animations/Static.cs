@@ -7,7 +7,7 @@ public class StaticAnimation : IAnimation
 
     public SubImage Image { get; set; } = null;
 
-    public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
+    public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
         SizeF relativeSize = Functions.ProportionalSize(Image.Width, Image.Height, size);
         PointF camPosition = position.PositionOnCam();

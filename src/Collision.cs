@@ -36,9 +36,13 @@ public static class Collision
     {
         foreach (var entity in Memory.Entities)
         {
+            if (entity.Hitbox is null)
+                continue;
             bool collision = false;
             foreach (var other in Memory.Entities)
             {
+                if (other.Hitbox is null)
+                    continue;
                 if (entity != other && entity.VerifyCollision(other))
                 {
                     collision = true;

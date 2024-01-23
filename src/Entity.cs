@@ -23,8 +23,8 @@ public abstract class Entity
     public virtual void OnCollision(Entity entity) {}
     public virtual void Move(PointF position)
         => this.Position = position;
-    public virtual void Draw() {
-        this.Animation.Draw(Position, Size, Hitbox);
+    public virtual void Draw(float angle = 0, int layer = 1) {
+        this.Animation.Draw(Position, Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
     }
 }

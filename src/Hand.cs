@@ -5,6 +5,7 @@ public class Hand
     public Mob Mob { get; set; }
     public Entity Entity { get; set; }
     public double Distance { get; set; }
+    public PointF Destiny { get; private set; }
 
     public Hand(Mob mob, Entity entity, double distance)
     {
@@ -13,12 +14,18 @@ public class Hand
         this.Distance = distance;
     }
 
-    public void Draw(PointF point)
+    public void Draw()
     {
-        double distance = Mob.Entity.Position.Distance(point);
+        Entity.Move(Destiny);
+        Entity.Draw(layer: 2);
+    }
+
+    public void Set(PointF point)
+    {
+        PointF mobPosition = Mob.Entity.Position.PositionOnCam();
+        double distance = mobPosition.Distance(point);
         double t = Distance / distance;
 
-        Entity.Move(Mob.Entity.Position.LinearInterpolation(point, t));
-        Entity.Draw();
+        Destiny = Mob.Entity.Position.LinearInterpolation(point, t);
     }
 }

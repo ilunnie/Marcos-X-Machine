@@ -13,8 +13,17 @@ public class Player : Mob
     public Walk WalkYUp = Walk.Stop;
     public Walk WalkYDown = Walk.Stop;
 
+    public Player()
+    {
+        var revolver = new RevolverEntity();
+        Memory.Entities.Add(revolver);
+        this.Hands.Add(new Hand(this, revolver, 10));
+    }
+
     public override void OnFrame()
     {
+        this.Hands[0].Draw();
+
         WalkXLeft = isMovingLeft == true ? Walk.Back : Walk.Stop;
         WalkXRight = isMovingRight == true ? Walk.Front : Walk.Stop;
         WalkYUp = isMovingUp == true ? Walk.Back : Walk.Stop;
@@ -28,7 +37,7 @@ public class Player : Mob
 
     public override void OnMouseMove(object o, MouseEventArgs e)
     {
-        
+        this.Hands[0].Set(e.Location);
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

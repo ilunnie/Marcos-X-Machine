@@ -22,7 +22,7 @@ public class WalkingAnimation : IAnimation
     public float Speed = .09f;
     public int Frame = 0;
 
-    public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
+    public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
         SizeF relativeSize = Functions.ProportionalSize(Image.Width, Image.Height, size);
         PointF camPosition = position.PositionOnCam();

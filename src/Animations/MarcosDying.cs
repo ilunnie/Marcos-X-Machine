@@ -10,7 +10,7 @@ public class MarcosDying : IAnimation
     int Frame = 0;
     int State = 0;
 
-    public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)
+    public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
         int state = State >= 16 ? 15 : State % 16;
         SubImage frame = Image.Cut(state, 0, 16);
