@@ -19,7 +19,7 @@ public class WalkingAnimation : IAnimation
         set => sprite = value;
     }
     public Walk Direction = Walk.Front;
-    public float Speed = .05f;
+    public float Speed = .09f;
     public int Frame = 0;
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, int angle = 0, int layer = 1)

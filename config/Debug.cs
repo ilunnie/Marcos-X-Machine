@@ -32,6 +32,7 @@ public static class Debug
     public static void OnFrame()
     {
         marquitos.OnFrame();
+        marquitos.Entity.FocusCam();
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)

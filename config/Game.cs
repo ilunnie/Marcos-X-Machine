@@ -8,7 +8,6 @@ public class Game : App
     {
         var marcos = new Marcos(new PointF(300, 100));
         Memory.Entities.Add(marcos);
-        marcos.FocusCam(false);
 
         // for (int i = 0; i < 1000; i++)
         // {
