@@ -47,6 +47,6 @@ public static class Debug
 
     public static void OnMouseMove(object o, MouseEventArgs e)
     {
-        
+        if (e.Delta != 0) Camera.Zoom += (float)0.01 * e.Delta;
     }
 }

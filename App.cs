@@ -43,6 +43,11 @@ public abstract class App
             this.OnMouseMove(o, e);
         };
 
+        pb.MouseWheel += (o, e) => {
+            if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
+            this.OnMouseMove(o, e);
+        };
+
         form.Load += delegate
         {
             bmp = new Bitmap(pb.Width, pb.Height);
