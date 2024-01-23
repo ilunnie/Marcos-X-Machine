@@ -7,7 +7,7 @@ public class RevolverEntity : Entity
     {
         this.Name = "Revolver";
 
-        this.Size = new SizeF(1000, 500);
+        this.Size = new SizeF(100, 50);
         this.Position = position;
 
         var rectangles = new List<RectangleF> {
@@ -22,4 +22,13 @@ public class RevolverEntity : Entity
         this.AddStaticAnimation(@"guns/revolver.png", spritesQuantX: 1);
     }
     public RevolverEntity() : this(new PointF(0, 0)) {}
+
+    public override void Draw(float angle = 0, int layer = 1)
+    {
+        StaticAnimation animation = (StaticAnimation)this.Animation;
+        animation.AnchorPosition = new PointF(0, Size.Height / 2);
+        this.Animation = animation;
+        this.Animation.Draw(Position, Size, Hitbox, angle, layer);
+        Animation = Animation.NextFrame();
+    }
 }

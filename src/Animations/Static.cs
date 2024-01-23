@@ -6,6 +6,8 @@ public class StaticAnimation : IAnimation
     public IAnimation Next { get => next; set => next = value; }
 
     public SubImage Image { get; set; } = null;
+    public PointF AnchorPosition { get; set; } = PointF.Empty;
+    public bool AnchorScreenReference = false;
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
@@ -13,6 +15,7 @@ public class StaticAnimation : IAnimation
         PointF camPosition = position.PositionOnCam();
 
         Sprite sprite = new Sprite(Image, hitbox, camPosition, relativeSize, angle, layer);
+        sprite.SetAnchor(AnchorPosition, AnchorScreenReference);
         Screen.Queue.Add(sprite);
     }
 

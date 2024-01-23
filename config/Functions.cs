@@ -105,4 +105,13 @@ public static class Functions
         => ProportionalSize(Width, Height,
             Math.Min(scaledSize.Width / (float)Width, scaledSize.Height / (float)Height)
         );
+
+    /// <summary>
+    /// Calcula o Angulo que Ponto B está referente ao Ponto A
+    /// </summary>
+    /// <param name="A">Ponto de referencia</param>
+    /// <param name="B">Ponto </param>
+    /// <returns></returns>
+    public static double AngleTo(this PointF A, PointF B)
+        => Math.Atan2(B.Y - A.Y, B.X - A.X);
 }

@@ -10,7 +10,7 @@ public static class Camera
     public static float Zoom
     {
         get => zoom;
-        set => zoom = value <= 0 ? Zoom : value;
+        set => zoom = value <= 0 || value >= 10 ? Zoom : value;
     }
     public static float Speed
     {
