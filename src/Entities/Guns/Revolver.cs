@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 public class RevolverEntity : Entity
 {
@@ -19,16 +20,24 @@ public class RevolverEntity : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        this.AddStaticAnimation(@"guns/revolver.png", spritesQuantX: 1);
+        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
+        this.AddAnimation(new StaticAnimation(){
+            Image = sprite
+        });
     }
     public RevolverEntity() : this(new PointF(0, 0)) {}
 
     public override void Draw(float angle = 0, int layer = 1)
     {
         StaticAnimation animation = (StaticAnimation)this.Animation;
-        animation.AnchorPosition = new PointF(0, Size.Height / 2);
+        animation.AnchorPosition = new PointF(0, Size.Height - (Size.Height / 4));
         this.Animation = animation;
-        this.Animation.Draw(Position, Size, Hitbox, angle, layer);
+        this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
+    }
+
+    public override void Interact()
+    {
+        MessageBox.Show("Booom");
     }
 }

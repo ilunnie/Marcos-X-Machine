@@ -38,4 +38,9 @@ public class Hand
         );
         Angle = (float)(angle * (180f / Math.PI));
     }
+
+    public void Click()
+    {
+        Entity.Interact();
+    }
 }

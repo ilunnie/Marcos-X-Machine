@@ -17,13 +17,13 @@ public class Player : Mob
     public Player()
     {
         var revolver = new RevolverEntity();
-        this.Hands.Add(new Hand(this, revolver, 100));
+        this.Hands.Add(new Hand(this, revolver, 50));
     }
 
     public override void OnFrame()
     {
-        this.Hands[0].Set(Memory.Cursor);
-        this.Hands[0].Draw();
+        this.Hands[hand].Set(Memory.Cursor);
+        this.Hands[hand].Draw();
         if(isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
         else
@@ -51,6 +51,9 @@ public class Player : Mob
         int spriteIndex = (int)Math.Floor(angle / 90f) % 4;
 
         Direction = (Direction)(spriteIndex + 2);
+
+        if(e.Button == MouseButtons.Left)
+            this.Hands[hand].Click();
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

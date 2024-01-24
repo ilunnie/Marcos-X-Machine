@@ -4,10 +4,12 @@ using System.Windows.Forms;
 
 public static class Debug
 { 
+    static App app = null;
     static Player marquitos = new Player();
 
-    public static void Open()
+    public static void Open(App app)
     {   
+        Debug.app = app;
         marquitos.Life = 10;
         marquitos.MaxLife = 10;
 
@@ -42,6 +44,7 @@ public static class Debug
     public static void OnKeyDown(object o, KeyEventArgs e)
     {
         marquitos.OnKeyDown(o, e);
+        if (e.KeyCode == Keys.Escape) app.Close();
     }
 
     public static void OnKeyUp(object o, KeyEventArgs e)

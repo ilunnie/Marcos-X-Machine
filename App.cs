@@ -46,6 +46,11 @@ public abstract class App
             this.OnMouseMove(o, e);
         };
 
+        pb.MouseClick += (o, e) => {
+            if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
+            this.OnMouseMove(o, e);
+        };
+
         form.Load += delegate
         {
             bmp = new Bitmap(pb.Width, pb.Height);
@@ -58,7 +63,7 @@ public abstract class App
 
             Camera.Size = new SizeF(bmp.Width, bmp.Height);
 
-            if (Memory.Mode == "debug") Debug.Open();
+            if (Memory.Mode == "debug") Debug.Open(this);
             this.Open();
             timer.Start();
         };
