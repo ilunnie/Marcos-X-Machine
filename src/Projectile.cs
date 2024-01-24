@@ -8,7 +8,7 @@ public abstract class Projectile : Entity
     public float Angle { get; set; }
 
     public override void Spawn() => Memory.Projectiles.Add(this);
-    public override void Destroy() => Memory.Projectiles.Remove(this);
+    public override void Destroy() => Memory.ToDelete.Add(this);
     public virtual void Move()
     {
         double distance = this.Position.Distance(Inicial);

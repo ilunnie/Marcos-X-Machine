@@ -47,16 +47,22 @@ public static class TileSets
 
         using (StreamReader reader = new StreamReader(filePath))
         {
+            int countLine = 0;
             while (!reader.EndOfStream)
             {
                 string linha = reader.ReadLine();
 
                 string[] colunas = linha.Split(',');
 
-                foreach (string coluna in colunas)
+                for (int i = 0; i < colunas.Length; i++)
                 {
-                    Memory.Tileset[int.Parse(coluna)].Clone().Draw();
+                    CalcMap clone = Memory.Tileset[int.Parse(colunas[i])].Clone();
+                    SizeF cloneSize = clone.Size;
+                    clone.Position = new PointF(i * cloneSize.Width, countLine * cloneSize.Height);
+                    clone.Draw();
                 }
+
+                countLine++;
             }
         }
     }

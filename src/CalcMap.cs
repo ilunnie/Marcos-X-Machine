@@ -3,7 +3,7 @@ using System.Windows.Forms.VisualStyles;
 
 public class CalcMap {
     public SubImage Image { get; set; }
-    public PointF Position { get; protected set; }
+    public PointF Position { get; set; }
     public SizeF Size { get; set; }
     public Hitbox Hitbox { get; set; }
     public int Layer { get; set; }
