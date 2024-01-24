@@ -15,9 +15,9 @@ public static class Debug
 
         Marcos marcolas = new Marcos(new PointF(300, 100));
         marquitos.Entity = marcolas;
-
-        TileSets.tileSets();
         
+        TileSets.tileSets();
+
         // var watch = new System.Diagnostics.Stopwatch();
         // watch.Start();
 
