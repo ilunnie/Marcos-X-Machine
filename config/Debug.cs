@@ -17,7 +17,6 @@ public static class Debug
         marquitos.Entity = marcolas;
 
         TileSets.tileSets();
-
         
         // var watch = new System.Diagnostics.Stopwatch();
         // watch.Start();
@@ -38,6 +37,12 @@ public static class Debug
     {
         marquitos.OnFrame();
         marquitos.Entity.FocusCam();
+        TileSets.DrawFromFile();
+
+        // foreach (var item in Memory.Tileset)
+        // {
+        //     Screen.Queue.Add(item);
+        // }
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)

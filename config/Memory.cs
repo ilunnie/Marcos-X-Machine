@@ -9,7 +9,7 @@ public static class Memory
     public static List<Entity> Entities { get; set; } = new List<Entity>();
     public static List<Projectile> Projectiles { get; set; } = new List<Projectile>();
     public static List<Entity> Colliders { get; set; } = new List<Entity>();
-    public static Sprite[] Tileset { get; set; }
+    public static CalcMap[] Tileset { get; set; }
 
     public static void Update()
     {
