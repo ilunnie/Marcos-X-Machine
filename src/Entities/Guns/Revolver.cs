@@ -4,21 +4,13 @@ using System.Windows.Forms;
 
 public class RevolverEntity : Entity
 {
+    private float Angle = 0;
     public RevolverEntity(PointF position)
     {
         this.Name = "Revolver";
 
         this.Size = new SizeF(100, 50);
         this.Position = position;
-
-        var rectangles = new List<RectangleF> {
-            new RectangleF(
-                -3, 0,
-                Size.Width,
-                Size.Height
-            )
-        };
-        this.Hitbox = new Hitbox(rectangles);
 
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
         this.AddAnimation(new StaticAnimation(){
@@ -29,6 +21,7 @@ public class RevolverEntity : Entity
 
     public override void Draw(float angle = 0, int layer = 1)
     {
+        Angle = angle;
         StaticAnimation animation = (StaticAnimation)this.Animation;
         animation.AnchorPosition = new PointF(0, Size.Height - (Size.Height / 4));
         this.Animation = animation;
@@ -38,6 +31,18 @@ public class RevolverEntity : Entity
 
     public override void Interact()
     {
-        MessageBox.Show("Booom");
+        if (cooldown > 0) return;
+
+        this.cooldown = 1000;
+        // MessageBox.Show("Booom");
+
+        PointF inicial = this.Position;
+        var projectile = new YellowProjectile(inicial){
+            Angle = Angle,
+            Speed = 10
+        };
+        // Memory.Projectiles.Add(projectile);
     }
+
+    public override void Spawn() => Memory.Colliders.Add(this);
 }

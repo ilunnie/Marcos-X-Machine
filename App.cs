@@ -88,6 +88,7 @@ public abstract class App
             if (Memory.Mode == "debug") Debug.OnFrame();
             this.OnFrame();
             
+            Memory.Update();
             Screen.Queue.Update(g);
             pb.Refresh();
             stopwatch.Restart();

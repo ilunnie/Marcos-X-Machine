@@ -19,7 +19,7 @@ public class Marcos : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        this.AddWalkingAnimation("marcos/marcos-sprites-old.png", spritesQuantX: 4);
+        this.AddStaticAnimation("marcos/marcos-sprites-old.png", spritesQuantX: 4);
     }
     public Marcos() : this(new PointF(0, 0)) {}
 }

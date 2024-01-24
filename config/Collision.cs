@@ -34,12 +34,12 @@ public static class Collision
 
     public static void VerifyCollision()
     {
-        foreach (var entity in Memory.Entities)
+        foreach (var entity in Memory.Colliders)
         {
             if (entity.Hitbox is null)
                 continue;
             bool collision = false;
-            foreach (var other in Memory.Entities)
+            foreach (var other in Memory.Colliders)
             {
                 if (other.Hitbox is null)
                     continue;

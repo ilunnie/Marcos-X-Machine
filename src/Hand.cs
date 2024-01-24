@@ -19,6 +19,8 @@ public class Hand
 
     public void Draw()
     {
+        if (Entity.cooldown > 0)
+            Entity.cooldown -= 10 * (int)Memory.Frame;
         Entity.Move(Destiny);
         Entity.Draw(angle: Angle);
     }
@@ -31,10 +33,11 @@ public class Hand
         PointF mobPosition = centerPosition.PositionOnCam();
 
         double angle = mobPosition.AngleTo(point);
+        double distance = Distance - Entity.cooldown / 50;
 
         Destiny = new PointF(
-            (float)(x + Distance * Math.Cos(angle)),
-            (float)(y + Distance * Math.Sin(angle))
+            (float)(x + distance * Math.Cos(angle)),
+            (float)(y + distance * Math.Sin(angle))
         );
         Angle = (float)(angle * (180f / Math.PI));
     }

@@ -17,7 +17,7 @@ public class Player : Mob
     public Player()
     {
         var revolver = new RevolverEntity();
-        this.Hands.Add(new Hand(this, revolver, 50));
+        this.Hands.Add(new Hand(this, revolver, 25));
     }
 
     public override void OnFrame()

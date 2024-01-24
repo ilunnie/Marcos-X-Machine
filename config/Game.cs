@@ -7,7 +7,6 @@ public class Game : App
     public override void Open()
     {
         var marcos = new Marcos(new PointF(300, 100));
-        Memory.Entities.Add(marcos);
 
         // for (int i = 0; i < 1000; i++)
         // {
@@ -18,10 +17,6 @@ public class Game : App
     }
     public override void OnFrame()
     {
-        foreach (var entity in Memory.Entities)
-        {
-            entity.Draw();
-        }
-        Collision.VerifyCollision();
+        
     }
 }
