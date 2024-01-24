@@ -3,7 +3,7 @@ using System.Drawing;
 
 public class Hitbox
 {
-    public List<RectangleF> rectangles { get; set; }
+    public List<RectangleF> rectangles { get; set; } = new List<RectangleF>();
     public Pen Pen = Pens.Blue;
 
     public Hitbox(List<RectangleF> rectangles)

@@ -18,7 +18,7 @@ public abstract class Entity
 
     public virtual void Interact() {}
     public virtual void Spawn() => Memory.Entities.Add(this);
-    public virtual void Destroy() => Memory.Entities.Remove(this);
+    public virtual void Destroy() => Memory.ToDelete.Add(this);
     public virtual void OnHit(Entity entity) {}
     public virtual void OnCollision(Entity entity) {}
     public virtual void Move(PointF position)

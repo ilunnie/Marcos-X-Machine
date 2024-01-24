@@ -20,7 +20,7 @@ public class Hand
     public void Draw()
     {
         if (Entity.cooldown > 0)
-            Entity.cooldown -= 10 * (int)Memory.Frame;
+            Entity.cooldown -= (int)Memory.Frame * 3;
         Entity.Move(Destiny);
         Entity.Draw(angle: Angle);
     }
@@ -33,7 +33,7 @@ public class Hand
         PointF mobPosition = centerPosition.PositionOnCam();
 
         double angle = mobPosition.AngleTo(point);
-        double distance = Distance - Entity.cooldown / 50;
+        double distance = Distance - Math.Max(Entity.cooldown, 500) / 50;
 
         Destiny = new PointF(
             (float)(x + distance * Math.Cos(angle)),

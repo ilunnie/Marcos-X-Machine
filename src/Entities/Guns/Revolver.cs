@@ -34,14 +34,13 @@ public class RevolverEntity : Entity
         if (cooldown > 0) return;
 
         this.cooldown = 1000;
-        // MessageBox.Show("Booom");
 
         PointF inicial = this.Position;
         var projectile = new YellowProjectile(inicial){
+            cooldown = 10000,
             Angle = Angle,
-            Speed = 10
+            Speed = 1
         };
-        // Memory.Projectiles.Add(projectile);
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
