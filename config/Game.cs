@@ -7,6 +7,9 @@ public class Game : App
     public override void Open()
     {
         var marcos = new Marcos(new PointF(300, 100));
+        var marcosMob = new Mob();
+        marcosMob.Life = 10;
+        marcosMob.Entity = marcos;
 
         // for (int i = 0; i < 1000; i++)
         // {

@@ -38,9 +38,6 @@ public class Player : Mob
         this.Move();
     }
 
-    public override void OnDestroy()
-        => this.Entity.AddAnimation(new MarcosDying());
-
     public override void OnMouseMove(object o, MouseEventArgs e)
     {
         PointF player = this.Entity.Position.PositionOnCam();

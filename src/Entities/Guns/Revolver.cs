@@ -44,7 +44,7 @@ public class RevolverEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1000;
+        this.cooldown = 500;
         
         var size = this.Size.Width * 0.7f;
         var alturaSlKkk = this.Size.Height * 0.8f;

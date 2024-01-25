@@ -10,7 +10,7 @@ public static class Debug
     public static void Open(App app)
     {   
         Debug.app = app;
-        marquitos.Life = 10;
+        marquitos.Life = 0;
         marquitos.MaxLife = 10;
 
         Marcos marcolas = new Marcos(new PointF(300, 100));
