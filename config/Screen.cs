@@ -46,6 +46,8 @@ public sealed class Screen : IScreen
 
         foreach (var sprite in Sprites)
         {
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             g.DrawImage(sprite);
         }
         Sprites.Clear();
