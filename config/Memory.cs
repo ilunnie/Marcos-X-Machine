@@ -10,11 +10,10 @@ public static class Memory
     public static List<Projectile> Projectiles { get; set; } = new List<Projectile>();
     public static List<Entity> Colliders { get; set; } = new List<Entity>();
     public static List<CalcMap> MapWithCollision { get; set ;} = new List<CalcMap>();
-    public static List<CalcMap> MapWithoutCollision { get; set ;} = new List<CalcMap>();
     public static List<Entity> ToDelete { get; set; } = new List<Entity>();
     public static CalcMap[] Tileset { get; set; }
 
-    public static void Draw()
+    public static void Collide()
     {
         foreach (var map in MapWithCollision)
         {
@@ -34,14 +33,10 @@ public static class Memory
 
     public static void Update()
     {
-        Draw();
+        Collide();
         Collision.VerifyCollision();
         Colliders.Clear();
         foreach (var map in MapWithCollision)
-        {
-            map.Draw();
-        }
-        foreach (var map in MapWithoutCollision)
         {
             map.Draw();
         }

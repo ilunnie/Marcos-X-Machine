@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO.Compression;
 using System.Windows.Forms;
 
 public class RevolverEntity : Entity
@@ -43,15 +44,17 @@ public class RevolverEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 10;
-
+        this.cooldown = 1000;
         
-        PointF anchor = new PointF(Anchor.X + Position.X, Anchor.Y + Position.Y);
-        PointF inicial = new PointF(anchor.X + Size.Width * 0.8f, anchor.Y - Size.Height * 1.5f);
-        var projectile = new YellowProjectile(inicial.CoordinateRotation(anchor, Angle * (Math.PI / 180))){
+        var size = this.Size.Width * 0.7f;
+        var alturaSlKkk = this.Size.Height * 0.8f;
+        var cos = MathF.Cos(MathF.PI * Angle / 180);
+        var sin = MathF.Sin(MathF.PI * Angle / 180);
+        var happyPoint = new PointF(Position.X + cos * size + alturaSlKkk * sin, Position.Y + sin * size - alturaSlKkk * cos);
+        var projectile = new YellowProjectile(happyPoint){
             cooldown = 10000,
             Angle = Angle,
-            Speed = 0,
+            Speed = 5,
         };
     }
 

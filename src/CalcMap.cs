@@ -19,7 +19,7 @@ public class CalcMap : Entity {
     }
 
     public CalcMap Clone()
-        => new CalcMap(this.Image, this.Position, this.Size, this.Hitbox, this.Layer);
+        => new CalcMap(this.Image, this.Position, this.Size, new Hitbox(), this.Layer);
 
     public override void Spawn() { }
 

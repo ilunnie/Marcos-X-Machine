@@ -4,12 +4,13 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
 
 public static class TileSets
 {
-    public static int spriteWidth { get; set; }
-    public static int spriteHeight { get; set; }
+    public static int spriteWidth { get; set; } = 24;
+    public static int spriteHeight { get; set; } = 24;
 
     public static void tileSets()
     {
@@ -35,10 +36,7 @@ public static class TileSets
                 if (spritesRows == 13)
                     layer = 1;
 
-                RectangleF rectangle = new RectangleF(0, 0, 120, 120); 
-                Hitbox hitbox = new Hitbox();
-                hitbox.rectangles.Add(rectangle);
-                CalcMap sprite = new CalcMap(subImage, new PointF(), new SizeF(120, 120), hitbox, layer);
+                CalcMap sprite = new CalcMap(subImage, new PointF(), new SizeF(120, 120), new Hitbox(), layer);
                 sprites[index] = sprite;
 
                 index++;
@@ -61,7 +59,7 @@ public static class TileSets
                 for (int column = 0; column < columns.Length; column++)
                 {
                     string spriteCode = columns[column];
-                    int spriteIndex = int.Parse(new string(spriteCode.Where(char.IsDigit).ToArray()));
+                    int spriteIndex = int.Parse(spriteCode.Split('h')[0]);
 
                     CalcMap clone = Memory.Tileset[spriteIndex].Clone();
                     SizeF cloneSize = clone.Size;
@@ -75,16 +73,36 @@ public static class TileSets
                     clone.AddAnimation(
                         new StaticAnimation() 
                         {
-                             Image = clone.Image 
+                            Image = clone.Image 
                         }
                     );
-                    
-                    if(spriteCode.Contains('h') || spriteCode.Contains('H'))
+
+                    if(spriteCode.Contains('h'))
                     {
-                        Memory.MapWithCollision.Add(clone);
-                        continue;
+                        string getHexa = spriteCode.Split('h')[1];
+
+                        if(getHexa != "")
+                        {
+                            string getBinary = Convert.ToString(Convert.ToInt32(getHexa, 16), 2).PadLeft(9, '0');;
+                            for (int i = 0; i < getBinary.Length; i++)
+                            {
+                                if (getBinary[i] == '1')
+                                    clone.Hitbox.rectangles.Add(new RectangleF(
+                                        clone.Size.Width / 3 * (i % 3),
+                                        clone.Size.Height / 3 * (i / 3),
+                                        clone.Size.Width / 3,
+                                        clone.Size.Height / 3
+                                    ));
+                            }
+                        } else {
+                            clone.Hitbox.rectangles.Add(new RectangleF(
+                                0, 0,
+                                clone.Size.Width,
+                                clone.Size.Height
+                            ));
+                        }
                     }
-                    Memory.MapWithoutCollision.Add(clone);
+                    Memory.MapWithCollision.Add(clone);
                 }
 
                 countLine++;
