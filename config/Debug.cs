@@ -13,7 +13,7 @@ public static class Debug
         marquitos.Life = 10;
         marquitos.MaxLife = 10;
 
-        Marcos marcolas = new Marcos(new PointF(300, 100));
+        Marcos marcolas = new Marcos(new PointF(-100, -100));
         marquitos.Entity = marcolas;
         
         TileSets.tileSets();
