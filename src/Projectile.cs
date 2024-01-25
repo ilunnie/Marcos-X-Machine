@@ -8,14 +8,14 @@ public abstract class Projectile : Entity
     public float Angle { get; set; }
 
     public override void Spawn() => Memory.Projectiles.Add(this);
-    public override void Destroy() => Memory.Projectiles.Remove(this);
+    public override void Destroy() => Memory.ToDelete.Add(this);
     public virtual void Move()
     {
         double distance = this.Position.Distance(Inicial);
 
         this.Position = new PointF(
-            (float)(Inicial.X + (distance + Speed * Memory.Frame) * Math.Cos(Angle)),
-            (float)(Inicial.Y + (distance + Speed * Memory.Frame) * Math.Sin(Angle))
+            (float)(Inicial.X + (distance + Speed * Memory.Frame) * Math.Cos(Angle * (Math.PI / 180))),
+            (float)(Inicial.Y + (distance + Speed * Memory.Frame) * Math.Sin(Angle * (Math.PI / 180)))
         );
     }
 }

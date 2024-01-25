@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 public class RevolverEntity : Entity
 {
+    private PointF Anchor { get; set; }
     private float Angle = 0;
     public RevolverEntity(PointF position)
     {
@@ -12,9 +14,20 @@ public class RevolverEntity : Entity
         this.Size = new SizeF(100, 50);
         this.Position = position;
 
+        var rectangles = new List<RectangleF> {
+            new RectangleF(
+                -3, 0,
+                Size.Width,
+                Size.Height
+            )
+        };
+        this.Hitbox = new Hitbox(rectangles);
+
+        Anchor = new PointF(0, Size.Height * .75f);
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
         this.AddAnimation(new StaticAnimation(){
-            Image = sprite
+            Image = sprite,
+            AnchorPosition = Anchor
         });
     }
     public RevolverEntity() : this(new PointF(0, 0)) {}
@@ -22,9 +35,6 @@ public class RevolverEntity : Entity
     public override void Draw(float angle = 0, int layer = 1)
     {
         Angle = angle;
-        StaticAnimation animation = (StaticAnimation)this.Animation;
-        animation.AnchorPosition = new PointF(0, Size.Height - (Size.Height / 4));
-        this.Animation = animation;
         this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
     }
@@ -33,13 +43,15 @@ public class RevolverEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1000;
+        this.cooldown = 10;
 
-        PointF inicial = this.Position;
-        var projectile = new YellowProjectile(inicial){
+        
+        PointF anchor = new PointF(Anchor.X + Position.X, Anchor.Y + Position.Y);
+        PointF inicial = new PointF(anchor.X + Size.Width * 0.8f, anchor.Y - Size.Height * 1.5f);
+        var projectile = new YellowProjectile(inicial.CoordinateRotation(anchor, Angle * (Math.PI / 180))){
             cooldown = 10000,
             Angle = Angle,
-            Speed = 1
+            Speed = 0,
         };
     }
 

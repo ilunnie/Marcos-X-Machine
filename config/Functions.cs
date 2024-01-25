@@ -114,4 +114,20 @@ public static class Functions
     /// <returns></returns>
     public static double AngleTo(this PointF A, PointF B)
         => Math.Atan2(B.Y - A.Y, B.X - A.X);
+
+    public static PointF CoordinateRotation(float X, float Y, float Xref, float Yref, double angle)
+    {
+        float Xt = X - Xref;
+        float Yt = Y - Yref;
+
+        double Xrot = Xt * Math.Cos(angle) - Yt * Math.Sin(angle);
+        double Yrot = Xt * Math.Sin(angle) + Yt * Math.Cos(angle);
+
+        return new PointF(
+            (float)(Xrot + Xref),
+            (float)(Yrot + Yref)
+        );
+    }
+    public static PointF CoordinateRotation(this PointF point, PointF anchor, double angle)
+        => CoordinateRotation(point.X, point.Y, anchor.X, anchor.Y, angle);
 }
