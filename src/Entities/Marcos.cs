@@ -22,4 +22,9 @@ public class Marcos : Entity
         this.AddStaticAnimation("marcos/marcos-sprites-old.png", spritesQuantX: 4);
     }
     public Marcos() : this(new PointF(0, 0)) {}
+
+    public override void Destroy()
+    {
+        this.AddAnimation(new MarcosDying());
+    }
 }

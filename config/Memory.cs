@@ -28,6 +28,7 @@ public static class Memory
             projectile.Move();
             projectile.cooldown -= (int)Frame * 3;
             if (projectile.cooldown <= 0) projectile.Destroy();
+            Colliders.Add(projectile);
         }
     }
 
@@ -43,6 +44,7 @@ public static class Memory
         foreach (var entity in Entities)
         {
             entity.Draw();
+            if (entity.Mob?.Life <= 0) entity.Destroy();
         }
         foreach (var projectile in Projectiles)
         {
@@ -51,7 +53,7 @@ public static class Memory
         foreach (var entity in ToDelete)
         {
             Entities.Remove(entity);
-            Projectiles.Remove((Projectile)entity);
+            Projectiles.Remove(entity as Projectile);
             Colliders.Remove(entity);
         }
     }

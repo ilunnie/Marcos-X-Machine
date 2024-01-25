@@ -15,7 +15,7 @@ public class MarcosDying : IAnimation
         int state = State >= 16 ? 15 : State % 16;
         SubImage frame = Image.Cut(state, 0, 16);
 
-        SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size);
+        SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size * 1.2f);
         PointF camPosition = position.PositionOnCam();
 
         Sprite sprite = new Sprite(frame, hitbox, camPosition, relativeSize, angle, layer);
