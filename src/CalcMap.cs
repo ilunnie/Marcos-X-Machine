@@ -1,11 +1,8 @@
 using System.Drawing;
 using System.Windows.Forms.VisualStyles;
 
-public class CalcMap {
+public class CalcMap : Entity {
     public SubImage Image { get; set; }
-    public PointF Position { get; set; }
-    public SizeF Size { get; set; }
-    public Hitbox Hitbox { get; set; }
     public int Layer { get; set; }
     
     public CalcMap(SubImage image, PointF position, SizeF size, Hitbox hitbox, int layer) {
@@ -16,8 +13,15 @@ public class CalcMap {
         this.Layer = layer;
     }
 
+    public override void OnHit(Entity entity)
+    {
+        entity.Move(entity.OldPosition);
+    }
+
     public CalcMap Clone()
         => new CalcMap(this.Image, this.Position, this.Size, this.Hitbox, this.Layer);
+
+    public override void Spawn() { }
 
     public void Draw() {
         SizeF relativeSize = Functions.ProportionalSize(Image.Width, Image.Height, Size);

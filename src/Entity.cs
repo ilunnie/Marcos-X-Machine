@@ -4,6 +4,7 @@ public abstract class Entity
 {
     public string Name { get; set; }
     public PointF Position { get; protected set; }
+    public PointF OldPosition { get; protected set; }
     public SizeF Size { get; set; }
     public int damage { get; set; } = 0;
     public int cooldown { get; set; } = 0;
@@ -22,7 +23,12 @@ public abstract class Entity
     public virtual void OnHit(Entity entity) {}
     public virtual void OnCollision(Entity entity) {}
     public virtual void Move(PointF position)
-        => this.Position = position;
+    {
+        this.OldPosition = this.Position;
+        this.Position = position;
+    }
+        
+
     public virtual void Draw(float angle = 0, int layer = 1) {
         this.Animation.Draw(Position, Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
