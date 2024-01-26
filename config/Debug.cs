@@ -16,7 +16,7 @@ public static class Debug
     {   
         Debug.app = app;
 
-        Marcos marcolas = new Marcos(new PointF(-100, -100));
+        Marcos marcolas = new Marcos(new PointF(1000, 400));
         marquitos.Entity = marcolas;
 
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(500, -100));

@@ -1,11 +1,7 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.ApplicationServices;
+using System.Threading.Tasks;
 
 public static class TileSets
 {
