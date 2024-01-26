@@ -14,9 +14,7 @@ public class CalcMap : Entity {
     }
 
     public override void OnHit(Entity entity)
-    {
-        entity.Move(entity.OldPosition);
-    }
+        => entity.Move(entity.OldPosition);
 
     public CalcMap Clone()
         => new CalcMap(this.Image, this.Position, this.Size, new Hitbox(), this.Layer);

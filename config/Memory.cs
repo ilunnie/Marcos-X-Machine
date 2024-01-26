@@ -11,13 +11,13 @@ public static class Memory
     public static List<Entity> Entities { get; set; } = new List<Entity>();
     public static List<Projectile> Projectiles { get; set; } = new List<Projectile>();
     public static List<Entity> Colliders { get; set; } = new List<Entity>();
-    public static List<CalcMap> MapWithCollision { get; set ;} = new List<CalcMap>();
+    public static List<CalcMap> Map { get; set ;} = new List<CalcMap>();
     public static List<Entity> ToDelete { get; set; } = new List<Entity>();
     public static CalcMap[] Tileset { get; set; }
 
     public static void Collide()
     {
-        foreach (var map in MapWithCollision)
+        foreach (var map in Map)
         {
             Colliders.Add(map);
         }
@@ -45,7 +45,7 @@ public static class Memory
             Projectiles.Remove(entity as Projectile);
             Colliders.Remove(entity);
         }
-        foreach (var map in MapWithCollision)
+        foreach (var map in Map)
         {
             map.Draw();
         }

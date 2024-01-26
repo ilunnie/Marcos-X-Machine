@@ -18,7 +18,7 @@ public class MarcosDying : IAnimation
         SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size * 1.2f);
         PointF camPosition = position.PositionOnCam();
 
-        Sprite sprite = new Sprite(frame, hitbox, camPosition, relativeSize, angle, layer);
+        Sprite sprite = new Sprite(frame, hitbox, new PointF(camPosition.X -10, camPosition.Y), relativeSize, angle, layer);
         Screen.Queue.Add(sprite);
     }
 

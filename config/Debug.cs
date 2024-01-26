@@ -19,6 +19,11 @@ public static class Debug
         TileSets.tileSets();
         TileSets.DrawFromFile();
 
+        var marcos = new Marcos(new PointF(-100, -100));
+        var marcosMob = new Mob();
+        marcosMob.Life = 10;
+        marcosMob.Entity = marcos;
+
         // var watch = new System.Diagnostics.Stopwatch();
         // watch.Start();
 
