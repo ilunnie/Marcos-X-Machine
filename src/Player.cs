@@ -22,6 +22,8 @@ public class Player : Mob
 
     public override void OnFrame()
     {
+        if(Memory.MouseButton == MouseButtons.Left)
+            this.Hands[hand].Click();
         this.Hands[hand].Set(Memory.Cursor);
         this.Hands[hand].Draw();
         if(isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
@@ -48,9 +50,6 @@ public class Player : Mob
         int spriteIndex = (int)Math.Floor(angle / 90f) % 4;
 
         Direction = (Direction)(spriteIndex + 2);
-
-        if(e.Button == MouseButtons.Left)
-            this.Hands[hand].Click();
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

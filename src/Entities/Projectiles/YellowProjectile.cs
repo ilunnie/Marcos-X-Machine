@@ -21,7 +21,7 @@ public class YellowProjectile : Projectile
 
     public override void OnHit(Entity entity)
     {
-        if (entity.Mob?.Life > 0)
+        if (entity.Mob?.Life > 0 || entity is CalcMap)
             this.Destroy();
     }
 }

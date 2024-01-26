@@ -46,7 +46,14 @@ public abstract class App
             this.OnMouseMove(o, e);
         };
 
-        pb.MouseClick += (o, e) => {
+        pb.MouseDown += (o, e) => {
+            Memory.MouseButton = e.Button;
+            if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
+            this.OnMouseMove(o, e);
+        };
+
+        pb.MouseUp += (o, e) => {
+            Memory.MouseButton = MouseButtons.None;
             if (Memory.Mode == "debug") Debug.OnMouseMove(o, e);
             this.OnMouseMove(o, e);
         };
