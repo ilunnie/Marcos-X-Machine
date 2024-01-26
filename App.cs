@@ -88,7 +88,7 @@ public abstract class App
 
         timer.Tick += delegate
         {
-            g.Clear(Color.DarkGray);
+            g.Clear(Color.Black);
 
             Camera.OnFrame();
             if (Memory.Mode == "debug") Debug.OnFrame();
