@@ -6,7 +6,7 @@ public class Marcos : Entity
     public Marcos(PointF position)
     {
         this.Name = "Marcos";
-
+        this.cooldown = 60;
         this.Size = new SizeF(75, 100);
         this.Position = position;
 
@@ -23,6 +23,16 @@ public class Marcos : Entity
     }
     public Marcos() : this(new PointF(0, 0)) {}
 
+    public override void OnHit(Entity entity)
+    {
+        if(this.Mob is null || this.cooldown > 0)
+            return;
+
+        this.Mob.Life -= entity.damage;
+        this.cooldown = entity.damage > 0 && this.Mob.Life > 0 ? 120 : 0;
+        if (this.Mob.Life <= 0)
+            this.Destroy();
+    }
     public override void Destroy()
     {
         this.AddAnimation(new MarcosDying());
