@@ -13,7 +13,7 @@ public class DamagedBot : Mob
     {
         this.MaxLife = 20;
         this.Life = 20;
-        this.Speed = 0.5f;
+        this.Speed = 0.002f;
     }
 
     public override void OnFrame()
@@ -28,6 +28,7 @@ public class DamagedBot : Mob
         if (player.Life > 0)
         {
             isMoving = true;
+            VerifyPosition(this.Entity.Position, this.nextPosition);
             nextPosition = player.Entity.Position;
         }
         else
@@ -37,6 +38,7 @@ public class DamagedBot : Mob
                 (int)this.Entity.Position.Y - 200,
                 400, 400);
             isMoving = true;
+            VerifyPosition(this.Entity.Position, this.nextPosition);
 
             if (nextPosition == PointF.Empty || this.Entity.Position.Distance(nextPosition) < 100)
                 nextPosition = new PointF(
@@ -45,10 +47,16 @@ public class DamagedBot : Mob
                 );
         }
 
+        if(isMoving)
+            this.Entity.AddWalkingAnimation("enemies/damaged-bot/damaged-bot-sprites.png", Direction);
+        else
+            this.Entity.AddStaticAnimation("enemies/damaged-bot/damaged-bot-sprites.png", Direction);
+        this.Entity.Animation = this.Entity.Animation.Skip();
+
         this.Entity.Move(
             this.Entity.Position.LinearInterpolation(
                 nextPosition,
-                this.Speed)
+                this.Speed * Memory.Frame)
         );
     }
 }

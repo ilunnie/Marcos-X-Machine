@@ -27,8 +27,8 @@ public class Mob
     public virtual void OnMouseMove(object o, MouseEventArgs e) {}
     public virtual void OnKeyDown(object o, KeyEventArgs e) {}
     public virtual void OnKeyUp(object o, KeyEventArgs e) {}
-    public virtual void VerifyPosition(PointF entityPosition, PointF ) {
-        var theta = Math.Atan2(player.Y - mouse.Y, player.X - mouse.X);
+    public virtual void VerifyPosition(PointF entityPosition, PointF referencePoint) {
+        var theta = Math.Atan2(entityPosition.Y - referencePoint.Y, entityPosition.X - referencePoint.X);
         double angle = theta * (180f / Math.PI);
         int spriteIndex = (int)Math.Floor(angle / 90f) % 4;
 

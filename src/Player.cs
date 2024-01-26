@@ -44,11 +44,7 @@ public class Player : Mob
         PointF player = this.Entity.Position.PositionOnCam();
         PointF mouse = e.Location;
 
-        var theta = Math.Atan2(player.Y - mouse.Y, player.X - mouse.X);
-        double angle = theta * (180f / Math.PI);
-        int spriteIndex = (int)Math.Floor(angle / 90f) % 4;
-
-        Direction = (Direction)(spriteIndex + 2);
+        VerifyPosition(player, mouse);
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

@@ -20,7 +20,7 @@ public class DamagedBotEntity : Entity
 
         this.Hitbox = new Hitbox(rectangles);
 
-        this.AddStaticAnimation("damaged-bot/damaged-bot-sprites.png");
+        this.AddStaticAnimation("enemies/damaged-bot/damaged-bot-sprites.png");
     }
     public DamagedBotEntity() : this(new PointF(0, 0)) {}
 

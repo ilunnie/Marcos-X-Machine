@@ -6,18 +6,22 @@ using System.Windows.Forms.Design.Behavior;
 public static class Debug
 { 
     static App app = null;
-    static Player marquitos = new Player();
+    static Player marquitos = new Player() {
+        Life = 10,
+        MaxLife = 10
+    };
+    static DamagedBot damagedbot = new DamagedBot();
 
     public static void Open(App app)
     {   
         Debug.app = app;
-        marquitos.Life = 0;
-        marquitos.MaxLife = 10;
 
         Marcos marcolas = new Marcos(new PointF(-100, -100));
         marquitos.Entity = marcolas;
 
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(-200, -100));
+        damagedBot.damage = 1;
+        damagedbot.Entity = damagedBot;
         
         TileSets.tileSets();
         TileSets.DrawFromFile();
@@ -46,6 +50,7 @@ public static class Debug
     {
         marquitos.OnFrame();
         marquitos.Entity.FocusCam();
+        damagedbot.OnFrame();
 
         // foreach (var item in Memory.Tileset)
         // {
