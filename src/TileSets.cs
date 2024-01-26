@@ -1,12 +1,24 @@
 using System;
+using System.CodeDom;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
+using System.Windows.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
 
 public static class TileSets
 {
     public static int spriteWidth { get; set; } = 24;
     public static int spriteHeight { get; set; } = 24;
+
+    public static StreamReader Reader { get; set; }
+    private static Queue<string> Line { get; set; } = new Queue<string>();
+    private static int readingX = 0;
+    private static int readingY = 0;
 
     public static void tileSets()
     {
@@ -41,7 +53,38 @@ public static class TileSets
         Memory.Tileset = sprites;
     }
 
-    public static void ReadFile(string filePath) {
+    public static void ReadFile(string file)
+    {
+        if (Reader != null) CloseFile();
+        
+        Reader = new StreamReader(file);
+        readingX = 0;
+        readingY = 0;
+    }
+
+    public static IEnumerable<(string value, int column, int row)> Next()
+    {
+        if (Line.Count == 0)
+        {
+            string line = Reader.ReadLine();
+            if (line == null) yield break;
+
+            Line = new Queue<string>(line.Replace(" ", "").Split(','));
+            readingX = 0;
+            readingY++;
+        }
+
+        readingX++;
+        yield return (Line.Dequeue(), readingX - 1, readingY);
+    }
+
+    public static void CloseFile()
+    {
+        Reader.Close();
+    }
+
+    public static void DrawFromFile() {
+        string filePath = "src/Area/Ets.csv";
 
         using (StreamReader reader = new StreamReader(filePath))
         {

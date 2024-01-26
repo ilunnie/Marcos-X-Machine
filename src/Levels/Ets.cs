@@ -7,7 +7,7 @@ public class EtsLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InicialPosition => new PointF(0, 0);
+    private PointF InicialPosition => new PointF(540, 280);
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
@@ -15,12 +15,13 @@ public class EtsLevel : ILevel
                             .OfType<Player>()
                             .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
 
-    public byte LoadPercent => throw new System.NotImplementedException();
+    public byte LoadPercent => 0;
+    public Image LoadBackground = SpriteBuffer.Current.Get("Levels/LoadBackground");
 
 
-    public bool Load()
+    public void Load()
     {
-        return false;
+
     }
 
     public void OnFrame()
@@ -41,30 +42,5 @@ public class EtsLevel : ILevel
     public void OnMouseMove(object o, MouseEventArgs e)
     {
         
-    }
-
-    bool ILevel.Load()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void ILevel.OnFrame()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void ILevel.OnMouseMove(object o, MouseEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void ILevel.OnKeyDown(object o, KeyEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void ILevel.OnKeyUp(object o, KeyEventArgs e)
-    {
-        throw new System.NotImplementedException();
     }
 }

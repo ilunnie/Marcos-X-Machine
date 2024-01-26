@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public class Game : App
 {
-    bool running = false;
+    public ILevel Level { get; set; }
     public override void Open()
     {
     
@@ -18,6 +18,10 @@ public class Game : App
     }
     public override void OnFrame()
     {
-  
+        if (Level.LoadPercent != 100)
+        {
+            Level.Load();
+            return;
+        }
     }
 }
