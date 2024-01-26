@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -45,6 +47,7 @@ public static class Memory
             Projectiles.Remove(entity as Projectile);
             Colliders.Remove(entity);
         }
+        
         foreach (var map in Map)
         {
             map.Draw();

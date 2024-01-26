@@ -41,7 +41,7 @@ public static class TileSets
         Memory.Tileset = sprites;
     }
 
-    public static void DrawFromFile() {
+    public static void ReadFile() {
         string filePath = "src/Area/Ets.csv";
 
         using (StreamReader reader = new StreamReader(filePath))

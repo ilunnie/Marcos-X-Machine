@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Design.Behavior;
@@ -22,9 +23,9 @@ public static class Debug
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(500, -100));
         damagedBot.damage = 1;
         damagedbot.Entity = damagedBot;
-        
+
         TileSets.tileSets();
-        TileSets.DrawFromFile();
+        TileSets.ReadFile();
 
         var marcos = new Marcos(new PointF(-100, -100));
         var marcosMob = new Mob();
