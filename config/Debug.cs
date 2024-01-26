@@ -51,7 +51,6 @@ public static class Debug
         marquitos.OnFrame();
         marquitos.Entity.FocusCam();
         damagedbot.OnFrame();
-
         // foreach (var item in Memory.Tileset)
         // {
         //     Screen.Queue.Add(item);

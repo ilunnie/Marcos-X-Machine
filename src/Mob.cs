@@ -19,7 +19,7 @@ public class Mob
     public int hand = 0;
     public float MaxLife;
     public float Life;
-    public float Speed = 2;
+    public float Speed = 0.6f;
 
     public virtual void OnDestroy() {}
     public virtual void OnInit() {}
