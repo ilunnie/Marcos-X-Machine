@@ -25,7 +25,7 @@ public static class Debug
         damagedbot.Entity = damagedBot;
 
         TileSets.tileSets();
-        TileSets.ReadFile("src/Area/Ets.csv");
+        TileSets.ReadFile("src/Area/FrenteEts.csv");
 
         
 
