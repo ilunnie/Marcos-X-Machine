@@ -5,6 +5,10 @@ public static class Camera
 {
     public static PointF Position { get; set; } = new PointF(0, 0);
     public static SizeF Size { get; set; }
+    public static float MinimumLimitX { get; set; } = 0;
+    public static float MaxLimitX { get; set; } = 120 * 21;
+    public static float MinimumLimitY { get; set; } = 0;
+    public static float MaxLimitY { get; set; } = 120 * 14;
     private static float zoom = 1;
     private static float speed = 0.9f;
     public static float Zoom
@@ -17,7 +21,7 @@ public static class Camera
         get => speed;
         set => speed = value < 0 ? 0 : value;
     }
-    public static PointF Destiny { get; private set; }
+    public static PointF Destiny { get; set; }
 
     public static void OnFrame()
     {
@@ -30,6 +34,7 @@ public static class Camera
         double distance = Position.Distance(Destiny);
 
         double t = speed * (distance / (Camera.Size.Width / Zoom));
+
         Position = Position.LinearInterpolation(Destiny, t);
     }
 
@@ -37,6 +42,11 @@ public static class Camera
     {
         float x = X - Camera.Size.Width / (2 * Zoom);
         float y = Y - Camera.Size.Height / (2 * Zoom);
+
+        x = x < MinimumLimitX ? MinimumLimitX : x;
+        y = y < MinimumLimitY ? MinimumLimitY : y;
+        x = x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x;
+        y = y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y;
 
         if (!motion)
             Position = new PointF(x, y);
