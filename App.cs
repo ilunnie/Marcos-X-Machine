@@ -73,6 +73,7 @@ public abstract class App
             if (Memory.Mode == "debug") Debug.Open(this);
             this.Open();
             timer.Start();
+            stopwatch.Start();
         };
 
         form.KeyDown += (o, e) => {
@@ -87,8 +88,6 @@ public abstract class App
 
         timer.Tick += delegate
         {
-            stopwatch.Stop();
-            Memory.Frame = stopwatch.ElapsedMilliseconds;
             g.Clear(Color.DarkGray);
 
             Camera.OnFrame();
@@ -98,6 +97,8 @@ public abstract class App
             Memory.Update();
             Screen.Queue.Update(g);
             pb.Refresh();
+
+            Memory.Frame = stopwatch.ElapsedMilliseconds;
             stopwatch.Restart();
         };
 

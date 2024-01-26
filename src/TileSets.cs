@@ -53,7 +53,7 @@ public static class TileSets
             int countLine = 0;
             while (!reader.EndOfStream)
             {
-                string line = reader.ReadLine();
+                string line = reader.ReadLine().Replace(" ", "");
                 string[] columns = line.Split(',');
 
                 for (int column = 0; column < columns.Length; column++)
