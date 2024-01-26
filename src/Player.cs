@@ -4,7 +4,6 @@ using System.Windows.Forms;
 
 public class Player : Mob
 {
-    public Direction Direction = Direction.BottomLeft;
     private bool isMovingLeft { get; set; } = false;
     private bool isMovingRight { get; set; } = false;
     private bool isMovingUp { get; set; } = false;

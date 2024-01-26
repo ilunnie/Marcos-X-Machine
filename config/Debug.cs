@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.Design.Behavior;
 
 public static class Debug
 { 
@@ -15,6 +16,8 @@ public static class Debug
 
         Marcos marcolas = new Marcos(new PointF(-100, -100));
         marquitos.Entity = marcolas;
+
+        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(-200, -100));
         
         TileSets.tileSets();
         TileSets.DrawFromFile();
