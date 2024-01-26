@@ -11,10 +11,10 @@ public class Game : App
     }
     public override void OnFrame()
     {
-        if (!running)
-        {
-            running = ;
-            return;
-        }
+        // if (!running)
+        // {
+        //     running = ;
+        //     return;
+        // }
     }
 }

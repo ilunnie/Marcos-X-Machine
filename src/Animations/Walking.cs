@@ -64,10 +64,10 @@ public class WalkingAnimation : IAnimation
         if (this.Next is null)
             return this.Clone();
 
-        if (this.Next.GetType() == this.GetType())
+        if (this.Next is WalkingAnimation)
         {
             WalkingAnimation clone = (WalkingAnimation)this.Clone();
-            clone.Frame = this.Frame;
+            clone.Frame = 0;
             clone.Image = ((WalkingAnimation)this.Next).Image;
             clone.Sprite.Image = clone.Image;
             clone.NextFrame();

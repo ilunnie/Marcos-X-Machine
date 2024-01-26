@@ -19,7 +19,7 @@ public static class Debug
         Marcos marcolas = new Marcos(new PointF(-100, -100));
         marquitos.Entity = marcolas;
 
-        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(-200, -100));
+        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(500, -100));
         damagedBot.damage = 1;
         damagedbot.Entity = damagedBot;
         

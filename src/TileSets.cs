@@ -102,7 +102,7 @@ public static class TileSets
                             ));
                         }
                     }
-                    Memory.MapWithCollision.Add(clone);
+                    Memory.Map.Add(clone);
                 }
 
                 countLine++;
