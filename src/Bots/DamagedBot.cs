@@ -19,11 +19,14 @@ public class DamagedBot : Mob
     public override void OnFrame()
     {
         if (player == null)
+        {
             foreach (var entity in Memory.Entities)
             {
                 if (entity.Mob is Player)
                     player = (Player)entity.Mob;
             }
+            return;
+        }
 
         if (player.Life > 0)
         {

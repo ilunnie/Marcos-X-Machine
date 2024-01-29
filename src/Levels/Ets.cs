@@ -7,7 +7,7 @@ public class EtsLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InicialPosition => new PointF(540, 280);
+    private PointF InicialPosition => new PointF(640, 430);
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
@@ -45,7 +45,7 @@ public class EtsLevel : ILevel
 
         if (totalToLoad == -1)
         {
-            totalToLoad = Loader.Init();
+            totalToLoad = Loader.Init(Player);
             return;
         }
 
@@ -56,7 +56,7 @@ public class EtsLevel : ILevel
 
     public void OnFrame()
     {
-
+        Player.Entity.FocusCam();
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
