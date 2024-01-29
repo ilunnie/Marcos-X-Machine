@@ -7,7 +7,7 @@ public class Game : App
     public ILevel Level { get; set; }
     public override void Open()
     {
-    
+        this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
         // for (int i = 0; i < 1000; i++)
         // {
@@ -18,10 +18,10 @@ public class Game : App
     }
     public override void OnFrame()
     {
-        if (Level.LoadPercent != 100)
-        {
-            Level.Load();
-            return;
-        }
+        // if (Level.LoadPercent != 100)
+        // {
+        //     Level.Load();
+        //     return;
+        // }
     }
 }
