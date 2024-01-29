@@ -13,7 +13,7 @@ public class DamagedBot : Mob
     {
         this.MaxLife = 20;
         this.Life = 20;
-        this.Speed = 0.0009f;
+        this.Speed = 0.0004f;
     }
 
     public override void OnFrame()
