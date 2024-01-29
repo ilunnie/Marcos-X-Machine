@@ -12,3 +12,9 @@ public enum Direction
     TopLeft,
     TopRight
 }
+
+public enum SoundType
+{
+    Effect,
+    Music
+}
