@@ -5,7 +5,7 @@ public interface ILevel
 {
     public IEvent Event { get; set; }
     public Player Player { get; }
-    public byte LoadPercent { get; }
+    public decimal LoadPercent { get; }
     public void Load();
     public void OnFrame();
     public void OnMouseMove(object o, MouseEventArgs e);

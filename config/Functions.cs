@@ -23,11 +23,6 @@ public static class Functions
         );
         
         sprite.Draw(g);
-        if (Memory.Mode == "debug" && sprite.Hitbox is not null)
-            sprite.Hitbox.Draw(g, new PointF(
-                sprite.Position.X,
-                sprite.Position.Y
-            ));
 
         g.ResetTransform();
     }
