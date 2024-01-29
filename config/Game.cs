@@ -18,6 +18,7 @@ public class Game : App
             Level.Load();
             return;
         }
+        Level.OnFrame();
     }
     public override void OnMouseMove(object o, MouseEventArgs e)
         => Level.OnMouseMove(o, e);

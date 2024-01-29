@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 public class EtsLoad
 {
@@ -9,7 +10,7 @@ public class EtsLoad
     public int Xmin = int.MaxValue;
     public int Ymin = int.MaxValue;
 
-    public int Init()
+    public int Init(Player player)
     {
         Queue.Enqueue(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"));
         Queue.Enqueue(() => Memory.Map.Clear());
@@ -35,6 +36,10 @@ public class EtsLoad
             Camera.MaxLimitY = Ymax * TileSets.spriteMapSize.Height;
             Camera.MinimumLimitX = Xmin * TileSets.spriteMapSize.Width;
             Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
+        });
+
+        Queue.Enqueue(() => {
+            player.Entity.FocusCam(false);
         });
 
         return Queue.Count;

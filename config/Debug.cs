@@ -7,18 +7,18 @@ using System.Windows.Forms.Design.Behavior;
 public static class Debug
 { 
     static App app = null;
-    static Player marquitos = new Player() {
-        Life = 10,
-        MaxLife = 10
-    };
+    // static Player marquitos = new Player() {
+    //     Life = 10,
+    //     MaxLife = 10
+    // };
     static DamagedBot damagedbot = new DamagedBot();
 
     public static void Open(App app)
     {   
         Debug.app = app;
 
-        Marcos marcolas = new Marcos(new PointF(1000, 400));
-        marquitos.Entity = marcolas;
+        // Marcos marcolas = new Marcos(new PointF(1000, 400));
+        // marquitos.Entity = marcolas;
 
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
         damagedBot.damage = 1;
@@ -46,8 +46,8 @@ public static class Debug
 
     public static void OnFrame()
     {
-        marquitos.OnFrame();
-        marquitos.Entity.FocusCam();
+        // marquitos.OnFrame();
+        // marquitos.Entity.FocusCam();
         damagedbot.OnFrame();
         // foreach (var item in Memory.Tileset)
         // {
@@ -57,18 +57,19 @@ public static class Debug
 
     public static void OnKeyDown(object o, KeyEventArgs e)
     {
+        // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
         marquitos.OnKeyDown(o, e);
         if (e.KeyCode == Keys.Escape) app.Close();
     }
 
     public static void OnKeyUp(object o, KeyEventArgs e)
     {
-        marquitos.OnKeyUp(o, e);
+        // marquitos.OnKeyUp(o, e);
     }
 
     public static void OnMouseMove(object o, MouseEventArgs e)
     {
-        marquitos.OnMouseMove(o, e);
+        // marquitos.OnMouseMove(o, e);
         if (e.Delta != 0) Camera.Zoom += (float)0.01 * e.Delta;
     }
 }
