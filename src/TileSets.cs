@@ -15,14 +15,17 @@ public static class TileSets
     public static int spriteWidth { get; set; } = 24;
     public static int spriteHeight { get; set; } = 24;
 
-    public static StreamReader Reader { get; set; }
+    public static SizeF spriteMapSize { get; private set; } = new SizeF(120, 120);
+
+    public static StreamReader Reader { get; set; } = null;
+    public static int Count { get; private set; }
     private static Queue<string> Line { get; set; } = new Queue<string>();
     private static int readingX = 0;
     private static int readingY = 0;
 
-    public static void tileSets()
+    public static void SetSprites(string file)
     {
-        Image img = SpriteBuffer.Current.Get("src/sprites/tileset/Tile.png");
+        Image img = SpriteBuffer.Current.Get(file);
 
         int spritesRows = img.Width / spriteWidth;
         int spritesColumns = img.Height / spriteHeight;
@@ -44,7 +47,7 @@ public static class TileSets
                 if (spritesRows == 13)
                     layer = 1;
 
-                CalcMap sprite = new CalcMap(subImage, new PointF(), new SizeF(120, 120), new Hitbox(), layer);
+                CalcMap sprite = new CalcMap(subImage, new PointF(), new SizeF(spriteMapSize.Width, spriteMapSize.Height), new Hitbox(), layer);
                 sprites[index] = sprite;
 
                 index++;
@@ -56,18 +59,36 @@ public static class TileSets
     public static void ReadFile(string file)
     {
         if (Reader != null) CloseFile();
-        
+
+        Count = Length(new StreamReader(file));
         Reader = new StreamReader(file);
         readingX = 0;
         readingY = 0;
     }
 
-    public static IEnumerable<(string value, int column, int row)> Next()
+    private static int Length(StreamReader reader)
+    {
+        int total = 0;
+        while (!reader.EndOfStream)
+        {
+            string line = reader.ReadLine().Replace(" ", "");
+            if (!string.IsNullOrEmpty(line))
+            {
+                string[] values = line.Split(',');
+                total += values.Length;
+            }
+        }
+        reader.Close();
+        reader.Dispose();
+        return total;
+    }
+
+    public static (string value, int column, int row)? Next()
     {
         if (Line.Count == 0)
         {
             string line = Reader.ReadLine();
-            if (line == null) yield break;
+            if (line == null) return null;
 
             Line = new Queue<string>(line.Replace(" ", "").Split(','));
             readingX = 0;
@@ -75,16 +96,69 @@ public static class TileSets
         }
 
         readingX++;
-        yield return (Line.Dequeue(), readingX - 1, readingY);
+        return (Line.Dequeue(), readingX - 1, readingY);
+    }
+
+    public static void Set(string value, int column, int row)
+    {
+        string[] tileset = value.Split('h');
+        int index = int.Parse(tileset[0]);
+
+        CalcMap clone = Memory.Tileset[index].Clone();
+        clone.Move(
+            new PointF(
+                column * clone.Size.Width,
+                row * clone.Size.Height
+            )
+        );
+        clone.AddAnimation(
+            new StaticAnimation()
+            {
+                Image = clone.Image
+            }
+        );
+
+        if (tileset.Length > 1)
+            clone.ReadHitBox(tileset[1]);
+
+        Memory.Map.Add(clone);
+    }
+
+    public static void ReadHitBox(this CalcMap clone, string hexa)
+    {
+        if (hexa == "")
+        {
+            clone.Hitbox.rectangles.Add(new RectangleF(
+                0, 0,
+                clone.Size.Width,
+                clone.Size.Height
+            ));
+            return;
+        }
+
+        string bin = Convert.ToString(Convert.ToInt32(hexa, 16), 2).PadLeft(9, '0');
+        for (int i = 0; i < bin.Length; i++)
+        {
+            if (bin[i] == '1')
+                clone.Hitbox.rectangles.Add(new RectangleF(
+                    clone.Size.Width / 3 * (i % 3),
+                    clone.Size.Width / 3 * (i / 3),
+                    clone.Size.Width / 3,
+                    clone.Size.Height / 3
+                ));
+        }
+
     }
 
     public static void CloseFile()
     {
         Reader.Close();
+        Reader.Dispose();
+        Reader = null;
     }
 
     public static void DrawFromFile() {
-        string filePath = "src/Area/SalaDigital.csv";
+        string filePath = "src/Area/Ets.csv";
 
         using (StreamReader reader = new StreamReader(filePath))
         {
@@ -103,25 +177,25 @@ public static class TileSets
                     SizeF cloneSize = clone.Size;
                     clone.Move(
                         new PointF(
-                            column * cloneSize.Width, 
+                            column * cloneSize.Width,
                             countLine * cloneSize.Height
                         )
                     );
 
                     clone.AddAnimation(
-                        new StaticAnimation() 
+                        new StaticAnimation()
                         {
-                            Image = clone.Image 
+                            Image = clone.Image
                         }
                     );
 
-                    if(spriteCode.Contains('h'))
+                    if (spriteCode.Contains('h'))
                     {
                         string getHexa = spriteCode.Split('h')[1];
 
-                        if(getHexa != "")
+                        if (getHexa != "")
                         {
-                            string getBinary = Convert.ToString(Convert.ToInt32(getHexa, 16), 2).PadLeft(9, '0');;
+                            string getBinary = Convert.ToString(Convert.ToInt32(getHexa, 16), 2).PadLeft(9, '0');
                             for (int i = 0; i < getBinary.Length; i++)
                             {
                                 if (getBinary[i] == '1')
@@ -132,7 +206,9 @@ public static class TileSets
                                         clone.Size.Height / 3
                                     ));
                             }
-                        } else {
+                        }
+                        else
+                        {
                             clone.Hitbox.rectangles.Add(new RectangleF(
                                 0, 0,
                                 clone.Size.Width,

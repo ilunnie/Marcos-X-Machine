@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 public class Sprite : IComparable<Sprite>
 {
     public SubImage Image { get; set; }
+    public List<TextImage> Text { get; set; } = new List<TextImage>();
     public Hitbox Hitbox { get; set; }
     public PointF Position { get; set; }
     public SizeF Size { get; set; }
@@ -11,15 +13,22 @@ public class Sprite : IComparable<Sprite>
     public Anchor Anchor { get; private set; }
     public int Layer { get; set; }
     public int Preference = 0;
-    
+
     /// <returns>Uma cópia do Sprite</returns>
     public Sprite Clone => new Sprite(Image, Position, Size, Angle, Layer);
 
     public void Draw(Graphics g)
     {
-        Image.Draw(g, new RectangleF(
-            Position, Size
-        ));
+        if (Image is not null)
+            Image.Draw(g, new RectangleF(
+                Position, Size
+            ));
+
+        foreach (TextImage text in Text)
+            text.Draw(g, Position);
+
+        if (Memory.Mode == "debug" && Hitbox is not null)
+            Hitbox.Draw(g, Position);
     }
 
     public Sprite(SubImage image, Hitbox hitbox, PointF position, SizeF size, float angle = 0, int layer = 1)
@@ -40,8 +49,8 @@ public class Sprite : IComparable<Sprite>
     /// <param name="position">Posição na tela que será desenhada</param>
     /// <param name="size">Tamanho da imagem</param>
     /// <param name="angle">Angulo de rotação da imagem</param>
-    public Sprite(SubImage image, PointF position, SizeF size, float angle = 0, int layer = 1 )
-        : this(image, null, position, size, angle, layer) {}
+    public Sprite(SubImage image, PointF position, SizeF size, float angle = 0, int layer = 1)
+        : this(image, null, position, size, angle, layer) { }
 
     /// <summary>
     /// <para>Define a ancora do sprite</para>
@@ -90,7 +99,7 @@ public class Sprite : IComparable<Sprite>
     /// <returns><c>true</c> caso ele deva ser desenhado depois</returns>
     public static bool operator ==(Sprite s1, Sprite s2)
     {
-        return 
+        return
             s1.Layer == s2.Layer &&
             s2.Preference == s1.Preference &&
             s1.Position.Y == s2.Position.Y;
@@ -104,7 +113,7 @@ public class Sprite : IComparable<Sprite>
     /// <returns><c>true</c> caso ele deva ser desenhado depois</returns>
     public static bool operator !=(Sprite s1, Sprite s2)
     {
-        return 
+        return
             s1.Layer != s2.Layer ||
             s2.Preference != s1.Preference ||
             s1.Position.Y != s2.Position.Y;
@@ -115,7 +124,7 @@ public class Sprite : IComparable<Sprite>
         if (obj == null || GetType() != obj.GetType())
             return false;
 
-        Sprite other = (Sprite) obj;
+        Sprite other = (Sprite)obj;
         return this.Image == other.Image
             && this.Position == other.Position
             && this.Size == other.Size

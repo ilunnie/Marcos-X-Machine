@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,20 +9,22 @@ public class Game : App
     public override void Open()
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
-
-        // for (int i = 0; i < 1000; i++)
-        // {
-        //     var sla = new Marcos(new PointF(Random.Shared.Next(0, 1921), Random.Shared.Next(0, 1081)));
-        //     Memory.Entities.Add(sla);
-        // }
-        // Camera.MoveTo(1050, 600);
+        Level = new EtsLevel();
     }
     public override void OnFrame()
     {
-        // if (Level.LoadPercent != 100)
-        // {
-        //     Level.Load();
-        //     return;
-        // }
+        if (Level.LoadPercent != 100)
+        {
+            Level.Load();
+            return;
+        }
     }
+    public override void OnMouseMove(object o, MouseEventArgs e)
+        => Level.OnMouseMove(o, e);
+
+    public override void OnKeyDown(object o, KeyEventArgs e)
+        => Level.OnKeyDown(o, e);
+
+    public override void OnKeyUp(object o, KeyEventArgs e)
+        => Level.OnKeyUp(o, e);
 }
