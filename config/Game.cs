@@ -18,10 +18,10 @@ public class Game : App
     }
     public override void OnFrame()
     {
-        if (Level.LoadPercent != 100)
-        {
-            Level.Load();
-            return;
-        }
+        // if (Level.LoadPercent != 100)
+        // {
+        //     Level.Load();
+        //     return;
+        // }
     }
 }
