@@ -14,6 +14,7 @@ public class RevolverEntity : Entity
 
         this.Size = new SizeF(100, 50);
         this.Position = position;
+        
 
         var rectangles = new List<RectangleF> {
             new RectangleF(

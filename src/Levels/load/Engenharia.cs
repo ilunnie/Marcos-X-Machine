@@ -9,8 +9,12 @@ public class EngenhariaLoad
     public int Ymin = int.MaxValue;
     public int Init(Player player)
     {
-        Queue.Enqueue(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"));
+        Queue.Enqueue(() => {
+            Memory.Entities.Clear();
+            Memory.Entities.Add(player.Entity);
+        });
         Queue.Enqueue(() => Memory.Map.Clear());
+        Queue.Enqueue(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"));
         TileSets.ReadFile("src/Area/Engenharia.csv");
         for (int i = 0; i < TileSets.Count; i++)
         {
@@ -33,6 +37,10 @@ public class EngenhariaLoad
             Camera.MaxLimitY = Ymax * TileSets.spriteMapSize.Height;
             Camera.MinimumLimitX = Xmin * TileSets.spriteMapSize.Width;
             Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
+        });
+
+        Queue.Enqueue(() => {
+            player.Entity.FocusCam(false);
         });
 
         return Queue.Count;

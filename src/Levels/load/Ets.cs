@@ -12,8 +12,12 @@ public class EtsLoad
 
     public int Init(Player player)
     {
-        Queue.Enqueue(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"));
+        Queue.Enqueue(() => {
+            Memory.Entities.Clear();
+            Memory.Entities.Add(player.Entity);
+        });
         Queue.Enqueue(() => Memory.Map.Clear());
+        Queue.Enqueue(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"));
         TileSets.ReadFile("src/Area/Ets.csv");
         for (int i = 0; i < TileSets.Count; i++)
         {
@@ -40,6 +44,26 @@ public class EtsLoad
 
         Queue.Enqueue(() => {
             player.Entity.FocusCam(false);
+        });
+
+        Queue.Enqueue(() =>
+        {
+            new Teleport(
+                new PointF(5 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
+                new PointF(9 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
+                new SalaDigitalLevel()
+            );
+        });
+
+        Queue.Enqueue(() =>
+        {
+            new Teleport(
+                new PointF(18 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 3 * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
+                new PointF(540, 280),
+                new EngenhariaLevel()
+            );
         });
 
         return Queue.Count;

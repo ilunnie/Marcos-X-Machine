@@ -43,10 +43,16 @@ public static class Camera
         float x = X - Camera.Size.Width / (2 * Zoom);
         float y = Y - Camera.Size.Height / (2 * Zoom);
 
-        x = (float)(x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
-        y = (float)(y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
-        x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
-        y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
+        if (MinimumLimitX - MaxLimitX > Size.Width)
+        {
+            x = (float)(x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
+            x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
+        }
+        if (MinimumLimitY - MaxLimitY > Size.Height)
+        {
+            y = (float)(y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
+            y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
+        }
 
         if (!motion)
             Position = new PointF(x, y);

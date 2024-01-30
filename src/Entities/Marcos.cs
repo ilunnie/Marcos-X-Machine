@@ -9,6 +9,7 @@ public class Marcos : Entity
         this.cooldown = 60;
         this.Size = new SizeF(75, 100);
         this.Position = position;
+        this.OldPosition = this.Position;
 
         var rectangles = new List<RectangleF> {
             new RectangleF(

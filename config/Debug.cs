@@ -48,7 +48,7 @@ public static class Debug
     {
         // marquitos.OnFrame();
         // marquitos.Entity.FocusCam();
-        damagedbot.OnFrame();
+        // damagedbot.OnFrame();
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)
