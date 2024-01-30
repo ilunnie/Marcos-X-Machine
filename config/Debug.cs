@@ -7,18 +7,18 @@ using System.Windows.Forms.Design.Behavior;
 public static class Debug
 { 
     static App app = null;
-    // static Player marquitos = new Player() {
-    //     Life = 10,
-    //     MaxLife = 10
-    // };
+    static Player marquitos = new Player() {
+        Life = 10,
+        MaxLife = 10
+    };
     static DamagedBot damagedbot = new DamagedBot();
 
     public static void Open(App app)
     {   
         Debug.app = app;
 
-        // Marcos marcolas = new Marcos(new PointF(1000, 400));
-        // marquitos.Entity = marcolas;
+        Marcos marcolas = new Marcos(new PointF(1000, 400));
+        marquitos.Entity = marcolas;
 
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
         damagedBot.damage = 1;
