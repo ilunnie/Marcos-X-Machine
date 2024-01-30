@@ -41,7 +41,7 @@ public class Player : Mob
         WalkYDown = isMovingDown == true ? Walk.Front : Walk.Stop;
 
         this.Move();
-        this.WalkingSound();
+        // this.WalkingSound();
     }
 
 
