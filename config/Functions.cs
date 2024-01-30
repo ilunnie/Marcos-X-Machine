@@ -141,7 +141,11 @@ public static class Functions
         var costMap = new Dictionary<int, float>();
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
+
         int[] neighbors = new int[8];
+        int CurSubWid, SubFromSub, PlusFromSub;
+        int CurPlusWid, SubFromPlus, PlusFromPlus;
+        float newCost;
 
         queue.Enqueue(enemy, 0);
         cameMap[enemy] = enemy;
@@ -153,24 +157,39 @@ public static class Functions
             if (current == player)
                 break;
 
-            neighbors[0] = map[current - width - 1] > 0 || map[current - width - 1] < width ? map[current - width - 1] : -1;
-            neighbors[1] = map[current - width] > 0 || map[current - width] < width ? map[current - width] : -1;
-            neighbors[2] = map[current - width + 1] > 0 || map[current - width + 1] < width ? map[current - width + 1] : -1;
+            CurSubWid = current - width;
+            CurPlusWid = current + width;
+            SubFromSub = CurSubWid - 1;
+            PlusFromSub = CurSubWid + 1;
+            SubFromPlus = CurPlusWid - 1;
+            PlusFromPlus = CurSubWid + 1;
 
-            neighbors[3] = map[current - 1] > 0 || map[current - 1] < width ? map[current - 1] : -1;
-            neighbors[4] = map[current + 1] > 0 || map[current + 1] < width ? map[current + 1] : -1;
+            neighbors[0] = SubFromSub > 0 || SubFromSub < width || map[SubFromSub] != 1 ? SubFromSub : -1;
+            neighbors[1] = CurSubWid > 0 || CurSubWid < width || map[CurSubWid] != 1 ? CurSubWid : -1;
+            neighbors[2] = PlusFromSub > 0 || PlusFromSub < width || map[PlusFromSub] != 1 ? PlusFromSub : -1;
 
-            neighbors[5] = map[current + width - 1] > 0 || map[current + width - 1] < width ? map[current + width - 1] : -1;
-            neighbors[6] = map[current + width] > 0 || map[current + width] < width ? map[current + width] : -1;
-            neighbors[7] = map[current + width + 1] > 0 || map[current + width + 1] < width ? map[current + width + 1] : -1;
+            neighbors[3] = current - 1 > 0 || current - 1 < width || map[current - 1] != 1 ? current - 1 : -1;
+            neighbors[4] = current + 1 > 0 || current + 1 < width || map[current + 1] != 1 ? current + 1 : -1;
+
+            neighbors[5] = SubFromPlus > 0 || SubFromPlus < width || map[SubFromPlus] != 1 ? SubFromPlus : -1;
+            neighbors[6] = CurPlusWid > 0 || CurPlusWid < width || map[CurPlusWid] != 1 ? CurPlusWid : -1;
+            neighbors[7] = PlusFromPlus > 0 || PlusFromPlus < width || map[PlusFromPlus] != 1? PlusFromPlus : -1;
 
             foreach (var next in neighbors)
             {
                 if (next == -1)
-                    break;
+                    continue;
+
+                newCost = costMap[current] + 1;
+                if(!costMap.ContainsKey(next) || newCost < costMap[next])
+                {
+                    costMap[next] = newCost;
+                    // double priority = newCost + EuclidianDistance(next, player);
+                    // queue.Enqueue(next, priority);
+                    // cameMap[next] = current;
+                }
             }
         }
-
 
         var path = new List<int>();
         return path;

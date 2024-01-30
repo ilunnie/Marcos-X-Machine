@@ -20,9 +20,9 @@ public static class Debug
         Marcos marcolas = new Marcos(new PointF(1000, 400));
         marquitos.Entity = marcolas;
 
-        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
-        damagedBot.damage = 1;
-        damagedbot.Entity = damagedBot;
+        // DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
+        // damagedBot.damage = 1;
+        // damagedbot.Entity = damagedBot;
 
         // TileSets.tileSets();
         // TileSets.ReadFile("src/Area/FrenteEts.csv");
