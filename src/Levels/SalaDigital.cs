@@ -37,7 +37,7 @@ public class SalaDigitalLevel : ILevel
         );
     }
 
-    public void Load()
+    public void Load(Graphics g, PictureBox pb)
     {
         background.Text[0].Text = percent.ToString("0") + "%";
         Screen.Queue.Add(background);

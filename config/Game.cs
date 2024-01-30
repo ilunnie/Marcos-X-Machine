@@ -14,10 +14,8 @@ public class Game : App
     public override void OnFrame()
     {
         if (Level.LoadPercent != 100)
-        {
-            Level.Load();
-            return;
-        }
+            Level.Load(g, pb);
+
         Level.OnFrame();
     }
     public override void OnMouseMove(object o, MouseEventArgs e)

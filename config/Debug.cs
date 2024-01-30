@@ -49,15 +49,12 @@ public static class Debug
         // marquitos.OnFrame();
         // marquitos.Entity.FocusCam();
         damagedbot.OnFrame();
-        // foreach (var item in Memory.Tileset)
-        // {
-        //     Screen.Queue.Add(item);
-        // }
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)
     {
         // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
+        // marquitos.OnKeyDown(o, e);
         if (e.KeyCode == Keys.Escape) app.Close();
     }
 
