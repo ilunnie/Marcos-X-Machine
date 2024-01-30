@@ -35,8 +35,8 @@ public class SalaDigitalLoad
 
         Queue.Enqueue(() =>
         {
-            Camera.MaxLimitX = Xmax * TileSets.spriteMapSize.Width;
-            Camera.MaxLimitY = Ymax * TileSets.spriteMapSize.Height;
+            Camera.MaxLimitX = (Xmax + 1) * TileSets.spriteMapSize.Width;
+            Camera.MaxLimitY = (Ymax + 1) * TileSets.spriteMapSize.Height;
             Camera.MinimumLimitX = Xmin * TileSets.spriteMapSize.Width;
             Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
         });
