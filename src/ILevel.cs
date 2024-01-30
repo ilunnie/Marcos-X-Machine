@@ -6,7 +6,7 @@ public interface ILevel
     public IEvent Event { get; set; }
     public Player Player { get; }
     public decimal LoadPercent { get; }
-    public void Load();
+    public void Load(Graphics g, PictureBox pb);
     public void OnFrame();
     public void OnMouseMove(object o, MouseEventArgs e);
     public void OnKeyDown(object o, KeyEventArgs e);

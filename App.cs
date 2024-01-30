@@ -8,6 +8,7 @@ public abstract class App
     protected Form form = null;
     protected Bitmap bmp = null;
     protected Graphics g = null;
+    protected PictureBox pb = null;
 
     /// <summary>
     /// Inicia o Aplicativo
@@ -17,7 +18,7 @@ public abstract class App
         Stopwatch stopwatch = new Stopwatch();
         ApplicationConfiguration.Initialize();
 
-        PictureBox pb = new PictureBox()
+        pb = new PictureBox()
         {
             Dock = DockStyle.Fill
         };

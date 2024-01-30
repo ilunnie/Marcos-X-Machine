@@ -14,6 +14,7 @@ public class YellowProjectile : Projectile
             this.Size.Height
         ));
         this.Position = position;
+        this.OldPosition = this.Position;
         this.damage = 5;
 
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 8, 1, 10, 4);

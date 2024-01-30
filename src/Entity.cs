@@ -4,7 +4,13 @@ public abstract class Entity
 {
     public string Name { get; set; }
     public PointF Position { get; protected set; }
-    public PointF OldPosition { get; protected set; }
+    private PointF oldPosition = PointF.Empty;
+    public PointF OldPosition
+    {
+        get => oldPosition.IsEmpty ? Position : oldPosition;
+        protected set { oldPosition = value; }
+    }
+
     public SizeF Size { get; set; }
     public int damage { get; set; } = 0;
     public int cooldown { get; set; } = 0;
@@ -13,11 +19,12 @@ public abstract class Entity
     public IAnimation Animation { get; set; }
     public Hitbox Hitbox { get; set; } = new Hitbox();
 
-    public Entity() {
+    public Entity()
+    {
         this.Spawn();
     }
 
-    public virtual void Interact() {}
+    public virtual void Interact() { }
     public virtual void Spawn()
     {
         if (Mob is not null) Mob.OnInit();
@@ -30,21 +37,23 @@ public abstract class Entity
         Memory.ToDelete.Add(this);
     }
 
-    public virtual void OnHit(Entity entity) {
-        if(this.Mob is null)
+    public virtual void OnHit(Entity entity)
+    {
+        if (this.Mob is null)
             return;
 
         this.Mob.Life -= entity.damage;
     }
-    public virtual void OnCollision(Entity entity) {}
+    public virtual void OnCollision(Entity entity) { }
     public virtual void Move(PointF position)
     {
         this.OldPosition = this.Position;
         this.Position = position;
     }
-        
 
-    public virtual void Draw(float angle = 0, int layer = 1) {
+
+    public virtual void Draw(float angle = 0, int layer = 1)
+    {
         this.Animation.Draw(Position, Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
     }

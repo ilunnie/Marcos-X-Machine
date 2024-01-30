@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 public static class Functions
 {
@@ -125,4 +129,50 @@ public static class Functions
     }
     public static PointF CoordinateRotation(this PointF point, PointF anchor, double angle)
         => CoordinateRotation(point.X, point.Y, anchor.X, anchor.Y, angle);
+
+    public static double EuclidianDistance(PointF current, PointF goal) 
+        => Math.Sqrt(
+            (current.X - goal.X) * (current.X - goal.X) + 
+            (current.Y - goal.Y) * (current.Y - goal.Y)
+        );
+    
+    public static List<int> GetNextMove(int player, int enemy, byte[] map, int width)
+    {
+        var costMap = new Dictionary<int, float>();
+        var cameMap = new Dictionary<int, int>();
+        var queue = new PriorityQueue<int, float>();
+        int[] neighbors = new int[8];
+
+        queue.Enqueue(enemy, 0);
+        cameMap[enemy] = enemy;
+        costMap[enemy] = 0;
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            if (current == player)
+                break;
+
+            neighbors[0] = map[current - width - 1] > 0 || map[current - width - 1] < width ? map[current - width - 1] : -1;
+            neighbors[1] = map[current - width] > 0 || map[current - width] < width ? map[current - width] : -1;
+            neighbors[2] = map[current - width + 1] > 0 || map[current - width + 1] < width ? map[current - width + 1] : -1;
+
+            neighbors[3] = map[current - 1] > 0 || map[current - 1] < width ? map[current - 1] : -1;
+            neighbors[4] = map[current + 1] > 0 || map[current + 1] < width ? map[current + 1] : -1;
+
+            neighbors[5] = map[current + width - 1] > 0 || map[current + width - 1] < width ? map[current + width - 1] : -1;
+            neighbors[6] = map[current + width] > 0 || map[current + width] < width ? map[current + width] : -1;
+            neighbors[7] = map[current + width + 1] > 0 || map[current + width + 1] < width ? map[current + width + 1] : -1;
+
+            foreach (var next in neighbors)
+            {
+                if (next == -1)
+                    break;
+            }
+        }
+
+
+        var path = new List<int>();
+        return path;
+    }
 }

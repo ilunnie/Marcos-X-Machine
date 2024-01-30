@@ -1,4 +1,6 @@
+using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 public static class Collision
 {

@@ -7,10 +7,11 @@ public class CalcMap : Entity {
     
     public CalcMap(SubImage image, PointF position, SizeF size, Hitbox hitbox, int layer) {
         this.Image = image;
-        this.Position = position;
         this.Size = size;
         this.Hitbox = hitbox;
         this.Layer = layer;
+        this.Position = position;
+        this.OldPosition = position;
     }
 
     public override void OnHit(Entity entity)
