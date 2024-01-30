@@ -12,6 +12,7 @@ public class Player : Mob
     public Walk WalkXRight = Walk.Stop;
     public Walk WalkYUp = Walk.Stop;
     public Walk WalkYDown = Walk.Stop;
+    public bool isMoving = false;
 
     public Player()
     {
@@ -40,7 +41,9 @@ public class Player : Mob
         WalkYDown = isMovingDown == true ? Walk.Front : Walk.Stop;
 
         this.Move();
+        this.WalkingSound();
     }
+
 
     public override void OnMouseMove(object o, MouseEventArgs e)
     {
@@ -56,17 +59,23 @@ public class Player : Mob
         {
             case Keys.A:
                 isMovingLeft = true;
+                isMoving = true;
                 break;
             case Keys.D:
                 isMovingRight = true;
+                isMoving = true;
                 break;
             case Keys.W:
                 isMovingUp = true;
+                isMoving = true;
                 break;
             case Keys.S:
                 isMovingDown = true;
+                isMoving = true;
                 break;
         }
+
+        isMoving = true;
     }
 
     public override void OnKeyUp(object o, KeyEventArgs e)
@@ -86,8 +95,19 @@ public class Player : Mob
                 isMovingDown = false;
                 break;
         }
+        
+        if(!isMovingUp && !isMovingRight && !isMovingDown && !isMovingRight)
+            isMoving = false;
     }
 
     private void Move()
         => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
+
+    private void WalkingSound()
+    {
+        if(isMoving)
+            SoundBuilder.PlayLoopedSound(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
+        else
+            return;
+    }
 }

@@ -61,6 +61,7 @@ public static class Debug
     public static void OnKeyUp(object o, KeyEventArgs e)
     {
         // marquitos.OnKeyUp(o, e);
+        // SoundBuilder.StopSound();
     }
 
     public static void OnMouseMove(object o, MouseEventArgs e)
