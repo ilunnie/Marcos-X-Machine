@@ -5,10 +5,10 @@ public static class Camera
 {
     public static PointF Position { get; set; } = new PointF(0, 0);
     public static SizeF Size { get; set; }
-    public static float MinimumLimitX { get; set; } = 0;
-    public static float MaxLimitX { get; set; } = 120 * 21;
-    public static float MinimumLimitY { get; set; } = 0;
-    public static float MaxLimitY { get; set; } = 120 * 14;
+    public static float? MinimumLimitX { get; set; } = null;
+    public static float? MaxLimitX { get; set; } = null;
+    public static float? MinimumLimitY { get; set; } = null;
+    public static float? MaxLimitY { get; set; } = null;
     private static float zoom = 1;
     private static float speed = 0.9f;
     public static float Zoom
@@ -43,10 +43,10 @@ public static class Camera
         float x = X - Camera.Size.Width / (2 * Zoom);
         float y = Y - Camera.Size.Height / (2 * Zoom);
 
-        x = x < MinimumLimitX ? MinimumLimitX : x;
-        y = y < MinimumLimitY ? MinimumLimitY : y;
-        x = x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x;
-        y = y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y;
+        x = (float)(x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
+        y = (float)(y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
+        x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
+        y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
 
         if (!motion)
             Position = new PointF(x, y);

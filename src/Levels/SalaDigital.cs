@@ -39,37 +39,41 @@ public class SalaDigitalLevel : ILevel
 
     public void Load(Graphics g, PictureBox pb)
     {
-        background.Text[0].Text = percent.ToString("0") + "%";
-        Screen.Queue.Add(background);
-
-        if (totalToLoad == -1)
+        totalToLoad = Loader.Init(Player);
+        while (LoadPercent != 100)
         {
-            totalToLoad = Loader.Init();
-            return;
+            background.Text[0].Text = percent.ToString("0") + "%";
+
+            Loader.Queue.Dequeue().Invoke();
+
+            percent = (decimal)(totalToLoad - Loader.Queue.Count) / totalToLoad * 100;
+            if (background.Text[0].Text != percent.ToString("0") + "%")
+            {
+                background.Draw(g);
+                pb.Refresh();
+            }
         }
-
-        Loader.Queue.Dequeue().Invoke();
-
-        percent = (decimal)(totalToLoad - Loader.Queue.Count) / totalToLoad * 100;
+        Memory.Frame = 0;
     }
 
     public void OnFrame()
     {
-        
+        Player.Entity.FocusCam();
+        Player.OnFrame();
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        
+        Player.OnKeyDown(o, e);
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
-        
+        Player.OnKeyUp(o, e);
     }
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        
+        Player.OnMouseMove(o, e);
     }
 }
