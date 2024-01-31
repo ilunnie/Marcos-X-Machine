@@ -20,9 +20,9 @@ public static class Debug
         Marcos marcolas = new Marcos(new PointF(1000, 400));
         marquitos.Entity = marcolas;
 
-        // DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
-        // damagedBot.damage = 1;
-        // damagedbot.Entity = damagedBot;
+        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(540, 300));
+        damagedBot.damage = 1;
+        damagedbot.Entity = damagedBot;
 
         // TileSets.tileSets();
         // TileSets.ReadFile("src/Area/FrenteEts.csv");
@@ -48,7 +48,7 @@ public static class Debug
     {
         // marquitos.OnFrame();
         // marquitos.Entity.FocusCam();
-        // damagedbot.OnFrame();
+        damagedbot.OnFrame();
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)

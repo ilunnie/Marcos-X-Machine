@@ -4,6 +4,7 @@ using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 public static class Functions
 {
@@ -136,19 +137,17 @@ public static class Functions
             (current.Y - goal.Y) * (current.Y - goal.Y)
         );
     
-    public static List<int> GetNextMove(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
+    public static Queue<int> GetNextMoves(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
     {
-        var path = new List<int>();
+        var path = new Queue<int>();
 
         var costMap = new Dictionary<int, float>();
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
-        int player = (int)(playerPointF.Y * width + playerPointF.X);
-        int enemy = (int)(enemyPointF.Y * width + enemyPointF.X);
+        int player = (int)(playerPointF.Y / TileSets.spriteMapSize.Height * width + playerPointF.X / TileSets.spriteMapSize.Width);
+        int enemy = (int)(enemyPointF.Y / TileSets.spriteMapSize.Height * width + enemyPointF.X / TileSets.spriteMapSize.Width);
 
         int[] neighbors = new int[8];
-        int CurSubWid, SubFromSub, PlusFromSub;
-        int CurPlusWid, SubFromPlus, PlusFromPlus;
         float newCost;
 
         queue.Enqueue(enemy, 0);
@@ -158,26 +157,24 @@ public static class Functions
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
-            if (current == player)
-                break;
 
-            CurSubWid = current - width;
-            CurPlusWid = current + width;
-            SubFromSub = CurSubWid - 1;
-            PlusFromSub = CurSubWid + 1;
-            SubFromPlus = CurPlusWid - 1;
-            PlusFromPlus = CurSubWid + 1;
+            int CurSubWid = current - width;
+            int CurPlusWid = current + width;
+            int SubFromSub = CurSubWid - 1;
+            int PlusFromSub = CurSubWid + 1;
+            int SubFromPlus = CurPlusWid - 1;
+            int PlusFromPlus = CurSubWid + 1;
 
-            neighbors[0] = SubFromSub > 0 || SubFromSub < width || map[SubFromSub] != 1 ? SubFromSub : -1;
-            neighbors[1] = CurSubWid > 0 || CurSubWid < width || map[CurSubWid] != 1 ? CurSubWid : -1;
-            neighbors[2] = PlusFromSub > 0 || PlusFromSub < width || map[PlusFromSub] != 1 ? PlusFromSub : -1;
+            neighbors[0] = SubFromSub > 0 && SubFromSub < map.Length && map[SubFromSub] != 1 ? SubFromSub : -1;
+            neighbors[1] = CurSubWid > 0 && CurSubWid < map.Length && map[CurSubWid] != 1 ? CurSubWid : -1;
+            neighbors[2] = PlusFromSub > 0 && PlusFromSub < map.Length && map[PlusFromSub] != 1 ? PlusFromSub : -1;
 
-            neighbors[3] = current - 1 > 0 || current - 1 < width || map[current - 1] != 1 ? current - 1 : -1;
-            neighbors[4] = current + 1 > 0 || current + 1 < width || map[current + 1] != 1 ? current + 1 : -1;
+            neighbors[3] = current - 1 > 0 && current - 1 < map.Length && map[current - 1] != 1 ? current - 1 : -1;
+            neighbors[4] = current + 1 > 0 && current + 1 < map.Length && map[current + 1] != 1 ? current + 1 : -1;
 
-            neighbors[5] = SubFromPlus > 0 || SubFromPlus < width || map[SubFromPlus] != 1 ? SubFromPlus : -1;
-            neighbors[6] = CurPlusWid > 0 || CurPlusWid < width || map[CurPlusWid] != 1 ? CurPlusWid : -1;
-            neighbors[7] = PlusFromPlus > 0 || PlusFromPlus < width || map[PlusFromPlus] != 1? PlusFromPlus : -1;
+            neighbors[5] = SubFromPlus > 0 && SubFromPlus < map.Length && map[SubFromPlus] != 1 ? SubFromPlus : -1;
+            neighbors[6] = CurPlusWid > 0 && CurPlusWid < map.Length && map[CurPlusWid] != 1 ? CurPlusWid : -1;
+            neighbors[7] = PlusFromPlus > 0 && PlusFromPlus < map.Length && map[PlusFromPlus] != 1? PlusFromPlus : -1;
 
             foreach (var next in neighbors)
             {
@@ -192,17 +189,23 @@ public static class Functions
                         new PointF(player / width, player % width),
                         new PointF(next / width, next % width)
                     );
-                    queue.Enqueue(next, -priority);
+                    queue.Enqueue(next, priority);
                     cameMap[next] = current;
                 }
             }
+            
+            if (current == player)
+                break;
         }
 
-        for (int i = 0; i < cameMap.Count; i++)
+        path.Enqueue(player);
+        var last = player;
+        while (true)
         {
-            path.Add(cameMap[i]);
+            last = cameMap[last];
+            path.Enqueue(last);
             
-            if (cameMap[i] == player)
+            if (last == enemy)
                 break;
         }
 
