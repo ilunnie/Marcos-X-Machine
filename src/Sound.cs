@@ -3,72 +3,66 @@ using NAudio.Wave;
 public class Sound
 {
     public AudioFileReader Audio { get; protected set; }
-    public WaveOutEvent WaveOut { get; protected set; }
+    public WaveOutEvent waveOut { get; protected set; }
     public WaveOut waveOutLoop { get; protected set; }
 
     public Sound(WaveOutEvent waveOut, AudioFileReader audio)
     {
-        this.WaveOut = waveOut;
+        this.waveOut = waveOut;
         this.Audio = audio;
     }
-    public Sound(Sound sound) : this(sound.WaveOut, sound.Audio) { }
+    public Sound(Sound sound) : this(sound.waveOut, sound.Audio) { }
     public virtual void Play()
     {
-        if (WaveOut.PlaybackState != PlaybackState.Playing)
+        waveOut.Stop();
+        waveOut.Dispose();
+        Audio.Position = 0;
+        waveOut.Init(Audio);
+        waveOut.Play();        
+    }
+
+    public virtual void PlayLoop(LoopedAudio stream)
+    {
+        if (waveOutLoop == null)
         {
-            WaveOut.Stop();
-            WaveOut.Init(Audio);
-            WaveOut.Play();
+            LoopedAudio loop = new LoopedAudio(stream);
+            waveOutLoop = new WaveOut();
+            waveOutLoop.Init(loop);
+            waveOutLoop.Play();
         }
         else
         {
-            WaveOut.Stop();
-            WaveOut.Init(Audio);
-            WaveOut.Play();
+            waveOutLoop.Stop();
+            waveOutLoop.Dispose();
+            waveOutLoop = null;
         }
-    }
-
-    public virtual void PlayLoop(WaveStream sourceStream)
-    {
-        if (waveOutLoop == null)
-            {
-                LoopedAudio loop = new LoopedAudio(sourceStream);
-                waveOutLoop = new WaveOut();
-                waveOutLoop.Init(loop);
-                waveOutLoop.Play();
-            }
-            else
-            {
-                waveOutLoop.Stop();
-                waveOutLoop.Dispose();
-                waveOutLoop = null;
-            }
     }
 
     public virtual void Stop()
     {
-        if (WaveOut.PlaybackState == PlaybackState.Playing)
+        if (waveOut.PlaybackState == PlaybackState.Playing)
         {
-            WaveOut.Stop();
+            waveOut.Stop();
+            waveOut.Dispose();
         }
     }
 
     public virtual void Restart()
     {
-        WaveOut.Stop();
+        waveOut.Stop();
         Audio.Position = 0;
-        WaveOut.Init(Audio);
-        WaveOut.Play();
+        waveOut.Init(Audio);
+        waveOut.Play();
     }
 
     public virtual void Dispose()
     {
-        if (WaveOut != null)
+        if (waveOut != null)
         {
-            WaveOut.Stop();
-            WaveOut.Dispose();
+            waveOut.Stop();
+            waveOut.Dispose();
         }
-        if(Audio != null)
+        if (Audio != null)
         {
             Audio.Dispose();
         }

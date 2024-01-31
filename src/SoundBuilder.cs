@@ -2,59 +2,39 @@ using NAudio.Wave;
 
 public static class SoundBuilder
 {
-    private static Sound currentPlayingSound;
-    private static bool IsPlaying = false;
+    public static Sound currentPlayingSound;
 
     public static void Play(this SoundType soundType, string file)
     {
         Sound sound = SoundBuffer.Current.Get(file);
+        Sound newSound;
 
-        if (currentPlayingSound != null)
-            return;
-
+        if (soundType == SoundType.Effect)
+            newSound = new SoundEffect(sound);
         else
-        {
-            Sound newSound;
+            newSound = new MusicEffect(sound);
 
-            if (soundType == SoundType.Effect)
-                newSound = new SoundEffect(sound);
-            else
-                newSound = new MusicEffect(sound);
-
-            newSound.Play();
-            Memory.Sounds.Add(newSound);
-        }
+        newSound.Play();
+        Memory.Sounds.Add(newSound);
+        currentPlayingSound = newSound;
     }
 
     public static void PlayLoopedSound(this SoundType soundType, string file)
     {
         Sound sound = SoundBuffer.Current.Get(file);
+        WaveFileReader reader = new WaveFileReader(file);
+        LoopedAudio loopStream = new LoopedAudio(reader);
 
-        if (IsPlaying == true)
-            return;
-
-        else
-        {
-            Sound newSound;
-
-            WaveStream sourceStream = sound.Audio;
-
-            if (soundType == SoundType.Effect)
-                newSound = new SoundEffect(sound);
-            else
-                newSound = new MusicEffect(sound);
-
-            newSound.PlayLoop(sourceStream);
-            Memory.Sounds.Add(newSound);
-
-            IsPlaying = true;
-        }
+        sound.PlayLoop(loopStream);
     }
 
     public static void StopSound()
     {
-        currentPlayingSound.Stop();
-        currentPlayingSound = null;
-        IsPlaying = false;
+        if (currentPlayingSound != null)
+        {
+            currentPlayingSound.Stop();
+            currentPlayingSound.Dispose();
+            currentPlayingSound = null;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public class Player : Mob
@@ -25,11 +26,11 @@ public class Player : Mob
 
     public override void OnFrame()
     {
-        if(Memory.MouseButton == MouseButtons.Left)
+        if (Memory.MouseButton == MouseButtons.Left)
             this.Hands[hand].Click();
         this.Hands[hand].Set(Memory.Cursor);
         this.Hands[hand].Draw();
-        if(isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
+        if (isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
         else
             this.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction);
@@ -41,7 +42,6 @@ public class Player : Mob
         WalkYDown = isMovingDown == true ? Walk.Front : Walk.Stop;
 
         this.Move();
-        // this.WalkingSound();
     }
 
 
@@ -93,19 +93,14 @@ public class Player : Mob
                 isMovingDown = false;
                 break;
         }
-        
-        if(!isMovingUp && !isMovingRight && !isMovingDown && !isMovingRight)
+
+        if (!isMovingUp && !isMovingRight && !isMovingDown && !isMovingRight)
             isMoving = false;
     }
 
     private void Move()
-        => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
-
-    private void WalkingSound()
     {
-        if(isMoving)
-            SoundBuilder.PlayLoopedSound(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
-        else
-            SoundBuilder.StopSound();
+        Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
+        SoundBuilder.PlayLoopedSound(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
     }
 }

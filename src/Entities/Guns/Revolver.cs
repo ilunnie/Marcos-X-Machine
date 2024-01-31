@@ -45,7 +45,7 @@ public class RevolverEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1000;
+        this.cooldown = 1500;
         
         var size = this.Size.Width * 0.7f;
         var alturaSlKkk = this.Size.Height * 0.8f;
@@ -57,6 +57,8 @@ public class RevolverEntity : Entity
             Angle = Angle,
             Speed = 5,
         };
+
+        SoundBuilder.Play(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav");
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
