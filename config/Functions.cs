@@ -130,17 +130,21 @@ public static class Functions
     public static PointF CoordinateRotation(this PointF point, PointF anchor, double angle)
         => CoordinateRotation(point.X, point.Y, anchor.X, anchor.Y, angle);
 
-    public static double EuclidianDistance(PointF current, PointF goal) 
-        => Math.Sqrt(
+    public static float EuclidianDistance(PointF current, PointF goal) 
+        => MathF.Sqrt(
             (current.X - goal.X) * (current.X - goal.X) + 
             (current.Y - goal.Y) * (current.Y - goal.Y)
         );
     
-    public static List<int> GetNextMove(int player, int enemy, byte[] map, int width)
+    public static List<int> GetNextMove(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
     {
+        var path = new List<int>();
+
         var costMap = new Dictionary<int, float>();
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
+        int player = (int)(playerPointF.Y * width + playerPointF.X);
+        int enemy = (int)(enemyPointF.Y * width + enemyPointF.X);
 
         int[] neighbors = new int[8];
         int CurSubWid, SubFromSub, PlusFromSub;
@@ -184,14 +188,24 @@ public static class Functions
                 if(!costMap.ContainsKey(next) || newCost < costMap[next])
                 {
                     costMap[next] = newCost;
-                    // double priority = newCost + EuclidianDistance(next, player);
-                    // queue.Enqueue(next, priority);
-                    // cameMap[next] = current;
+                    float priority = newCost + EuclidianDistance(
+                        new PointF(player / width, player % width),
+                        new PointF(next / width, next % width)
+                    );
+                    queue.Enqueue(next, -priority);
+                    cameMap[next] = current;
                 }
             }
         }
 
-        var path = new List<int>();
+        for (int i = 0; i < cameMap.Count; i++)
+        {
+            path.Add(cameMap[i]);
+            
+            if (cameMap[i] == player)
+                break;
+        }
+
         return path;
     }
 }
