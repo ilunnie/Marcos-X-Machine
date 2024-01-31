@@ -61,6 +61,9 @@ public class EtsLevel : ILevel
     {
         Player.Entity.FocusCam();
         Player.OnFrame();
+        Screen.Filters.Add(
+            new Vignette()
+        );
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)

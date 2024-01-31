@@ -66,6 +66,8 @@ public abstract class App
 
             g = Graphics.FromImage(bmp);
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
             g.Clear(Color.DarkGray);
             pb.Refresh();
 

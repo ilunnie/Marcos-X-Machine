@@ -9,8 +9,13 @@ public sealed class Screen : IScreen
     private static readonly object block = new object();
     
     public static List<Sprite> Sprites { get;  private set; }
+    public static List<IFilter> Filters { get; private set; }
 
-    Screen() { Sprites = new List<Sprite>(); }
+    Screen()
+    {
+        Sprites = new List<Sprite>();
+        Filters = new List<IFilter>();
+    }
     public static Screen Queue
     {
         get
@@ -45,11 +50,12 @@ public sealed class Screen : IScreen
         this.Sort();
 
         foreach (var sprite in Sprites)
-        {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             g.DrawImage(sprite);
-        }
+            
+        foreach (var filter in Filters)
+            filter.Apply(g);
+
         Sprites.Clear();
+        Filters.Clear();
     }
 }

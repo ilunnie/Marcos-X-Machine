@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>Marcos_X_Machine</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
