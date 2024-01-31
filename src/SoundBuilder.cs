@@ -3,6 +3,7 @@ using NAudio.Wave;
 public static class SoundBuilder
 {
     private static Sound currentPlayingSound;
+    private static bool IsPlaying = false;
 
     public static void Play(this SoundType soundType, string file)
     {
@@ -29,8 +30,9 @@ public static class SoundBuilder
     {
         Sound sound = SoundBuffer.Current.Get(file);
 
-        if (currentPlayingSound != null)
+        if (IsPlaying == true)
             return;
+
         else
         {
             Sound newSound;
@@ -44,15 +46,15 @@ public static class SoundBuilder
 
             newSound.PlayLoop(sourceStream);
             Memory.Sounds.Add(newSound);
+
+            IsPlaying = true;
         }
     }
 
     public static void StopSound()
     {
-        if (currentPlayingSound != null)
-        {
-            currentPlayingSound.Stop();
-            currentPlayingSound = null;
-        }
+        currentPlayingSound.Stop();
+        currentPlayingSound = null;
+        IsPlaying = false;
     }
 }

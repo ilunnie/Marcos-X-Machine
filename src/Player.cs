@@ -74,8 +74,6 @@ public class Player : Mob
                 isMoving = true;
                 break;
         }
-
-        isMoving = true;
     }
 
     public override void OnKeyUp(object o, KeyEventArgs e)
@@ -108,6 +106,6 @@ public class Player : Mob
         if(isMoving)
             SoundBuilder.PlayLoopedSound(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
         else
-            return;
+            SoundBuilder.StopSound();
     }
 }
