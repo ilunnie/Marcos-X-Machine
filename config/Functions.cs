@@ -211,4 +211,19 @@ public static class Functions
 
         return path;
     }
+
+    /// <summary>
+    /// Converte um Graphics para um Image
+    /// </summary>
+    /// <param name="g">Graphics a ser convertido</param>
+    /// <returns></returns>
+    public static Bitmap ToImage(this Graphics g)
+    {
+        Bitmap bitmap = new Bitmap(
+            (int)g.VisibleClipBounds.Width,
+            (int)g.VisibleClipBounds.Height,
+            g
+        );
+        return bitmap;
+    }
 }

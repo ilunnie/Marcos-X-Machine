@@ -53,7 +53,7 @@ public sealed class Screen : IScreen
             g.DrawImage(sprite);
             
         foreach (var filter in Filters)
-            filter.Apply(g);
+            filter.Apply(ref g);
 
         Sprites.Clear();
         Filters.Clear();

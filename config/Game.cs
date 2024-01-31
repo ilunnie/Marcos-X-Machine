@@ -12,8 +12,11 @@ public class Game : App
     }
     public override void OnFrame()
     {
-        if (Memory.Level.LoadPercent != 100)
+        if (!Memory.Level.IsLoaded)
+        {
             Memory.Level.Load(g, pb);
+            return;
+        }
 
         Memory.Level.OnFrame();
     }

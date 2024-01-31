@@ -3,12 +3,17 @@ using System.Windows.Forms;
 
 public interface ILevel
 {
-    public IEvent Event { get; set; }
-    public Player Player { get; }
-    public decimal LoadPercent { get; }
-    public void Load(Graphics g, PictureBox pb);
-    public void OnFrame();
-    public void OnMouseMove(object o, MouseEventArgs e);
-    public void OnKeyDown(object o, KeyEventArgs e);
-    public void OnKeyUp(object o, KeyEventArgs e);
+    IEvent Event { get; set; }
+    Player Player { get; }
+    Loader Loader { get; }
+    bool IsLoaded { get; set; }
+    void Load(Graphics g, PictureBox pb)
+    {
+        Loader.LoadScreen(Player, g, pb);
+        IsLoaded = true;
+    }
+    void OnFrame();
+    void OnMouseMove(object o, MouseEventArgs e);
+    void OnKeyDown(object o, KeyEventArgs e);
+    void OnKeyUp(object o, KeyEventArgs e);
 }
