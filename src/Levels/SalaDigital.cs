@@ -8,12 +8,14 @@ public class SalaDigitalLevel : ILevel
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
     private PointF InicialPosition => new PointF(540, 280);
+
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
                             .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
+
     public decimal percent = 0;
     public decimal LoadPercent => percent;
     public Image LoadBackground = SpriteBuffer.Current.Get("src/Levels/LoadBackground.png");
@@ -59,21 +61,37 @@ public class SalaDigitalLevel : ILevel
     public void OnFrame()
     {
         Player.Entity.FocusCam();
-        Player.OnFrame();
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnFrame();
+        }
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        Player.OnKeyDown(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyDown(o, e);
+        }
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
-        Player.OnKeyUp(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyUp(o, e);
+        }
     }
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        Player.OnMouseMove(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnMouseMove(o, e);
+        }
     }
 }

@@ -29,6 +29,8 @@ public class Marcos : Entity
         if(this.Mob is null || this.cooldown > 0)
             return;
 
+        if(this == entity.Mob?.Entity) return;
+
         this.Mob.Life -= entity.damage;
         this.cooldown = entity.damage > 0 && this.Mob.Life > 0 ? 120 : 0;
         if (this.Mob.Life <= 0)

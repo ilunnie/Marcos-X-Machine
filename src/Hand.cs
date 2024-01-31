@@ -14,6 +14,7 @@ public class Hand
     {
         this.Mob = mob;
         this.Entity = entity;
+        this.Entity.Mob = mob;
         this.Distance = distance;
     }
 

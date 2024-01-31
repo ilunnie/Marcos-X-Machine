@@ -39,8 +39,9 @@ public abstract class Entity
 
     public virtual void OnHit(Entity entity)
     {
-        if (this.Mob is null)
-            return;
+        if (this.Mob is null) return;
+        if(this == entity.Mob?.Entity) return;
+        if((this.Mob is Player) == (entity.Mob is Player)) return;
 
         this.Mob.Life -= entity.damage;
     }

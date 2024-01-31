@@ -55,6 +55,19 @@ public class SalaDigitalLoad
             );
         });
 
+        Queue.Enqueue(() =>
+        {
+            new BasicBot()
+            {
+                Entity = new BasicBotEntity(new PointF(590, 280))
+            };
+            new BasicBot()
+            {
+                Entity = new BasicBotEntity(new PointF(590, 600))
+            };
+            
+        });
+
         return Queue.Count;
     }
 }

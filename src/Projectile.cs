@@ -3,6 +3,7 @@ using System.Drawing;
 
 public abstract class Projectile : Entity
 {
+    public Entity entity {get; set; }
     public float Speed { get; set; }
     public PointF Inicial { get; set; }
     public float Angle { get; set; }

@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO.Compression;
-using System.Windows.Forms;
 
-public class RevolverEntity : Entity
+public class GunBasicBotEntity : Entity
 {
     private PointF Anchor { get; set; }
     private float Angle = 0;
-    public RevolverEntity(PointF position)
+    public GunBasicBotEntity(PointF position)
     {
         this.Name = "Revolver";
 
-        this.Size = new SizeF(100, 50);
+        this.Size = new SizeF(70, 40);
         this.Position = position;
-        
+
 
         var rectangles = new List<RectangleF> {
             new RectangleF(
@@ -26,14 +24,17 @@ public class RevolverEntity : Entity
         this.Hitbox = new Hitbox(rectangles);
 
         Anchor = new PointF(0, Size.Height * .75f);
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
-        this.AddAnimation(new StaticAnimation(){
+
+        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/basic-bot-gun.png");
+
+        this.AddAnimation(new StaticAnimation()
+        {
             Image = sprite,
             AnchorPosition = Anchor
         });
-    }
-    public RevolverEntity() : this(new PointF(0, 0)) {}
 
+    }
+    public GunBasicBotEntity() : this(new PointF(0, 0)) {}
     public override void Draw(float angle = 0, int layer = 1)
     {
         Angle = angle;
@@ -52,7 +53,7 @@ public class RevolverEntity : Entity
         var cos = MathF.Cos(MathF.PI * Angle / 180);
         var sin = MathF.Sin(MathF.PI * Angle / 180);
         var happyPoint = new PointF(Position.X + cos * size + alturaSlKkk * sin, Position.Y + sin * size - alturaSlKkk * cos);
-        var projectile = new YellowProjectile(happyPoint){
+        var projectile = new BlueProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 10000,
             Angle = Angle,
