@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
@@ -7,6 +8,8 @@ public class DamagedBot : Mob
     private bool isMoving = false;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
+    PointF lastPlayerPosition = PointF.Empty;
+    Queue<int> nextMoves;
     Player player = null;
 
     public DamagedBot()
@@ -33,6 +36,21 @@ public class DamagedBot : Mob
             isMoving = true;
             VerifyPosition(this.Entity.Position, this.nextPosition);
             nextPosition = player.Entity.Position;
+            // if (player.Entity.Position != lastPlayerPosition)
+            // {
+            //     nextMoves = Functions.GetNextMoves(player.Entity.Position, this.Entity.Position, Memory.ArrayMap, TileSets.ColumnLength * 3);
+            // }
+
+            // if (nextMoves.Count == 0)
+            //     return;
+            
+            // var next = nextMoves.Dequeue();
+            // nextPosition = new Point(
+            //     next / TileSets.ColumnLength,
+            //     next % TileSets.ColumnLength
+            // );
+
+            // lastPlayerPosition = player.Entity.Position;
         }
         else
         {

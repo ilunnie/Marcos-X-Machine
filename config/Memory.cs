@@ -15,6 +15,7 @@ public static class Memory
     public static List<Projectile> Projectiles { get; set; } = new List<Projectile>();
     public static List<Entity> Colliders { get; set; } = new List<Entity>();
     public static List<CalcMap> Map { get; set ;} = new List<CalcMap>();
+    public static byte[] ArrayMap { get; set; }
     public static List<Sound> Sounds { get; set; } = new List<Sound>();
     public static List<Entity> ToDelete { get; set; } = new List<Entity>();
     public static CalcMap[] Tileset { get; set; }

@@ -22,6 +22,8 @@ public static class TileSets
     private static Queue<string> Line { get; set; } = new Queue<string>();
     private static int readingX = 0;
     private static int readingY = 0;
+    public static int ColumnLength { get; private set; } = 0;
+    private static byte[] mapArray { get; set; }
 
     public static void SetSprites(string file)
     {
@@ -64,6 +66,7 @@ public static class TileSets
         Reader = new StreamReader(file);
         readingX = 0;
         readingY = 0;
+        mapArray = new byte[Count * 9];
     }
 
     private static int Length(StreamReader reader)
@@ -76,6 +79,7 @@ public static class TileSets
             {
                 string[] values = line.Split(',');
                 total += values.Length;
+                if (values.Length > ColumnLength) ColumnLength = values.Length;
             }
         }
         reader.Close();
@@ -119,12 +123,12 @@ public static class TileSets
         );
 
         if (tileset.Length > 1)
-            clone.ReadHitBox(tileset[1]);
+            clone.ReadHitBox(tileset[1], column, row);
 
         Memory.Map.Add(clone);
     }
 
-    public static void ReadHitBox(this CalcMap clone, string hexa)
+    public static void ReadHitBox(this CalcMap clone, string hexa, int column, int row)
     {
         if (hexa == "")
         {
@@ -133,6 +137,8 @@ public static class TileSets
                 clone.Size.Width,
                 clone.Size.Height
             ));
+
+
             return;
         }
 
@@ -140,88 +146,26 @@ public static class TileSets
         for (int i = 0; i < bin.Length; i++)
         {
             if (bin[i] == '1')
+            {
                 clone.Hitbox.rectangles.Add(new RectangleF(
                     clone.Size.Width / 3 * (i % 3),
                     clone.Size.Width / 3 * (i / 3),
                     clone.Size.Width / 3,
                     clone.Size.Height / 3
                 ));
+
+                mapArray[column + (i % 3) + (row * ColumnLength)] = 1;
+            }
         }
 
     }
 
     public static void CloseFile()
     {
+        Memory.ArrayMap = mapArray;
         Reader.Close();
         Reader.Dispose();
         Reader = null;
-    }
-
-    public static void DrawFromFile() {
-        string filePath = "src/Area/Engenharia.csv";
-
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            int countLine = 0;
-            while (!reader.EndOfStream)
-            {
-                string line = reader.ReadLine().Replace(" ", "");
-                string[] columns = line.Split(',');
-
-                for (int column = 0; column < columns.Length; column++)
-                {
-                    string spriteCode = columns[column];
-                    int spriteIndex = int.Parse(spriteCode.Split('h')[0]);
-
-                    CalcMap clone = Memory.Tileset[spriteIndex].Clone();
-                    SizeF cloneSize = clone.Size;
-                    clone.Move(
-                        new PointF(
-                            column * cloneSize.Width,
-                            countLine * cloneSize.Height
-                        )
-                    );
-
-                    clone.AddAnimation(
-                        new StaticAnimation()
-                        {
-                            Image = clone.Image
-                        }
-                    );
-
-                    if (spriteCode.Contains('h'))
-                    {
-                        string getHexa = spriteCode.Split('h')[1];
-
-                        if (getHexa != "")
-                        {
-                            string getBinary = Convert.ToString(Convert.ToInt32(getHexa, 16), 2).PadLeft(9, '0');
-                            for (int i = 0; i < getBinary.Length; i++)
-                            {
-                                if (getBinary[i] == '1')
-                                    clone.Hitbox.rectangles.Add(new RectangleF(
-                                        clone.Size.Width / 3 * (i % 3),
-                                        clone.Size.Height / 3 * (i / 3),
-                                        clone.Size.Width / 3,
-                                        clone.Size.Height / 3
-                                    ));
-                            }
-                        }
-                        else
-                        {
-                            clone.Hitbox.rectangles.Add(new RectangleF(
-                                0, 0,
-                                clone.Size.Width,
-                                clone.Size.Height
-                            ));
-                        }
-                    }
-                    Memory.Map.Add(clone);
-                }
-
-                countLine++;
-            }
-        }
     }
 }
 
