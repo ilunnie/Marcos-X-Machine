@@ -14,11 +14,15 @@ public class SalaDigitalLevel : ILevel
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
-                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
-                            
+                            .FirstOrDefault() ?? new Player() { 
+                                Entity = new Marcos(InicialPosition),
+                                Life = 6,
+                                MaxLife = 6
+                            };
     public bool IsLoaded { get; set; } = false;
 
     public Loader Loader => new SalaDigitalLoad();
+
 
     public void OnFrame()
     {
@@ -55,5 +59,10 @@ public class SalaDigitalLevel : ILevel
             if (entity.Mob != null)
                 entity.Mob.OnMouseMove(o, e);
         }
+    }
+
+    public void Load(Graphics g, PictureBox pb)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -137,15 +137,15 @@ public static class Functions
             (current.Y - goal.Y) * (current.Y - goal.Y)
         );
     
-    public static Queue<int> GetNextMoves(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
+    public static Stack<int> GetNextMoves(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
     {
-        var path = new Queue<int>();
+        var path = new Stack<int>();
 
         var costMap = new Dictionary<int, float>();
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
-        int player = (int)(playerPointF.Y / TileSets.spriteMapSize.Height * width + playerPointF.X / TileSets.spriteMapSize.Width);
-        int enemy = (int)(enemyPointF.Y / TileSets.spriteMapSize.Height * width + enemyPointF.X / TileSets.spriteMapSize.Width);
+        int player = (int)((playerPointF.Y / TileSets.spriteMapSize.Height * width) + playerPointF.X / TileSets.spriteMapSize.Width);
+        int enemy = (int)((enemyPointF.Y / TileSets.spriteMapSize.Height * width) + enemyPointF.X / TileSets.spriteMapSize.Width);
 
         int[] neighbors = new int[8];
         float newCost;
@@ -198,12 +198,12 @@ public static class Functions
                 break;
         }
 
-        path.Enqueue(player);
+        path.Push(player);
         var last = player;
         while (true)
         {
             last = cameMap[last];
-            path.Enqueue(last);
+            path.Push(last);
             
             if (last == enemy)
                 break;

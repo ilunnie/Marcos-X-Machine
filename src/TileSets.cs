@@ -1,14 +1,7 @@
 using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.ApplicationServices;
+using System.Drawing;
+using System.Collections.Generic;
 
 public static class TileSets
 {
@@ -66,7 +59,7 @@ public static class TileSets
         Reader = new StreamReader(file);
         readingX = 0;
         readingY = 0;
-        mapArray = new byte[Count * 9];
+        mapArray = new byte[Count];
     }
 
     private static int Length(StreamReader reader)
@@ -123,12 +116,15 @@ public static class TileSets
         );
 
         if (tileset.Length > 1)
-            clone.ReadHitBox(tileset[1], column, row);
+        {
+            clone.ReadHitBox(tileset[1]);
+            mapArray[column + (row - 1) * ColumnLength] = 1;
+        }
 
         Memory.Map.Add(clone);
     }
 
-    public static void ReadHitBox(this CalcMap clone, string hexa, int column, int row)
+    public static void ReadHitBox(this CalcMap clone, string hexa)
     {
         if (hexa == "")
         {
@@ -137,8 +133,6 @@ public static class TileSets
                 clone.Size.Width,
                 clone.Size.Height
             ));
-
-
             return;
         }
 
@@ -152,12 +146,9 @@ public static class TileSets
                     clone.Size.Width / 3 * (i / 3),
                     clone.Size.Width / 3,
                     clone.Size.Height / 3
-                ));
-
-                mapArray[column + (i % 3) + (row * ColumnLength)] = 1;
+                ));  
             }
         }
-
     }
 
     public static void CloseFile()

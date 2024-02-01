@@ -11,7 +11,7 @@ public static class Debug
         Life = 10,
         MaxLife = 10
     };
-    static DamagedBot damagedbot = new DamagedBot();
+    // static DamagedBot damagedbot = new DamagedBot();
 
     public static void Open(App app)
     {   
@@ -20,10 +20,9 @@ public static class Debug
         // Marcos marcolas = new Marcos(new PointF(1000, 400));
         // marquitos.Entity = marcolas;
 
-        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(540, 300));
-
-        damagedBot.damage = 1;
-        damagedbot.Entity = damagedBot;
+        // DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(540, 300));
+        // damagedBot.damage = 1;
+        // damagedbot.Entity = damagedBot;
 
         // TileSets.tileSets();
         // TileSets.ReadFile("src/Area/FrenteEts.csv");

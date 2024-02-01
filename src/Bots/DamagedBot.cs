@@ -9,7 +9,7 @@ public class DamagedBot : Mob
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
     PointF lastPlayerPosition = PointF.Empty;
-    Queue<int> nextMoves;
+    Stack<int> nextMoves;
     Player player = null;
 
     public DamagedBot()
@@ -36,21 +36,32 @@ public class DamagedBot : Mob
             isMoving = true;
             VerifyPosition(this.Entity.Position, this.nextPosition);
             nextPosition = player.Entity.Position;
-            // if (player.Entity.Position != lastPlayerPosition)
+            // if (player.Entity.Position != lastPlayerPosition || nextMoves.Count == 0)
             // {
-            //     nextMoves = Functions.GetNextMoves(player.Entity.Position, this.Entity.Position, Memory.ArrayMap, TileSets.ColumnLength * 3);
+            //     int width = (int)TileSets.ColumnLength;
+            //     nextMoves = Functions.GetNextMoves(
+            //         player.Entity.Position,
+            //         this.Entity.Position,
+            //         Memory.ArrayMap,
+            //         width
+            //     );
+            //     var next = nextMoves.Pop();
+            //     nextPosition = new PointF(
+            //         next % width,
+            //         next / width
+            //     );
             // }
 
-            // if (nextMoves.Count == 0)
-            //     return;
-            
-            // var next = nextMoves.Dequeue();
-            // nextPosition = new Point(
-            //     next / TileSets.ColumnLength,
-            //     next % TileSets.ColumnLength
-            // );
+            // if (nextPosition.Distance(this.Entity.Position) < 2 * TileSets.spriteWidth)
+            // {
+            //     var next = nextMoves.Pop();
+            //     nextPosition = new Point(
+            //         next / TileSets.ColumnLength,
+            //         next % TileSets.ColumnLength
+            //     );
+            // }
 
-            // lastPlayerPosition = player.Entity.Position;
+            lastPlayerPosition = player.Entity.Position;
         }
         else
         {
@@ -68,7 +79,7 @@ public class DamagedBot : Mob
                 );
         }
 
-        if(isMoving)
+        if (isMoving)
             this.Entity.AddWalkingAnimation("enemies/damaged-bot/damaged-bot-sprites.png", Direction);
         else
             this.Entity.AddStaticAnimation("enemies/damaged-bot/damaged-bot-sprites.png", Direction);
