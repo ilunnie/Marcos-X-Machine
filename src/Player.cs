@@ -28,7 +28,7 @@ public class Player : Mob
     {
         if (Memory.MouseButton == MouseButtons.Left)
             this.Hands[hand].Click();
-        this.Hands[hand].Set(Memory.Cursor);
+        this.Hands[hand].Set(Memory.Cursor, true);
         this.Hands[hand].Draw();
         if (isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);

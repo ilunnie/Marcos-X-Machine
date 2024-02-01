@@ -26,14 +26,13 @@ public class Hand
         Entity.Draw(angle: Angle);
     }
 
-    public void Set(PointF point)
+    public void Set(PointF point, bool ScreenRef = false)
     {
         float x = Mob.Entity.Position.X + Mob.Entity.Size.Width / 2;
         float y = Mob.Entity.Position.Y + Mob.Entity.Size.Height / 2;
         PointF centerPosition = new PointF(x, y);
-        PointF mobPosition = centerPosition.PositionOnCam();
 
-        double angle = mobPosition.AngleTo(point);
+        double angle = ScreenRef ? centerPosition.PositionOnCam().AngleTo(point) : centerPosition.AngleTo(point);
         double distance = Distance - Math.Max(Entity.cooldown, 500) / 50;
 
         Destiny = new PointF(

@@ -17,8 +17,6 @@ public class FrenteEtsLevel : ILevel
 
     public bool IsLoaded { get; set; } = false;
     public Loader Loader => new FrenteEtsLoad();
-    public void Load(Graphics g, PictureBox pb)
-        => Loader.LoadScreen(Player, g, pb);
 
     public void OnFrame()
     {

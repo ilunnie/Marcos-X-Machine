@@ -8,7 +8,7 @@ public class GunBasicBotEntity : Entity
     private float Angle = 0;
     public GunBasicBotEntity(PointF position)
     {
-        this.Name = "Revolver";
+        this.Name = "GunBasicBot";
 
         this.Size = new SizeF(70, 40);
         this.Position = position;
@@ -23,7 +23,7 @@ public class GunBasicBotEntity : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        Anchor = new PointF(0, Size.Height * .75f);
+        Anchor = new PointF(0, Size.Height / 2);
 
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/basic-bot-gun.png");
 
@@ -48,16 +48,21 @@ public class GunBasicBotEntity : Entity
 
         this.cooldown = 1000;
         
-        var size = this.Size.Width * 0.7f;
-        var alturaSlKkk = this.Size.Height * 0.8f;
+        var size = this.Size.Width * 0.5f;
+
+        var alturaSlKkk = this.Size.Height * 0.5f;
+
         var cos = MathF.Cos(MathF.PI * Angle / 180);
+
         var sin = MathF.Sin(MathF.PI * Angle / 180);
+
         var happyPoint = new PointF(Position.X + cos * size + alturaSlKkk * sin, Position.Y + sin * size - alturaSlKkk * cos);
-        var projectile = new BlueProjectile(happyPoint){
+
+        new BlueProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 10000,
             Angle = Angle,
-            Speed = 5,
+            Speed = 1,
         };
     }
 

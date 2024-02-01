@@ -15,7 +15,7 @@ public class BasicBot : Mob
 
         this.MaxLife = 20;
         this.Life = 100;
-        this.Speed = 0.0004f;
+        this.Speed = 0;
     }
 
     public override void OnFrame()
@@ -34,10 +34,10 @@ public class BasicBot : Mob
 
         if (player.Life > 0)
         {
-            this.Hands[hand].Set(player.Entity.Position);
+            this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
             this.Hands[hand].Click();
             this.Hands[hand].Draw();
-            isMoving = true;
+            // isMoving = true;
             VerifyPosition(this.Entity.Position, this.nextPosition);
             nextPosition = player.Entity.Position;
 

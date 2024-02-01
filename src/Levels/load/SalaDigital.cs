@@ -40,5 +40,7 @@ public class SalaDigitalLoad : Loader
                 new SizeF(120 / 3, 120),
                 new PointF(640, 430),
                 new EtsLevel()
-            ));
+            ))
+            .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(700,700)) })
+                ;
 }

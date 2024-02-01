@@ -15,7 +15,7 @@ public class BlueProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 5;
+        this.damage = 0;
 
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 9, 1, 10, 4);
     }
