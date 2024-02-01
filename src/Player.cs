@@ -31,7 +31,9 @@ public class Player : Mob
         this.Hands[hand].Set(Memory.Cursor);
         this.Hands[hand].Draw();
         if (isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
+        {
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
+        }
         else
         {
             this.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction);

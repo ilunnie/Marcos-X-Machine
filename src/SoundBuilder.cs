@@ -15,6 +15,7 @@ public static class SoundBuilder
             newSound = new MusicEffect(sound);
 
         newSound.Play();
+        newSound.SetVolume(50);
         Memory.Sounds.Add(newSound);
         currentPlayingSound = newSound;
     }
@@ -35,7 +36,7 @@ public static class SoundBuilder
         LoopedAudio loopStream = new LoopedAudio(reader);
 
         sound.PlayLoop(loopStream, position);
-
+        sound.SetMusicVolume(10);
     }
 
     public static void StopSound()
