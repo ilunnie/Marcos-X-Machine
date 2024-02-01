@@ -17,12 +17,15 @@ public static class Debug
     {   
         Debug.app = app;
 
-        Marcos marcolas = new Marcos(new PointF(1000, 400));
-        marquitos.Entity = marcolas;
+        // Marcos marcolas = new Marcos(new PointF(1000, 400));
+        // marquitos.Entity = marcolas;
 
+<<<<<<< HEAD
 
+        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
+=======
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(540, 300));
-
+>>>>>>> 317d66b45d652d9b9a1be98d28b359cbc98d0198
         damagedBot.damage = 1;
         damagedbot.Entity = damagedBot;
 
@@ -50,7 +53,7 @@ public static class Debug
     {
         // marquitos.OnFrame();
         // marquitos.Entity.FocusCam();
-        damagedbot.OnFrame();
+        // damagedbot.OnFrame();
     }
 
     public static void OnKeyDown(object o, KeyEventArgs e)
