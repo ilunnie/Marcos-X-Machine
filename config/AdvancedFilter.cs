@@ -13,8 +13,6 @@ public abstract class AdvancedFilter : IFilter
 
     public void Apply(ref Graphics graphics)
     {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
         Bitmap input = graphics.ToImage();
 
         long[] r, g, b;
@@ -31,7 +29,6 @@ public abstract class AdvancedFilter : IFilter
 
         result.UnlockBits(data);
         graphics = Graphics.FromImage(result);
-        // MessageBox.Show(stopwatch.Elapsed.TotalSeconds.ToString());
     }
 
     protected abstract unsafe void Apply(byte* im, long* r, long* g, long* b, int width, int height, int stride);

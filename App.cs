@@ -93,6 +93,11 @@ public abstract class App
         {
             g.Clear(Color.Black);
 
+            if (!Memory.Level.IsLoaded)
+            {
+                this.OnFrame();
+                return;
+            }
             Camera.OnFrame();
             if (Memory.Mode == "debug") Debug.OnFrame();
             this.OnFrame();
