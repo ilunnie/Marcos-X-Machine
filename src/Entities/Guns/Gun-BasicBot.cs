@@ -46,7 +46,7 @@ public class GunBasicBotEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1000;
+        this.cooldown = 5000;
         
         var size = this.Size.Width * 0.5f;
 
@@ -60,7 +60,7 @@ public class GunBasicBotEntity : Entity
 
         new BlueProjectile(happyPoint){
             Mob = this.Mob,
-            cooldown = 10000,
+            cooldown = 5000,
             Angle = Angle,
             Speed = 1,
         };

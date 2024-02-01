@@ -8,7 +8,7 @@ public class Game : App
     public override void Open()
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
-        Memory.Level = new SalaDigitalLevel();
+        Memory.Level = new DTALevel();
     }
     public override void OnFrame()
     {
