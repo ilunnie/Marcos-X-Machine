@@ -15,17 +15,28 @@ public static class SoundBuilder
             newSound = new MusicEffect(sound);
 
         newSound.Play();
+        newSound.SetVolume(50);
         Memory.Sounds.Add(newSound);
         currentPlayingSound = newSound;
     }
 
-    public static void PlayLoopedSound(this SoundType soundType, string file)
+    public static void PlayLoopedSound(this SoundType soundType, string file, long position)
     {
         Sound sound = SoundBuffer.Current.Get(file);
         WaveFileReader reader = new WaveFileReader(file);
         LoopedAudio loopStream = new LoopedAudio(reader);
 
-        sound.PlayLoop(loopStream);
+        sound.PlayLoop(loopStream, 0);
+    }
+
+    public static void PlayBackGroundMusic(this SoundType soundType, string file, long position)
+    {
+        Sound sound = SoundBuffer.Current.Get(file);
+        WaveFileReader reader = new WaveFileReader(file);
+        LoopedAudio loopStream = new LoopedAudio(reader);
+
+        sound.PlayLoop(loopStream, position);
+        sound.SetMusicVolume(10);
     }
 
     public static void StopSound()
