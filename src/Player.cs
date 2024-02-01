@@ -33,7 +33,10 @@ public class Player : Mob
         if (isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
         else
+        {
             this.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction);
+            SoundBuilder.PlayLoopedSound(SoundType.Effect,"src/Sounds/Marcos/andando.wav", 0);
+        }
         this.Entity.Animation = this.Entity.Animation.Skip();
 
         WalkXLeft = isMovingLeft == true ? Walk.Back : Walk.Stop;

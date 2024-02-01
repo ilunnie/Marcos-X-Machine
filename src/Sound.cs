@@ -18,15 +18,16 @@ public class Sound
         waveOut.Dispose();
         Audio.Position = 0;
         waveOut.Init(Audio);
-        waveOut.Play();        
+        waveOut.Play();
     }
-
-    public virtual void PlayLoop(LoopedAudio stream)
+    public virtual void PlayLoop(LoopedAudio stream, long position)
     {
         if (waveOutLoop == null)
         {
             LoopedAudio loop = new LoopedAudio(stream);
             waveOutLoop = new WaveOut();
+            long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
+            loop.Position = audioStart;
             waveOutLoop.Init(loop);
             waveOutLoop.Play();
         }
