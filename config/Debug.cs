@@ -20,12 +20,8 @@ public static class Debug
         // Marcos marcolas = new Marcos(new PointF(1000, 400));
         // marquitos.Entity = marcolas;
 
-<<<<<<< HEAD
-
-        DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(2000, 400));
-=======
         DamagedBotEntity damagedBot = new DamagedBotEntity(new PointF(540, 300));
->>>>>>> 317d66b45d652d9b9a1be98d28b359cbc98d0198
+
         damagedBot.damage = 1;
         damagedbot.Entity = damagedBot;
 
