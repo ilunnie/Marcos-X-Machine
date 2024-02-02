@@ -9,7 +9,7 @@ public class Game : App
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
-        Memory.Level = new DTALevel();
+        Memory.Level = new EtsLevel();
         SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
 
     }

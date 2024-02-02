@@ -45,5 +45,6 @@ public class EtsLoad : Loader
                 new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
                 new PointF(9 * TileSets.spriteMapSize.Width - TileSets.spriteMapSize.Width / 3, 5 * TileSets.spriteMapSize.Height),
                 new FrenteEtsLevel()
-            ));
+            ))
+            .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1000)) });
 }
