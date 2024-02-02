@@ -36,5 +36,16 @@ public class SalaDigitalLoad : Loader
                 new SizeF(120 / 3, 120),
                 new PointF(640, 430),
                 new EtsLevel()
-            ));
+            ))
+            .Then(() => 
+            {
+                for (int i = 0; i < 2000; i ++)
+                {
+                    new DamagedBot() { Entity = new DamagedBotEntity(new PointF(
+                        Random.Shared.Next(300, 600),
+                        Random.Shared.Next(600, 900)))
+                    };
+                }
+            })
+                ;
 }
