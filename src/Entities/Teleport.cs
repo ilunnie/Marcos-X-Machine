@@ -13,6 +13,8 @@ public class Teleport : Entity
         this.TpPosition = playerPosition;
         this.Level = level;
 
+        this.Level.IsLoaded = false;
+
         this.Hitbox.rectangles.Add(
             new RectangleF(
                 0, 0,
@@ -23,9 +25,9 @@ public class Teleport : Entity
 
     public override void OnHit(Entity entity)
     {
-        if (entity.Mob is not Player) return;
+        if (entity.Mob is not Player || entity is Projectile) return;
 
-        entity.Move(TpPosition);
+        ((Player)entity.Mob).tp = TpPosition;
         Memory.Level = this.Level;
     }
 

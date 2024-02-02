@@ -7,15 +7,17 @@ public class SalaDigitalLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InicialPosition => new PointF(540, 280);
+    private PointF InitialPosition => new PointF(540, 280);
 
+    private PointF playerPosition = PointF.Empty;
+    public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
                             .FirstOrDefault() ?? new Player() { 
-                                Entity = new Marcos(InicialPosition),
+                                Entity = new Marcos(InitialPosition),
                                 Life = 6,
                                 MaxLife = 6
                             };
@@ -23,6 +25,8 @@ public class SalaDigitalLevel : ILevel
 
     public Loader Loader => new SalaDigitalLoad();
 
+    private Image backgroundLoad = null;
+    public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
 
     public void OnFrame()
     {

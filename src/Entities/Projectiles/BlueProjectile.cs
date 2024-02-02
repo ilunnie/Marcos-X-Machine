@@ -7,7 +7,7 @@ public class BlueProjectile : Projectile
         this.Name = "Blue Projectile";
 
         this.Inicial = position;
-        this.Size = new SizeF(12, 12);
+        this.Size = new SizeF(24, 24);
         this.Hitbox.rectangles.Add(new RectangleF(
             0, 0,
             this.Size.Width,

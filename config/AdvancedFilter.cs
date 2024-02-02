@@ -25,10 +25,10 @@ public abstract class AdvancedFilter : IFilter
             PixelFormat.Format24bppRgb
         );
 
-        
+        ApplyFilter(data, r, g, b);
 
         result.UnlockBits(data);
-        graphics = Graphics.FromImage(result);
+        // graphics.DrawImage(result, new Point(0, 0));
     }
 
     protected abstract unsafe void Apply(byte* im, long* r, long* g, long* b, int width, int height, int stride);

@@ -14,11 +14,15 @@ public class Player : Mob
     public Walk WalkYUp = Walk.Stop;
     public Walk WalkYDown = Walk.Stop;
     public bool isMoving = false;
+    public PointF tp { get; set; } = PointF.Empty;
 
     public Player()
     {
         var revolver = new RevolverEntity();
         this.Hands.Add(new Hand(this, revolver, 25));
+
+        var gun_basicbot = new GunBasicBotEntity();
+        this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
         this.MaxLife = 10;
@@ -26,6 +30,11 @@ public class Player : Mob
 
     public override void OnFrame()
     {
+        if (!this.tp.IsEmpty)
+        {
+            this.Entity.Move(tp);
+            this.tp = PointF.Empty;
+        }
         if (Memory.MouseButton == MouseButtons.Left)
             this.Hands[hand].Click();
         this.Hands[hand].Set(Memory.Cursor, true);
@@ -56,6 +65,17 @@ public class Player : Mob
         PointF mouse = e.Location;
 
         VerifyPosition(player, mouse);
+
+        if (e.Delta > 0)
+        {
+            this.hand += 1;
+            if (this.hand >= this.Hands.Count) this.hand = this.Hands.Count - 1;
+        }
+        if (e.Delta < 0)
+        {
+            this.hand -= 1;
+            if (this.hand < 0) this.hand = 0;
+        }
     }
 
     public override void OnKeyDown(object o, KeyEventArgs e)

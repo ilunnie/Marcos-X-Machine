@@ -8,34 +8,54 @@ public class EngenhariaLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InicialPosition => new PointF(540, 280);
+    private PointF InitialPosition => new PointF(540, 280);
+    private PointF playerPosition = PointF.Empty;
+    public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
-                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
+                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InitialPosition) };
     public bool IsLoaded { get; set; } = false;
     public Loader Loader => new EngenhariaLoad();
+    private Image backgroundLoad = null;
+    public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
 
     public void OnFrame()
     {
         Player.Entity.FocusCam();
-        Player.OnFrame();
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnFrame();
+        }
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        Player.OnKeyDown(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyDown(o, e);
+        }
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
-        Player.OnKeyUp(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyUp(o, e);
+        }
     }
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        Player.OnMouseMove(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnMouseMove(o, e);
+        }
     }
 }

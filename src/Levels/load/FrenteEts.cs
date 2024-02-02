@@ -34,8 +34,8 @@ public class FrenteEtsLoad : Loader
             })
             .Then(() => player.Entity.FocusCam(false))
             .Then(() => new Teleport(
-                new PointF(8 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 3 * TileSets.spriteMapSize.Height),
-                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height ),
+                new PointF((8 * 3 + 1.25f)*(TileSets.spriteMapSize.Width / 3), 3.75f * TileSets.spriteMapSize.Height),
+                new SizeF((TileSets.spriteMapSize.Width / 3) * 3.5f, TileSets.spriteMapSize.Height / 3),
                 new PointF(18 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 4 * TileSets.spriteMapSize.Height),
                 new EtsLevel()
             ))
