@@ -20,7 +20,7 @@ public class Player : Mob
         var revolver = new RevolverEntity();
         this.Hands.Add(new Hand(this, revolver, 25));
 
-        this.Life = 10;
+        this.Life = 10000000000000000000;
         this.MaxLife = 10;
     }
 

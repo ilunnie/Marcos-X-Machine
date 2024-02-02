@@ -21,7 +21,11 @@ public class EtsLevel : ILevel
     public void OnFrame()
     {
         Player.Entity.FocusCam();
-        Player.OnFrame();
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnFrame();
+        }
         Screen.Filters.Add(
             new Vignette()
         );
@@ -29,16 +33,28 @@ public class EtsLevel : ILevel
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        Player.OnKeyDown(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyDown(o, e);
+        }
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
-        Player.OnKeyUp(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnKeyUp(o, e);
+        }
     }
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        Player.OnMouseMove(o, e);
+        foreach (var entity in Memory.Entities)
+        {
+            if (entity.Mob != null)
+                entity.Mob.OnMouseMove(o, e);
+        }
     }
 }
