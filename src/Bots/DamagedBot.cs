@@ -8,7 +8,7 @@ public class DamagedBot : Mob
     private bool isMoving = false;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
-    PointF lastPlayerPosition = PointF.Empty;
+
     Stack<int> nextMoves;
     Player player = null;
 
@@ -18,8 +18,6 @@ public class DamagedBot : Mob
         this.Life = 20;
         this.Speed = 0.001f;
     }
-
-        int frame = 0;
     public override void OnFrame()
     {
         if (player == null)
@@ -34,7 +32,6 @@ public class DamagedBot : Mob
 
         if (player.Life > 0)
         {
-            frame++;
             isMoving = true;
             int width = (int)TileSets.ColumnLength;
             
@@ -54,8 +51,6 @@ public class DamagedBot : Mob
                     (next / width + 1) * TileSets.spriteMapSize.Height
                 );
             }
-
-            lastPlayerPosition = player.Entity.Position;
         }
         else
         {

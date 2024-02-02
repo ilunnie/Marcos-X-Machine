@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 public class BasicBot : Mob
@@ -6,6 +7,7 @@ public class BasicBot : Mob
     private bool isMoving = false;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
+    Stack<int> nextMoves;
     Player player = null;
 
     private PointF position;
@@ -18,9 +20,9 @@ public class BasicBot : Mob
         var gun = new GunBasicBotEntity();
         this.Hands.Add(new Hand(this, gun, 90));
 
-        this.MaxLife = 20;
-        this.Life = 10;
-        this.Speed = 0.009f;
+        this.MaxLife = 30;
+        this.Life = 30;
+        this.Speed = 0.001f;
     }
 
     public override void OnFrame()
@@ -55,10 +57,25 @@ public class BasicBot : Mob
                     player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
                 );
 
-                
                 isMoving = true;
-                VerifyPosition(this.Entity.Position, this.nextPosition);
-                nextPosition = idealPosition;
+                int width = (int)TileSets.ColumnLength;
+            
+                nextMoves = Functions.GetNextMoves(
+                    idealPosition,
+                    this.Entity.Position,
+                    Memory.ArrayMap,
+                    width
+                );
+                if (nextMoves.Count > 2)
+                {
+                    nextMoves.Pop();
+                    nextMoves.Pop();
+                    var next = nextMoves.Pop();
+                    nextPosition = new PointF(
+                        (next % width + 1) * TileSets.spriteMapSize.Width,
+                        (next / width + 1) * TileSets.spriteMapSize.Height
+                    );
+                }
             }
             else {
                 this.speed = 0;
