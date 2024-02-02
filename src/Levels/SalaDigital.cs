@@ -64,5 +64,4 @@ public class SalaDigitalLevel : ILevel
                 entity.Mob.OnMouseMove(o, e);
         }
     }
-
 }

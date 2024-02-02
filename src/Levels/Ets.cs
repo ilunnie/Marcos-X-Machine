@@ -31,9 +31,11 @@ public class EtsLevel : ILevel
             if (entity.Mob != null)
                 entity.Mob.OnFrame();
         }
+
         Screen.Filters.Add(
             new Vignette()
         );
+
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)

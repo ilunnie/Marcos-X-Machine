@@ -25,6 +25,7 @@ public class Player : Mob
         this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
+
         this.MaxLife = 10;
     }
 

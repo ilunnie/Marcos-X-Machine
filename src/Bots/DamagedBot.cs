@@ -16,9 +16,10 @@ public class DamagedBot : Mob
     {
         this.MaxLife = 20;
         this.Life = 20;
-        this.Speed = 0.0004f;
+        this.Speed = 0.001f;
     }
 
+        int frame = 0;
     public override void OnFrame()
     {
         if (player == null)
@@ -33,33 +34,26 @@ public class DamagedBot : Mob
 
         if (player.Life > 0)
         {
+            frame++;
             isMoving = true;
-            VerifyPosition(this.Entity.Position, this.nextPosition);
-            nextPosition = player.Entity.Position;
-            // if (player.Entity.Position != lastPlayerPosition || nextMoves.Count == 0)
-            // {
-            //     int width = (int)TileSets.ColumnLength;
-            //     nextMoves = Functions.GetNextMoves(
-            //         player.Entity.Position,
-            //         this.Entity.Position,
-            //         Memory.ArrayMap,
-            //         width
-            //     );
-            //     var next = nextMoves.Pop();
-            //     nextPosition = new PointF(
-            //         next % width,
-            //         next / width
-            //     );
-            // }
-
-            // if (nextPosition.Distance(this.Entity.Position) < 2 * TileSets.spriteWidth)
-            // {
-            //     var next = nextMoves.Pop();
-            //     nextPosition = new Point(
-            //         next / TileSets.ColumnLength,
-            //         next % TileSets.ColumnLength
-            //     );
-            // }
+            int width = (int)TileSets.ColumnLength;
+            
+            nextMoves = Functions.GetNextMoves(
+                player.Entity.Position,
+                this.Entity.Position,
+                Memory.ArrayMap,
+                width
+            );
+            if (nextMoves.Count > 2)
+            {
+                nextMoves.Pop();
+                nextMoves.Pop();
+                var next = nextMoves.Pop();
+                nextPosition = new PointF(
+                    (next % width + 1) * TileSets.spriteMapSize.Width,
+                    (next / width + 1) * TileSets.spriteMapSize.Height
+                );
+            }
 
             lastPlayerPosition = player.Entity.Position;
         }
@@ -88,7 +82,7 @@ public class DamagedBot : Mob
         this.Entity.Move(
             this.Entity.Position.LinearInterpolation(
                 nextPosition,
-                this.Speed * Memory.Frame)
-        );
+                this.Speed * Memory.Frame
+        ));
     }
 }

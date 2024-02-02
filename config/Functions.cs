@@ -144,8 +144,12 @@ public static class Functions
         var costMap = new Dictionary<int, float>();
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
-        int player = (int)((playerPointF.Y / TileSets.spriteMapSize.Height * width) + playerPointF.X / TileSets.spriteMapSize.Width);
-        int enemy = (int)((enemyPointF.Y / TileSets.spriteMapSize.Height * width) + enemyPointF.X / TileSets.spriteMapSize.Width);
+        int player =
+            width * ((int)(playerPointF.Y / TileSets.spriteMapSize.Height) - 1) + 
+            (int)(playerPointF.X / TileSets.spriteMapSize.Width) - 1;
+        int enemy = 
+            width * ((int)(enemyPointF.Y / TileSets.spriteMapSize.Height) - 1) + 
+            (int)(enemyPointF.X / TileSets.spriteMapSize.Width) - 1;
 
         int[] neighbors = new int[8];
         float newCost;
@@ -158,36 +162,35 @@ public static class Functions
         {
             var current = queue.Dequeue();
 
-            int CurSubWid = current - width;
-            int CurPlusWid = current + width;
-            int SubFromSub = CurSubWid - 1;
-            int PlusFromSub = CurSubWid + 1;
-            int SubFromPlus = CurPlusWid - 1;
-            int PlusFromPlus = CurSubWid + 1;
+            int top = current - width;
+            int bot = current + width;
 
-            neighbors[0] = SubFromSub > 0 && SubFromSub < map.Length && map[SubFromSub] != 1 ? SubFromSub : -1;
-            neighbors[1] = CurSubWid > 0 && CurSubWid < map.Length && map[CurSubWid] != 1 ? CurSubWid : -1;
-            neighbors[2] = PlusFromSub > 0 && PlusFromSub < map.Length && map[PlusFromSub] != 1 ? PlusFromSub : -1;
+            neighbors[0] = top - 1 > 0 && top - 1 < map.Length && map[top - 1] != 1 ? top - 1 : -1;
+            neighbors[1] = top > 0 && top < map.Length && map[top] != 1 ? top : -1;
+            neighbors[2] = top + 1 > 0 && top + 1 < map.Length && map[top + 1] != 1 ? top + 1 : -1;
 
             neighbors[3] = current - 1 > 0 && current - 1 < map.Length && map[current - 1] != 1 ? current - 1 : -1;
             neighbors[4] = current + 1 > 0 && current + 1 < map.Length && map[current + 1] != 1 ? current + 1 : -1;
 
-            neighbors[5] = SubFromPlus > 0 && SubFromPlus < map.Length && map[SubFromPlus] != 1 ? SubFromPlus : -1;
-            neighbors[6] = CurPlusWid > 0 && CurPlusWid < map.Length && map[CurPlusWid] != 1 ? CurPlusWid : -1;
-            neighbors[7] = PlusFromPlus > 0 && PlusFromPlus < map.Length && map[PlusFromPlus] != 1? PlusFromPlus : -1;
+            neighbors[5] = bot - 1 > 0 && bot - 1 < map.Length && map[bot - 1] != 1 ? bot - 1 : -1;
+            neighbors[6] = bot > 0 && bot < map.Length && map[bot] != 1 ? bot : -1;
+            neighbors[7] = bot + 1 > 0 && bot + 1 < map.Length && map[bot + 1] != 1? bot + 1 : -1;
 
             foreach (var next in neighbors)
             {
                 if (next == -1)
                     continue;
-
+                
+                if (!costMap.ContainsKey(current))
+                    return path;
                 newCost = costMap[current] + 1;
+
                 if(!costMap.ContainsKey(next) || newCost < costMap[next])
                 {
                     costMap[next] = newCost;
                     float priority = newCost + EuclidianDistance(
-                        new PointF(player / width, player % width),
-                        new PointF(next / width, next % width)
+                        new PointF(player % width, player / width),
+                        new PointF(next % width, next / width)
                     );
                     queue.Enqueue(next, priority);
                     cameMap[next] = current;
@@ -202,6 +205,9 @@ public static class Functions
         var last = player;
         while (true)
         {
+            if (!cameMap.ContainsKey(last))
+                return path;
+            
             last = cameMap[last];
             path.Push(last);
             
