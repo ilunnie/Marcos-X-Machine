@@ -5,7 +5,7 @@ public interface IScreen
     /// <summary>
     /// Renderiza toda a fila de Sprites na tela
     /// </summary>
-    public void Update(Graphics g);
+    public void Update(Graphics g, Bitmap bmp);
 
     /// <summary>
     /// Adiciona um Sprite na fila de renderização

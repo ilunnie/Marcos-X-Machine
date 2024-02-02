@@ -96,6 +96,7 @@ public abstract class App
             if (!Memory.Level.IsLoaded)
             {
                 this.OnFrame();
+                stopwatch.Restart();
                 return;
             }
             Camera.OnFrame();
@@ -103,7 +104,7 @@ public abstract class App
             this.OnFrame();
             
             Memory.Update();
-            Screen.Queue.Update(g);
+            Screen.Queue.Update(g, bmp);
             pb.Refresh();
 
             Memory.Frame = stopwatch.ElapsedMilliseconds;

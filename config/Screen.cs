@@ -40,7 +40,7 @@ public sealed class Screen : IScreen
         Sprites.Sort();
     }  
 
-    public void Update(Graphics g)
+    public void Update(Graphics g, Bitmap bmp)
     {
         this.Sort();
 
@@ -48,7 +48,7 @@ public sealed class Screen : IScreen
             g.DrawImage(sprite);
             
         foreach (var filter in Filters)
-            filter.Apply(ref g);
+            filter.Apply(g, bmp);
 
         Sprites.Clear();
         Filters.Clear();

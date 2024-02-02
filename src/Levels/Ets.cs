@@ -24,7 +24,6 @@ public class EtsLevel : ILevel
 
     public void OnFrame()
     {
-        Screen.Filters.Add(new Vignette());
         Player.Entity.FocusCam();
         foreach (var entity in Memory.Entities)
         {
