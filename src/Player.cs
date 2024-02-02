@@ -125,8 +125,5 @@ public class Player : Mob
     }
 
     private void Move()
-    {
-        Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
-        // SoundBuilder.PlayLoopedSound(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
-    }
+        => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
 }
