@@ -7,7 +7,7 @@ public class SalaDigitalLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(540, 280);
+    private PointF InitialPosition => new PointF(640, 540);
 
     private PointF playerPosition = PointF.Empty;
     public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }
@@ -36,6 +36,12 @@ public class SalaDigitalLevel : ILevel
             if (entity.Mob != null)
                 entity.Mob.OnFrame();
         }
+
+         Screen.Filters.Add(
+            new Vignette( ) {
+                Intensity = 0.967f
+            }
+        );
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)

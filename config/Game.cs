@@ -12,8 +12,8 @@ public class Game : App
         Memory.Level = new EtsLevel();
         SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
 
-        Sound.SetMusicVolume(0);
-        Sound.SetVolume(100);
+        // Sound.SetMusicVolume(0);
+        // Sound.SetVolume(100);
         
     }
     public override void OnFrame()

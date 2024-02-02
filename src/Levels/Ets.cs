@@ -31,9 +31,9 @@ public class EtsLevel : ILevel
                 entity.Mob.OnFrame();
         }
 
-        Screen.Filters.Add(
-            new Vignette()
-        );
+        // Screen.Filters.Add(
+        //     new Vignette()
+        // );
 
     }
 

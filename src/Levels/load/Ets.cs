@@ -37,11 +37,11 @@ public class EtsLoad : Loader
             .Then(() => new Teleport(
                 new PointF(5 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height),
                 new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
-                new PointF(9 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
+                new PointF(12 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
                 new SalaDigitalLevel()
             ))
                 .And(() => new Teleport(
-                    new PointF((1 + 18 * 3) * (TileSets.spriteMapSize.Width / 3), 3 * TileSets.spriteMapSize.Height),
+                    new PointF((1 + 21 * 3) * (TileSets.spriteMapSize.Width / 3), 3 * TileSets.spriteMapSize.Height),
                     new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
                     new PointF(18 * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
                     new FrenteEtsLevel()

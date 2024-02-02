@@ -33,7 +33,7 @@ public class SalaDigitalLoad : Loader
             })
             .Then(() => player.Entity.FocusCam(false))
             .Then(() => new Teleport(
-                new PointF(10 * TileSets.spriteMapSize.Width, 6 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
+                new PointF(14 * TileSets.spriteMapSize.Width, 6 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
                 new SizeF(120 / 3, 120),
                 new PointF(640, 430),
                 new EtsLevel()
@@ -41,7 +41,7 @@ public class SalaDigitalLoad : Loader
             .Then(() => 
             {
                 new DamagedBot() { Entity = new DamagedBotEntity(new PointF(
-                    Random.Shared.Next(300, 600),
+                    Random.Shared.Next(800, 1100),
                     Random.Shared.Next(600, 900)))
                 };
             })
