@@ -39,7 +39,10 @@ public class Marcos : Entity
         this.Mob.Life -= entity.damage;
         this.cooldown = entity.damage > 0 && this.Mob.Life > 0 ? 120 : 0;
         if (this.Mob.Life <= 0)
+        {
             this.Destroy();
+            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/ai.wav"); // arrumar volume
+        }
     }
     public override void Destroy()
     {

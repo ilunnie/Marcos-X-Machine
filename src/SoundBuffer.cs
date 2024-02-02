@@ -11,13 +11,19 @@ public class SoundBuffer
 
     private Dictionary<string, Sound> map = new();
 
-    public Sound Get(string file)
+    public Sound Get(string file, SoundType type)
     {
-        if (map.ContainsKey(file))
-            return map[file];
+        var key = $"{file}::{type}";
+        if (map.ContainsKey(key))
+            return map[key];
 
-        var newSound = new Sound(new WaveOutEvent(), new AudioFileReader(file));
-        map.Add(file, newSound);
+        var newSound = type switch
+        {
+            SoundType.Effect => new SoundEffect(new AudioFileReader(file)),
+            SoundType.Music => new SoundEffect(new AudioFileReader(file)),
+            _ => null
+        };
+        map.Add(key, newSound);
         return newSound;
     }
 }

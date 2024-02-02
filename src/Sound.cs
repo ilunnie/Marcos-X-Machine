@@ -1,46 +1,47 @@
+using System.Threading;
 using NAudio.Wave;
 
 public class Sound
 {
+    public static WaveOutEvent MusicWaveOut = new WaveOutEvent();
+    public static WaveOutEvent EffectWaveOut = new WaveOutEvent();
+
     public AudioFileReader Audio { get; protected set; }
     public WaveOutEvent waveOut { get; protected set; }
-    public WaveOut waveOutLoop { get; protected set; }
+    public WaveOutEvent waveOutLoop { get; protected set; }
 
     public Sound(WaveOutEvent waveOut, AudioFileReader audio)
     {
         this.waveOut = waveOut;
         this.Audio = audio;
     }
-    public Sound(Sound sound) : this(sound.waveOut, sound.Audio) { }
     public virtual void Play()
     {
         waveOut.Stop();
         waveOut.Dispose();
-        Audio.Volume = 1f;
         Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
     }
 
-    public virtual void SetVolume(int value)
+    public static void SetVolume(int value)
     {
         if (value > 100)
-            this.waveOut.Volume = 1.0f;
+            EffectWaveOut.Volume = 1.0f;
         else if (value < 0)
-            this.waveOut.Volume = 0f;
-        else
-            this.waveOut.Volume = value / 100f;
+            EffectWaveOut.Volume = 0f;
+        else EffectWaveOut.Volume = value / 100f;
     }
-    public virtual void SetMusicVolume(int value)
+    public static void SetMusicVolume(int value)
     {
-        if (waveOutLoop != null)
+        if (MusicWaveOut != null)
         {
             if (value > 100)
-                this.waveOutLoop.Volume = 1.0f;
+                MusicWaveOut.Volume = 1.0f;
             else if (value < 0)
-                this.waveOutLoop.Volume = 0f;
+                MusicWaveOut.Volume = 0f;
             else
-                this.waveOutLoop.Volume = value / 100f;
+                MusicWaveOut.Volume = value / 100f;
         }
     }
 
@@ -49,10 +50,9 @@ public class Sound
         if (waveOutLoop == null)
         {
             LoopedAudio loop = new LoopedAudio(stream);
-            waveOutLoop = new WaveOut();
+            waveOutLoop = new WaveOutEvent();
             long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
             loop.Position = audioStart;
-            waveOutLoop.Volume = 0.5f;
             waveOutLoop.Init(loop);
             waveOutLoop.Play();
         }

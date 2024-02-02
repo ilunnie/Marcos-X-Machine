@@ -1,5 +1,7 @@
+using NAudio.Wave;
+
 public class MusicEffect : Sound
 {
-    public MusicEffect(Sound sound) : base(sound)
-        => this.waveOut.Volume = 0.2f;
+    public MusicEffect(AudioFileReader audioFileReader)
+        : base(MusicWaveOut, audioFileReader) { } 
 }

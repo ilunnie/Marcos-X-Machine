@@ -64,6 +64,7 @@ public class ElectricRoboticGuitar : Entity
             Angle = Angle,
             Speed = 1,
         };
+        
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

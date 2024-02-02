@@ -16,7 +16,7 @@ public class Mol : Mob
         this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 20;
-        this.Life = 100;
+        this.Life = 20;
         this.Speed = 0.00095f;
     }
 
@@ -71,6 +71,7 @@ public class Mol : Mob
                 if (this.Life < 10)
                 {
                     FaseOne = false;
+                    // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/MelBot/guitarraMol.wav");
                 }
             }
             else
@@ -79,6 +80,7 @@ public class Mol : Mob
 
                 this.Entity.Move(new PointF(400, 400));
                 this.Entity.AddAnimation(new MelBotPlayingGuitar());
+                SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/MelBot/guitarraMol.wav");
             }
 
         }

@@ -26,10 +26,9 @@ public class BasicBot : Mob
     }
 
     public override void OnFrame()
-    {
+    {            
         if (player == null)
         {
-
             foreach (var entity in Memory.Entities)
             {
                 if (entity.Mob is Player)
@@ -104,6 +103,10 @@ public class BasicBot : Mob
             this.Entity.AddWalkingAnimation("enemies/basic-bot/basic-bot-sprites.png", Direction);
         else
             this.Entity.AddStaticAnimation("enemies/basic-bot/basic-bot-sprites.png", Direction);
+        
+        if (this.Life <= 0)
+            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/BasicRobot/dyingRobot.wav"); // arrumar volume
+
         this.Entity.Animation = this.Entity.Animation.Skip();
 
         this.Entity.Move(
