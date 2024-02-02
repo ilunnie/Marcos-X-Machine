@@ -54,7 +54,6 @@ public class BasicBot : Mob
                     player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
                     player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
                 );
-
                 
                 isMoving = true;
                 VerifyPosition(this.Entity.Position, this.nextPosition);

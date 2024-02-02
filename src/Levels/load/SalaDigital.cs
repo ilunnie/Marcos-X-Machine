@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 public class SalaDigitalLoad : Loader
@@ -39,13 +40,10 @@ public class SalaDigitalLoad : Loader
             ))
             .Then(() => 
             {
-                for (int i = 0; i < 2000; i ++)
-                {
-                    new DamagedBot() { Entity = new DamagedBotEntity(new PointF(
-                        Random.Shared.Next(300, 600),
-                        Random.Shared.Next(600, 900)))
-                    };
-                }
+                new DamagedBot() { Entity = new DamagedBotEntity(new PointF(
+                    Random.Shared.Next(300, 600),
+                    Random.Shared.Next(600, 900)))
+                };
             })
                 ;
 }

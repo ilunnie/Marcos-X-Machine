@@ -9,6 +9,7 @@ public static class Collision
         RectangleF entityRect = new RectangleF();
         RectangleF comparRect = new RectangleF();
 
+        bool result = false;
         foreach (var thisRect in entity.Hitbox.rectangles)
         {
             foreach (var otherRect in other.Hitbox.rectangles)
@@ -26,12 +27,12 @@ public static class Collision
                 if (entityRect.IntersectsWith(comparRect))
                 {
                     entity.OnHit(other);
-                    return true;
+                    result = true;
                 }
             }
         }
 
-        return false;
+        return result;
     }
 
     public static void VerifyCollision()

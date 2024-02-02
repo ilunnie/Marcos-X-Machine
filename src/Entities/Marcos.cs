@@ -26,6 +26,11 @@ public class Marcos : Entity
 
     public override void OnHit(Entity entity)
     {
+        if (entity is CalcMap)
+        {
+            this.Position = this.OldPosition;
+        }
+        
         if(this.Mob is null || this.cooldown > 0)
             return;
 
