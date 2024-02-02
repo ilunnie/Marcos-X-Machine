@@ -6,5 +6,5 @@ public interface IFilter
 
     public void Remove();
 
-    public unsafe void Apply(ref Graphics g);
+    public unsafe void Apply(Graphics g, Bitmap bmp);
 }

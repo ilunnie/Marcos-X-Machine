@@ -44,6 +44,11 @@ public abstract class Entity
         if((this.Mob is Player) == (entity.Mob is Player)) return;
 
         this.Mob.Life -= entity.damage;
+
+        if (entity is CalcMap)
+        {
+            this.Position = this.OldPosition;
+        }
     }
     public virtual void OnCollision(Entity entity) { }
     public virtual void Move(PointF position)
@@ -51,8 +56,6 @@ public abstract class Entity
         this.OldPosition = this.Position;
         this.Position = position;
     }
-
-
     public virtual void Draw(float angle = 0, int layer = 1)
     {
         this.Animation.Draw(Position, Size, Hitbox, angle, layer);

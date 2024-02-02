@@ -57,6 +57,7 @@ public class BasicBot : Mob
                     player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
                 );
 
+                
                 isMoving = true;
                 int width = (int)TileSets.ColumnLength;
             

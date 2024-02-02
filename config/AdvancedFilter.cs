@@ -11,10 +11,8 @@ public abstract class AdvancedFilter : IFilter
     public void Remove()
         => Screen.Filters.Remove(this);
 
-    public void Apply(ref Graphics graphics)
+    public void Apply(Graphics graphics, Bitmap input)
     {
-        Bitmap input = graphics.ToImage();
-
         long[] r, g, b;
         (r, g, b) = extract(input);
 
@@ -28,7 +26,7 @@ public abstract class AdvancedFilter : IFilter
         ApplyFilter(data, r, g, b);
 
         result.UnlockBits(data);
-        // graphics.DrawImage(result, new Point(0, 0));
+        graphics.DrawImage(result, new Point(0, 0));
     }
 
     protected abstract unsafe void Apply(byte* im, long* r, long* g, long* b, int width, int height, int stride);
