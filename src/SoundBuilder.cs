@@ -36,7 +36,7 @@ public static class SoundBuilder
         LoopedAudio loopStream = new LoopedAudio(reader);
 
         sound.PlayLoop(loopStream, position);
-        sound.SetMusicVolume(10);
+        // sound.SetMusicVolume(10);
     }
 
     public static void StopSound()

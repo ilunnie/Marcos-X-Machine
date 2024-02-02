@@ -16,6 +16,7 @@ public class Sound
     {
         waveOut.Stop();
         waveOut.Dispose();
+        Audio.Volume = 1f;
         Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
@@ -51,6 +52,7 @@ public class Sound
             waveOutLoop = new WaveOut();
             long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
             loop.Position = audioStart;
+            waveOutLoop.Volume = 0.5f;
             waveOutLoop.Init(loop);
             waveOutLoop.Play();
         }
