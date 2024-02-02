@@ -10,7 +10,7 @@ public class BasicBot : Mob
 
     private PointF position;
 
-    private float distanceFromPlayer;
+    private float distanceFromPlayer = 500;
     private float speed;
 
     public BasicBot()
@@ -20,7 +20,7 @@ public class BasicBot : Mob
 
         this.MaxLife = 20;
         this.Life = 10;
-        this.Speed = 0.0009f;
+        this.Speed = 0.009f;
     }
 
     public override void OnFrame()
@@ -36,8 +36,6 @@ public class BasicBot : Mob
             return;
         }
 
-
-        isMoving = true;
         if (player.Life > 0)
         {
             float dx = player.Entity.Position.X - this.Entity.Position.X;
@@ -51,8 +49,8 @@ public class BasicBot : Mob
 
             if (distanceToPlayer > distanceFromPlayer )
             {
-
-                 PointF idealPosition = new PointF(
+                isMoving = true;
+                PointF idealPosition = new PointF(
                     player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
                     player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
                 );
@@ -64,6 +62,7 @@ public class BasicBot : Mob
             }
             else {
                 this.speed = 0;
+                isMoving = false;
             }
         }
 

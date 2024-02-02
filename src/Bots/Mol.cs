@@ -3,20 +3,21 @@ using System.Drawing;
 
 public class Mol : Mob
 {
-    public bool FaseOne = true; 
+    public bool FaseOne = true;
     private bool isMoving = false;
+    private float distanceFromPlayer = 300;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
     Player player = null;
 
     public Mol()
     {
-        var gun = new ElectricRoboticGuitar(); 
+        var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 20;
         this.Life = 100;
-        this.Speed = 0.00009f;
+        this.Speed = 0.00095f;
     }
 
     public override void OnFrame()
@@ -35,21 +36,49 @@ public class Mol : Mob
 
         if (player.Life > 0)
         {
-            if(FaseOne){
+            if (FaseOne)
+            {
 
-                this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2 , player.Entity.Position.Y + player.Entity.Size.Height / 2));
+                float dx = player.Entity.Position.X - this.Entity.Position.X;
+                float dy = player.Entity.Position.Y - this.Entity.Position.Y;
+
+                float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
+
+                this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
                 this.Hands[hand].Click();
                 this.Hands[hand].Draw();
-                isMoving = true;
-                VerifyPosition(this.Entity.Position, this.nextPosition);
-                nextPosition = player.Entity.Position;
-                if(this.Life < 10){
+
+                if (distanceToPlayer > distanceFromPlayer)
+                {
+                    isMoving = true;
+                    PointF idealPosition = new PointF(
+                        player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
+                        player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
+                    );
+
+
+                    isMoving = true;
+                    VerifyPosition(this.Entity.Position, this.nextPosition);
+                    nextPosition = idealPosition;
+                }
+                else
+                {
+                    this.Speed = 0;
+                    isMoving = false;
+                }
+
+
+                if (this.Life < 10)
+                {
                     FaseOne = false;
                 }
             }
-            else{
+            else
+            {
                 isMoving = false;
-                this.Entity.Move(new PointF(300, 300));
+
+                this.Entity.Move(new PointF(400, 400));
+                this.Entity.AddAnimation(new MelBotPlayingGuitar());
             }
 
         }

@@ -26,11 +26,10 @@ public class EtsLevel : ILevel
     {
         Screen.Filters.Add(new Vignette());
         Player.Entity.FocusCam();
-        foreach (var entity in Memory.Entities)
-        {
-            if (entity.Mob != null)
-                entity.Mob.OnFrame();
-        }
+        Player.OnFrame();
+        Screen.Filters.Add(
+            new Vignette()
+        );
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
