@@ -6,7 +6,7 @@ public class MolEntity : Entity
     public MolEntity(PointF position){
         this.Name = "Mol";
 
-        this.Size = new SizeF(90, 100);
+        this.Size = new SizeF(150, 160);
         this.Position = position;
         this.OldPosition = this.Position;
 

@@ -19,7 +19,7 @@ public class BasicBot : Mob
         this.Hands.Add(new Hand(this, gun, 90));
 
         this.MaxLife = 20;
-        this.Life = 100;
+        this.Life = 10;
         this.Speed = 0.0009f;
     }
 
@@ -37,6 +37,7 @@ public class BasicBot : Mob
         }
 
 
+        isMoving = true;
         if (player.Life > 0)
         {
             float dx = player.Entity.Position.X - this.Entity.Position.X;
@@ -60,6 +61,9 @@ public class BasicBot : Mob
                 isMoving = true;
                 VerifyPosition(this.Entity.Position, this.nextPosition);
                 nextPosition = idealPosition;
+            }
+            else {
+                this.speed = 0;
             }
         }
 

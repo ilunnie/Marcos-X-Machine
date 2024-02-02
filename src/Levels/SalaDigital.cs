@@ -61,8 +61,4 @@ public class SalaDigitalLevel : ILevel
         }
     }
 
-    public void Load(Graphics g, PictureBox pb)
-    {
-        throw new System.NotImplementedException();
-    }
 }

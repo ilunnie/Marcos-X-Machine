@@ -3,6 +3,7 @@ using System.Drawing;
 
 public class Mol : Mob
 {
+    public bool FaseOne = true; 
     private bool isMoving = false;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
@@ -10,12 +11,12 @@ public class Mol : Mob
 
     public Mol()
     {
-        var gun = new GunBasicBotEntity(); ///--------------------------------------
-        this.Hands.Add(new Hand(this, gun, 90));
+        var gun = new ElectricRoboticGuitar(); 
+        this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 20;
         this.Life = 100;
-        this.Speed = 0;
+        this.Speed = 0.00009f;
     }
 
     public override void OnFrame()
@@ -34,12 +35,22 @@ public class Mol : Mob
 
         if (player.Life > 0)
         {
-            this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2 , player.Entity.Position.Y + player.Entity.Size.Height / 2));
-            this.Hands[hand].Click();
-            this.Hands[hand].Draw();
-            // isMoving = true;
-            VerifyPosition(this.Entity.Position, this.nextPosition);
-            nextPosition = player.Entity.Position;
+            if(FaseOne){
+
+                this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2 , player.Entity.Position.Y + player.Entity.Size.Height / 2));
+                this.Hands[hand].Click();
+                this.Hands[hand].Draw();
+                isMoving = true;
+                VerifyPosition(this.Entity.Position, this.nextPosition);
+                nextPosition = player.Entity.Position;
+                if(this.Life < 10){
+                    FaseOne = false;
+                }
+            }
+            else{
+                isMoving = false;
+                this.Entity.Move(new PointF(300, 300));
+            }
 
         }
 
@@ -60,9 +71,9 @@ public class Mol : Mob
         }
 
         if (isMoving)
-            this.Entity.AddWalkingAnimation("enemies/basic-bot/basic-bot-sprites.png", Direction);
+            this.Entity.AddWalkingAnimation("bosses/mel-bot/mel-bot-sprites.png", Direction);
         else
-            this.Entity.AddStaticAnimation("enemies/basic-bot/basic-bot-sprites.png", Direction);
+            this.Entity.AddStaticAnimation("bosses/mel-bot/mel-bot-sprites.png", Direction);
         this.Entity.Animation = this.Entity.Animation.Skip();
 
         this.Entity.Move(
