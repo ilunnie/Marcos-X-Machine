@@ -7,7 +7,7 @@ public class EntradaDTALevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(640, 430);
+    private PointF InitialPosition => new PointF(1200, 1400);
     private PointF playerPosition = PointF.Empty;
     public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }
     private Player player = null;
