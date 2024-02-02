@@ -8,14 +8,9 @@ public sealed class Screen : IScreen
     private static Screen queue = null;
     private static readonly object block = new object();
     
-    public static List<Sprite> Sprites { get;  private set; }
-    public static List<IFilter> Filters { get; private set; }
+    public static List<Sprite> Sprites { get;  private set; } = new List<Sprite>();
+    public static List<IFilter> Filters { get; private set; } = new List<IFilter>();
 
-    Screen()
-    {
-        Sprites = new List<Sprite>();
-        Filters = new List<IFilter>();
-    }
     public static Screen Queue
     {
         get

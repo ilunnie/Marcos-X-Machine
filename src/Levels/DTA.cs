@@ -7,18 +7,19 @@ public class DTALevel : ILevel
      private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InicialPosition => new PointF(540, 560);
+    private PointF InitialPosition => new PointF(540, 560);
 
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
-                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
+                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InitialPosition) };
                             
     public bool IsLoaded { get; set; } = false;
-
     public Loader Loader => new DTALoad();
+    private Image backgroundLoad = null;
+    public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
 
     public void OnFrame()
     {

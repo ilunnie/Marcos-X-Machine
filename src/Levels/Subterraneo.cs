@@ -15,8 +15,9 @@ public class SubterraneoLevel : ILevel
                             .FirstOrDefault() ?? new Player() { Entity = new Marcos(InicialPosition) };
                             
     public bool IsLoaded { get; set; } = false;
-
     public Loader Loader => new SubterraneoLoad();
+    private Image backgroundLoad = null;
+    public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
 
     public void OnFrame()
     {

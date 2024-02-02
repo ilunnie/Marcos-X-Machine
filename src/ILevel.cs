@@ -7,9 +7,10 @@ public interface ILevel
     Player Player { get; }
     Loader Loader { get; }
     bool IsLoaded { get; set; }
+    Image BackgroundLoad { get; set; }
     void Load(Graphics g, PictureBox pb)
     {
-        Loader.LoadScreen(Player, g, pb);
+        Loader.LoadScreen(Player, g, pb, BackgroundLoad);
         IsLoaded = true;
     }
     void OnFrame();

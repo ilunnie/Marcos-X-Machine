@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
 
 public class SalaDigitalLoad : Loader
 {
@@ -36,7 +32,7 @@ public class SalaDigitalLoad : Loader
             })
             .Then(() => player.Entity.FocusCam(false))
             .Then(() => new Teleport(
-                new PointF(10 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
+                new PointF(10 * TileSets.spriteMapSize.Width, 6 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
                 new SizeF(120 / 3, 120),
                 new PointF(640, 430),
                 new EtsLevel()

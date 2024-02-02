@@ -118,7 +118,7 @@ public static class TileSets
         if (tileset.Length > 1)
         {
             clone.ReadHitBox(tileset[1]);
-            mapArray[column + (row - 1) * ColumnLength] = 1;
+            // mapArray[column + (row - 1) * ColumnLength] = 1;
         }
 
         Memory.Map.Add(clone);

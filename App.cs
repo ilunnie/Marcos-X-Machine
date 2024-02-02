@@ -25,7 +25,7 @@ public abstract class App
 
         var timer = new Timer
         {
-            Interval = 10,
+            Interval = 20,
         };
 
         this.form = new Form
