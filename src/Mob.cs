@@ -12,7 +12,7 @@ public class Mob
         get => entity;
         set {
             this.entity = value;
-            value.Mob = this;
+            if (value is not null) value.Mob = this;
         }
     }
     public List<Hand> Hands { get; set; } = new List<Hand>();
@@ -21,7 +21,9 @@ public class Mob
     public float Life;
     public float Speed = 0.6f;
 
-    public virtual void OnDestroy() {}
+    public virtual void OnDestroy()
+    {
+    }
     public virtual void OnInit() {}
     public virtual void OnFrame() {}
     public virtual void OnMouseMove(object o, MouseEventArgs e) {}

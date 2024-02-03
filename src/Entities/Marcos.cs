@@ -47,5 +47,7 @@ public class Marcos : Entity
     public override void Destroy()
     {
         this.AddAnimation(new MarcosDying());
+        if (Mob is not null) Mob.OnDestroy();
+        this.Mob = null;
     }
 }

@@ -10,10 +10,7 @@ public class BasicBot : Mob
     Stack<int> nextMoves;
     Player player = null;
 
-    private PointF position;
-
     private float distanceFromPlayer = 500;
-    private float speed;
 
     public BasicBot()
     {
@@ -78,7 +75,7 @@ public class BasicBot : Mob
                 }
             }
             else {
-                this.speed = 0;
+                this.Speed = 0;
                 isMoving = false;
             }
         }

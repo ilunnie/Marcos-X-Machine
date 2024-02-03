@@ -19,7 +19,6 @@ public class DamagedBot : Mob
         this.Speed = 0.001f;
     }
 
-        int frame = 0;
     public override void OnFrame()
     {
         if (player == null)
