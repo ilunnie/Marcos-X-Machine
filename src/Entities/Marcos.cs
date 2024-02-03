@@ -41,11 +41,13 @@ public class Marcos : Entity
         if (this.Mob.Life <= 0)
         {
             this.Destroy();
-            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/ai.wav"); // arrumar volume
+            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/marcosDying.wav");
         }
     }
     public override void Destroy()
     {
         this.AddAnimation(new MarcosDying());
+        if (Mob is not null) Mob.OnDestroy();
+        this.Mob = null;
     }
 }

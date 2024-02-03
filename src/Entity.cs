@@ -34,6 +34,7 @@ public abstract class Entity
     public virtual void Destroy()
     {
         if (Mob is not null) Mob.OnDestroy();
+        this.Mob = null;
         Memory.ToDelete.Add(this);
     }
 
