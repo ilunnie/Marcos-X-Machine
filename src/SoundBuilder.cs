@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using NAudio.Wave;
 
 public static class SoundBuilder
@@ -29,7 +31,6 @@ public static class SoundBuilder
         LoopedAudio loopStream = new LoopedAudio(reader);
 
         sound.PlayLoop(loopStream, position);
-        // sound.SetMusicVolume(10);
     }
 
     public static void StopSound()

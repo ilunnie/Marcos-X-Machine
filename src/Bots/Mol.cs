@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Threading;
 
 public class Mol : Mob
 {
@@ -10,8 +11,12 @@ public class Mol : Mob
     PointF nextPosition = PointF.Empty;
     Player player = null;
 
+    private int count = 0;
+
     public Mol()
     {
+        SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
+        // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/introMusic.wav", 20);
         var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
 
@@ -24,7 +29,6 @@ public class Mol : Mob
     {
         if (player == null)
         {
-
             foreach (var entity in Memory.Entities)
             {
                 if (entity.Mob is Player)
@@ -38,7 +42,6 @@ public class Mol : Mob
         {
             if (FaseOne)
             {
-
                 float dx = player.Entity.Position.X - this.Entity.Position.X;
                 float dy = player.Entity.Position.Y - this.Entity.Position.Y;
 
@@ -71,16 +74,19 @@ public class Mol : Mob
                 if (this.Life < 10)
                 {
                     FaseOne = false;
-                    // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/MelBot/guitarraMol.wav");
+                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
+                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
+
+                    // wait for last sound to stop before playing
+                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
+                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav", 0);
                 }
             }
             else
             {
                 isMoving = false;
-
                 this.Entity.Move(new PointF(400, 400));
                 this.Entity.AddAnimation(new MelBotPlayingGuitar());
-                SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/MelBot/guitarraMol.wav");
             }
 
         }
