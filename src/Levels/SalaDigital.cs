@@ -30,22 +30,23 @@ public class SalaDigitalLevel : ILevel
 
     public void OnFrame()
     {
+        if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
                 entity.Mob.OnFrame();
         }
-
-         Screen.Filters.Add(
-            new Vignette( ) {
-                Intensity = 0.967f
-            }
-        );
+        // Screen.Filters.Add(
+        //     new Vignette( ) {
+        //         Intensity = 0.967f
+        //     }
+        // );
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
+        if (Event is not null) { Event.OnKeyDown(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
@@ -55,6 +56,7 @@ public class SalaDigitalLevel : ILevel
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
+        if (Event is not null) { Event.OnKeyUp(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
@@ -64,6 +66,7 @@ public class SalaDigitalLevel : ILevel
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
+        if (Event is not null) { Event.OnMouseMove(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
