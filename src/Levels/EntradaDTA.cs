@@ -7,7 +7,7 @@ public class EntradaDTALevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(1200, 1400);
+    private PointF InitialPosition => new PointF(2350, 100);
     private PointF playerPosition = PointF.Empty;
     public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }
     private Player player = null;
@@ -23,6 +23,7 @@ public class EntradaDTALevel : ILevel
 
     public void OnFrame()
     {
+        if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
         foreach (var entity in Memory.Entities)
         {
@@ -33,6 +34,7 @@ public class EntradaDTALevel : ILevel
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
+        if (Event is not null) { Event.OnKeyDown(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
@@ -42,6 +44,7 @@ public class EntradaDTALevel : ILevel
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
+        if (Event is not null) { Event.OnKeyUp(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
@@ -51,6 +54,7 @@ public class EntradaDTALevel : ILevel
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
+        if (Event is not null) { Event.OnMouseMove(o, e); return; }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)

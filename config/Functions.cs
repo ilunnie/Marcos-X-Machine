@@ -62,9 +62,13 @@ public static class Functions
     /// <returns><c>PointF</c> com a posição calculada</returns>
     public static PointF LinearInterpolation(float Ax, float Ay, float Bx, float By, double t)
     {
+        // return new PointF(
+        //     (float)((1 - t) * Ax + t * Bx),
+        //     (float)((1 - t) * Ay + t * By)
+        // );
         return new PointF(
-            (float)((1 - t) * Ax + t * Bx),
-            (float)((1 - t) * Ay + t * By)
+            (float)(Ax + t * (Bx - Ax)),
+            (float)(Ay + t * (By - Ay))
         );
     }
     /// <summary>

@@ -10,8 +10,6 @@ public abstract class Loader
     public int Ymin = int.MaxValue;
     public void LoadScreen(Player player, Graphics g, PictureBox pb, Image background_image = null, bool percent = false)
     {
-        SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
-
         LoadProcessBuilder builder = new LoadProcessBuilder();
         Init(player, builder);
 
