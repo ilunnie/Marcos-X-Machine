@@ -20,8 +20,16 @@ public class Hand
 
     public void Draw()
     {
+        if (Entity.recoil > 0)
+        {
+            Entity.recoil -= (int)Memory.Frame * 3;
+        }
+
         if (Entity.cooldown > 0)
+        {
             Entity.cooldown -= (int)Memory.Frame * 3;
+        }
+        
         Entity.Move(Destiny);
         Entity.Draw(angle: Angle);
     }
@@ -33,7 +41,7 @@ public class Hand
         PointF centerPosition = new PointF(x, y);
 
         double angle = ScreenRef ? centerPosition.PositionOnCam().AngleTo(point) : centerPosition.AngleTo(point);
-        double distance = Distance - Math.Max(Entity.cooldown, 500) / 50;
+        double distance = Distance - Math.Max(Entity.recoil, 500) / 50;
 
         Destiny = new PointF(
             (float)(x + distance * Math.Cos(angle)),

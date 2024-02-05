@@ -4,11 +4,11 @@ using System.Drawing;
 using System.IO.Compression;
 using System.Windows.Forms;
 
-public class RevolverEntity : Entity
+public class Revolver : Entity
 {
     private PointF Anchor { get; set; }
     private float Angle = 0;
-    public RevolverEntity(PointF position)
+    public Revolver(PointF position)
     {
         this.Name = "Revolver";
 
@@ -32,7 +32,7 @@ public class RevolverEntity : Entity
             AnchorPosition = Anchor
         });
     }
-    public RevolverEntity() : this(new PointF(0, 0)) {}
+    public Revolver() : this(new PointF(0, 0)) {}
 
     public override void Draw(float angle = 0, int layer = 1)
     {
@@ -45,14 +45,16 @@ public class RevolverEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1500;
+        this.cooldown = 2000;
+        this.recoil = 2000;
         
         var size = this.Size.Width * 0.7f;
-        var alturaSlKkk = this.Size.Height * 0.8f;
+        var altura = this.Size.Height * 0.8f;
         var cos = MathF.Cos(MathF.PI * Angle / 180);
         var sin = MathF.Sin(MathF.PI * Angle / 180);
-        var happyPoint = new PointF(Position.X + cos * size + alturaSlKkk * sin, Position.Y + sin * size - alturaSlKkk * cos);
-        var projectile = new YellowProjectile(happyPoint){
+        var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
+
+        new YellowProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 10000,
             Angle = Angle,

@@ -10,7 +10,7 @@ public class DubstepGun : Entity
     {
         this.Name = "DubstepGun";
 
-        this.Size = new SizeF(120, 80);
+        this.Size = new SizeF(120, 90);
         this.Position = position;
 
 
@@ -23,7 +23,7 @@ public class DubstepGun : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        Anchor = new PointF(0, Size.Height );
+        Anchor = new PointF(0, Size.Height / 2);
 
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/dubstep-gun.png");
 
@@ -47,18 +47,15 @@ public class DubstepGun : Entity
         if (cooldown > 0) return;
 
         this.cooldown = 800;
+        this.recoil = 2000;
         
         var size = this.Size.Width * 0.5f;
-
-        var altura = this.Size.Height * 0.9f;
-
+        var altura = this.Size.Height * 0.5f;
         var cos = MathF.Cos(MathF.PI * Angle / 180);
-
         var sin = MathF.Sin(MathF.PI * Angle / 180);
-
         var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
-        new LaserProjectile(happyPoint){
+        new NoteProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 5000,
             Angle = Angle,

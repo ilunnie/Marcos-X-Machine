@@ -14,7 +14,7 @@ public class BasicBot : Mob
 
     public BasicBot()
     {
-        this.Hands.Add(new Hand(this, new GunBasicBotEntity(), 90));
+        this.Hands.Add(new Hand(this, new GunBasicBot(), 90));
 
         this.MaxLife = 30;
         this.Life = 30;

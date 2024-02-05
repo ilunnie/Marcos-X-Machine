@@ -47,15 +47,11 @@ public class ElectricRoboticGuitar : Entity
         if (cooldown > 0) return;
 
         this.cooldown = 700;
-        
+
         var size = this.Size.Width * 0.5f;
-
         var altura = this.Size.Height * 0.8f;
-
         var cos = MathF.Cos(MathF.PI * Angle / 180);
-
         var sin = MathF.Sin(MathF.PI * Angle / 180);
-
         var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
         new LaserProjectile(happyPoint){

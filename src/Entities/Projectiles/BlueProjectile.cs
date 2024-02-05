@@ -7,7 +7,7 @@ public class BlueProjectile : Projectile
         this.Name = "Blue Projectile";
 
         this.Inicial = position;
-        this.Size = new SizeF(24, 24);
+        this.Size = new SizeF(30, 30);
         this.Hitbox.rectangles.Add(new RectangleF(
             0, 0,
             this.Size.Width,
@@ -15,7 +15,7 @@ public class BlueProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 3;
+        this.damage = 8;
 
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 9, 1, 10, 4);
     }

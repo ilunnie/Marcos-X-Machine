@@ -9,8 +9,11 @@ public class Game : App
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
-        Memory.Level = new DTALevel();
+        Memory.Level = new EntradaDTALevel();
         // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
+
+        // Sound.SetMusicVolume(0);
+        // Sound.SetVolume(100);
     }
     public override void OnFrame()
     {

@@ -18,10 +18,16 @@ public class Player : Mob
 
     public Player()
     {
-        var revolver = new ElectricRoboticGuitar();
-        this.Hands.Add(new Hand(this, revolver, -20));
+        var bulletgun = new BulletGun();
+        this.Hands.Add(new Hand(this, bulletgun, 30));
 
-        var gun_basicbot = new GunBasicBotEntity();
+        var dubstepgun = new DubstepGun();
+        this.Hands.Add(new Hand(this, dubstepgun, 30));
+
+        var revolver = new Revolver();
+        this.Hands.Add(new Hand(this, revolver, 20));
+
+        var gun_basicbot = new GunBasicBot();
         this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;

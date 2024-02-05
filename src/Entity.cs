@@ -14,6 +14,7 @@ public abstract class Entity
     public SizeF Size { get; set; }
     public int damage { get; set; } = 0;
     public int cooldown { get; set; } = 0;
+    public int recoil { get; set; } = 0;
 
     public Mob Mob = null;
     public IAnimation Animation { get; set; }

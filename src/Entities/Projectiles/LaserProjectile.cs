@@ -15,7 +15,7 @@ public class LaserProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 3;
+        this.damage = 8;
         
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 9, 3, 10, 4);
     }
