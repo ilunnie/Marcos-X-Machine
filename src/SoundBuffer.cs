@@ -17,10 +17,10 @@ public class SoundBuffer
         if (map.ContainsKey(key))
             return map[key];
 
-        var newSound = type switch
+        Sound newSound = type switch
         {
             SoundType.Effect => new SoundEffect(new AudioFileReader(file)),
-            SoundType.Music => new SoundEffect(new AudioFileReader(file)),
+            SoundType.Music => new MusicEffect(new AudioFileReader(file)),
             _ => null
         };
         map.Add(key, newSound);

@@ -98,7 +98,7 @@ public class BasicBot : Mob
             this.Entity.AddStaticAnimation("enemies/basic-bot/basic-bot-sprites.png", Direction);
         
         if (this.Life <= 0)
-            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Enemies/BasicRobot/morrendo.wav");
+            Sound.OpenFrom(SoundType.Effect, "src/Sounds/Enemies/BasicRobot/morrendo.wav").Play();
 
         this.Entity.Animation = this.Entity.Animation.Skip();
 

@@ -59,7 +59,8 @@ public class RevolverEntity : Entity
             Speed = 1.5f,
         };
 
-        SoundBuilder.Play(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav");
+        var sound = Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav");
+        sound.Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

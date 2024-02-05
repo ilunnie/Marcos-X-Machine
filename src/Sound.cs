@@ -1,76 +1,106 @@
+using System;
+using System.Collections.Generic;
 using System.Threading;
+using NAudio.Wasapi.CoreAudioApi;
 using NAudio.Wave;
 
 public class Sound
 {
-    public static WaveOutEvent MusicWaveOut = new WaveOutEvent();
+    public static WaveOut MusicWaveOut = new WaveOut();
     public static WaveOutEvent EffectWaveOut = new WaveOutEvent();
-
-    public AudioFileReader Audio { get; protected set; }
-    public WaveOutEvent waveOut { get; protected set; }
-    public WaveOutEvent waveOutLoop { get; protected set; }
-
-    public Sound(WaveOutEvent waveOut, AudioFileReader audio)
+    private static List<Sound> effects = new();
+    private static List<Sound> musics = new();
+    private static int effectVolume = 100;
+    private static int musicVolume = 100;
+    public static void SetEffectVolume(int value)
     {
+        effectVolume = value;
+        foreach (var effect in effects)
+        {
+            if (value > 100)
+                effect.Audio.Volume = 1.0f;
+            else if (value < 0)
+                effect.Audio.Volume = 0f;
+            else effect.Audio.Volume = value / 100f;
+        }
+    }
+    public static void SetMusicVolume(int value)
+    {
+        musicVolume = value;
+        foreach (var music in musics)
+        {
+            if (value > 100)
+                music.Audio.Volume = 1.0f;
+            else if (value < 0)
+                music.Audio.Volume = 0f;
+            else music.Audio.Volume = value / 100f;
+        }
+    }
+    
+    public static Sound OpenFrom(SoundType type, string file)
+        => SoundBuffer.Current.Get(file, type);
+    
+    public AudioFileReader Audio { get; protected set; }
+    public IWavePlayer waveOut { get; protected set; }
+
+    public Sound(IWavePlayer waveOut, AudioFileReader audio)
+    {
+        if (waveOut == MusicWaveOut)
+        {
+            musics.Add(this);
+            audio.Volume = float.Min(musicVolume / 100f, 1f);
+        }
+        else if (waveOut == EffectWaveOut)
+        {
+            effects.Add(this);
+            audio.Volume = float.Min(effectVolume / 100f, 1f);
+        }
+        
         this.waveOut = waveOut;
         this.Audio = audio;
     }
     public virtual void Play()
     {
-        waveOut.Stop();
-        waveOut.Dispose();
-        Audio.Position = 0;
+        if (waveOut.PlaybackState == PlaybackState.Playing)
+        {
+            waveOut.Stop();
+            waveOut.Dispose();
+            Audio.Position = 0;
+        }
         waveOut.Init(Audio);
         waveOut.Play();
     }
 
-    public static void SetVolume(int value)
+    public void Wait(Action action)
     {
-        if (value > 100)
-            EffectWaveOut.Volume = 1.0f;
-        else if (value < 0)
-            EffectWaveOut.Volume = 0f;
-        else EffectWaveOut.Volume = value / 100f;
-    }
-    public static void SetMusicVolume(int value)
-    {
-        if (MusicWaveOut != null)
+        EventHandler<StoppedEventArgs> stopedEvent = null;
+        stopedEvent = (o, e) =>
         {
-            if (value > 100)
-                MusicWaveOut.Volume = 1.0f;
-            else if (value < 0)
-                MusicWaveOut.Volume = 0f;
-            else
-                MusicWaveOut.Volume = value / 100f;
-        }
+            action();   
+            waveOut.PlaybackStopped -= stopedEvent;
+        };
+        waveOut.PlaybackStopped += stopedEvent;
     }
 
     public virtual void PlayLoop(LoopedAudio stream, long position)
-    {
-        if (waveOutLoop == null)
-        {
-            LoopedAudio loop = new LoopedAudio(stream);
-            waveOutLoop = new WaveOutEvent();
-            long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
-            loop.Position = audioStart;
-            waveOutLoop.Init(loop);
-            waveOutLoop.Play();
-        }
-        else
-        {
-            waveOutLoop.Stop();
-            waveOutLoop.Dispose();
-            waveOutLoop = null;
-        }
-    }
-
-    public virtual void Stop()
     {
         if (waveOut.PlaybackState == PlaybackState.Playing)
         {
             waveOut.Stop();
             waveOut.Dispose();
         }
+
+        LoopedAudio loop = new LoopedAudio(stream);
+        long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
+        loop.Position = audioStart;
+        waveOut.Init(loop);
+        waveOut.Play();
+    }
+
+    public virtual void Stop()
+    {
+        waveOut.Stop();
+        waveOut.Dispose();
     }
 
     public virtual void Restart()
@@ -79,18 +109,5 @@ public class Sound
         Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
-    }
-
-    public virtual void Dispose()
-    {
-        if (waveOut != null)
-        {
-            waveOut.Stop();
-            waveOut.Dispose();
-        }
-        if (Audio != null)
-        {
-            Audio.Dispose();
-        }
     }
 }

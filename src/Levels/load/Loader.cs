@@ -39,7 +39,6 @@ public abstract class Loader
 
             loadPercent = builder.LoadNext();
         }
-        SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
         Memory.Frame = 0;
     }
     protected abstract void Init(Player player, LoadProcessBuilder builder);

@@ -12,8 +12,9 @@ public class Mol : Mob
 
     public Mol()
     {
-        SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
-        // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/introMusic.wav", 20);
+        Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav")
+            .Play();
+        
         var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
 
@@ -25,7 +26,7 @@ public class Mol : Mob
     public override void OnFrame()
     {
         if(this.Life == 0)
-            SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
+            // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
             
         if (player == null)
         {

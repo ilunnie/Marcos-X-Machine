@@ -34,7 +34,6 @@ public class EntradaDTAload : Loader
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
             .Then(() => player.Entity.FocusCam(false))
-            .Then(() => SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20))
             .Then(() => new Teleport(
                 new PointF((4 * 3) * (TileSets.spriteMapSize.Width / 3), 9 * 3 * (TileSets.spriteMapSize.Height / 3)),
                 new SizeF(TileSets.spriteMapSize.Width / 2, TileSets.spriteMapSize.Height / 3 * 2),

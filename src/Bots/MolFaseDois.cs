@@ -12,8 +12,11 @@ public class MolFaseDois : Mob
 
     public MolFaseDois()
     {
-        SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
-        // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/introMusic.wav", 20);
+        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav");
+        var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav");
+
+        s1.Wait(() => s2.Play());
+        s1.Play();
 
         this.MaxLife = 20;
         this.Life = 10;
@@ -32,10 +35,6 @@ public class MolFaseDois : Mob
             }
             return;
         }
-
-        if(this.Life == 0)
-            SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
-
 
         if (player.Life > 0)
         {

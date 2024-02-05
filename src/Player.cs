@@ -48,7 +48,7 @@ public class Player : Mob
         {
             this.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction);
             if(this.Life < 0)
-                SoundBuilder.PlayLoopedSound(SoundType.Effect,"src/Sounds/Marcos/andando.wav", 0);
+                Sound.OpenFrom(SoundType.Music, "src/Sounds/Marcos/andando.wav");
         }
         this.Entity.Animation = this.Entity.Animation.Skip();
 

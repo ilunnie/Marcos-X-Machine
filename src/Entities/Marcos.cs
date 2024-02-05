@@ -41,7 +41,7 @@ public class Marcos : Entity
         if (this.Mob.Life <= 0)
         {
             this.Destroy();
-            SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/marcosDying.wav");
+            Sound.OpenFrom(SoundType.Effect, "src/Sounds/Marcos/marcosDying.wav").Play();
         }
     }
     public override void Destroy()
