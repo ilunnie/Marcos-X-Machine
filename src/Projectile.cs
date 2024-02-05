@@ -19,4 +19,16 @@ public abstract class Projectile : Entity
             (float)(Inicial.Y + (distance + Speed * Memory.Frame) * Math.Sin(Angle * (Math.PI / 180)))
         );
     }
+
+    public override void OnHit(Entity entity)
+    {
+        if (entity.Mob == this.Mob)
+            return;
+
+        if (entity is Projectile)
+            return;
+
+        if (entity.Mob?.Life > 0 || entity is CalcMap)
+            this.Destroy();
+    }
 }

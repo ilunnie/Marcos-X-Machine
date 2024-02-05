@@ -40,10 +40,6 @@ public class SalaDigitalLoad : Loader
             ))
             .Then(() => 
             {
-                new DamagedBot() { Entity = new DamagedBotEntity(new PointF(
-                    Random.Shared.Next(800, 1100),
-                    Random.Shared.Next(600, 900)))
-                };
             })
                 ;
 }

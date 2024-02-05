@@ -14,8 +14,7 @@ public class BasicBot : Mob
 
     public BasicBot()
     {
-        var gun = new GunBasicBotEntity();
-        this.Hands.Add(new Hand(this, gun, 90));
+        this.Hands.Add(new Hand(this, new GunBasicBotEntity(), 90));
 
         this.MaxLife = 30;
         this.Life = 30;
@@ -49,12 +48,10 @@ public class BasicBot : Mob
             {
                 isMoving = true;
                 PointF idealPosition = new PointF(
-                    player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
-                    player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
+                    player.Entity.Position.X - dx / distanceToPlayer * distanceFromPlayer,
+                    player.Entity.Position.Y - dy / distanceToPlayer * distanceFromPlayer
                 );
-
                 
-                isMoving = true;
                 int width = (int)TileSets.ColumnLength;
             
                 nextMoves = Functions.GetNextMoves(
@@ -75,7 +72,6 @@ public class BasicBot : Mob
                 }
             }
             else {
-                this.Speed = 0;
                 isMoving = false;
             }
         }

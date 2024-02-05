@@ -56,7 +56,7 @@ public class RevolverEntity : Entity
             Mob = this.Mob,
             cooldown = 10000,
             Angle = Angle,
-            Speed = 5,
+            Speed = 1.5f,
         };
 
         SoundBuilder.Play(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav");

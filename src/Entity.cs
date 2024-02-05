@@ -40,16 +40,16 @@ public abstract class Entity
 
     public virtual void OnHit(Entity entity)
     {
+        if (entity is CalcMap)
+        {
+            this.Position = this.OldPosition;
+        }
+        
         if (this.Mob is null) return;
         if(this == entity.Mob?.Entity) return;
         if((this.Mob is Player) == (entity.Mob is Player)) return;
 
         this.Mob.Life -= entity.damage;
-
-        if (entity is CalcMap)
-        {
-            this.Position = this.OldPosition;
-        }
     }
     public virtual void OnCollision(Entity entity) { }
     public virtual void Move(PointF position)

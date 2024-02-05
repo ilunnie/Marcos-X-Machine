@@ -95,30 +95,36 @@ public static class TileSets
 
     public static void Set(string value, int column, int row)
     {
-        string[] tileset = value.Split('h');
-        int index = int.Parse(tileset[0]);
-
-        CalcMap clone = Memory.Tileset[index].Clone();
-        clone.Move(
-            new PointF(
-                column * clone.Size.Width,
-                row * clone.Size.Height
-            )
-        );
-        clone.AddAnimation(
-            new StaticAnimation()
-            {
-                Image = clone.Image
-            }
-        );
-
-        if (tileset.Length > 1)
+        string[] tilesets = value.Split('+');
+        
+        for (int i = 0; i < tilesets.Length; i++)
         {
-            clone.ReadHitBox(tileset[1]);
-            // mapArray[column + (row - 1) * ColumnLength] = 1;
-        }
+            string[] tileset = tilesets[i].Split('h');
+            int index = int.Parse(tileset[0]);
 
-        Memory.Map.Add(clone);
+            CalcMap clone = Memory.Tileset[index].Clone();
+            clone.Layer = i;
+            clone.Move(
+                new PointF(
+                    column * clone.Size.Width,
+                    row * clone.Size.Height
+                )
+            );
+            clone.AddAnimation(
+                new StaticAnimation()
+                {
+                    Image = clone.Image
+                }
+            );
+
+            if (tileset.Length > 1)
+            {
+                clone.ReadHitBox(tileset[1]);
+                // mapArray[column + (row - 1) * ColumnLength] = 1;
+            }
+
+            Memory.Map.Add(clone);
+        }
     }
 
     public static void ReadHitBox(this CalcMap clone, string hexa)

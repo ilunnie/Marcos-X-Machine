@@ -46,25 +46,24 @@ public class ElectricRoboticGuitar : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 5000;
+        this.cooldown = 700;
         
         var size = this.Size.Width * 0.5f;
 
-        var alturaSlKkk = this.Size.Height * 0.5f;
+        var altura = this.Size.Height * 0.8f;
 
         var cos = MathF.Cos(MathF.PI * Angle / 180);
 
         var sin = MathF.Sin(MathF.PI * Angle / 180);
 
-        var happyPoint = new PointF(Position.X + cos * size + alturaSlKkk * sin, Position.Y + sin * size - alturaSlKkk * cos);
+        var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
         new LaserProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 5000,
             Angle = Angle,
-            Speed = 1,
+            Speed = 1f,
         };
-        
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

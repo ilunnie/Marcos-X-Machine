@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-public class GunBasicBotEntity : Entity
+public class DubstepGun : Entity
 {
     private PointF Anchor { get; set; }
     private float Angle = 0;
-    public GunBasicBotEntity(PointF position)
+    public DubstepGun(PointF position)
     {
-        this.Name = "GunBasicBot";
+        this.Name = "DubstepGun";
 
-        this.Size = new SizeF(70, 40);
+        this.Size = new SizeF(120, 80);
         this.Position = position;
 
 
@@ -23,9 +23,9 @@ public class GunBasicBotEntity : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        Anchor = new PointF(0, Size.Height / 2);
+        Anchor = new PointF(0, Size.Height );
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/basic-bot-gun.png");
+        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/dubstep-gun.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -34,8 +34,8 @@ public class GunBasicBotEntity : Entity
         });
 
     }
-    public GunBasicBotEntity() : this(new PointF(0, 0)) {}
-    public override void Draw(float angle = 0, int layer = 1)
+    public DubstepGun() : this(new PointF(0, 0)) {}
+    public override void Draw(float angle = 0, int layer = 3)
     {
         Angle = angle;
         this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, angle, layer);
@@ -46,11 +46,11 @@ public class GunBasicBotEntity : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 5000;
+        this.cooldown = 800;
         
         var size = this.Size.Width * 0.5f;
 
-        var altura = this.Size.Height * 0.5f;
+        var altura = this.Size.Height * 0.9f;
 
         var cos = MathF.Cos(MathF.PI * Angle / 180);
 
@@ -58,13 +58,12 @@ public class GunBasicBotEntity : Entity
 
         var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
-        new BlueProjectile(happyPoint){
+        new LaserProjectile(happyPoint){
             Mob = this.Mob,
             cooldown = 5000,
             Angle = Angle,
             Speed = 1f,
         };
-        SoundBuilder.Play(SoundType.Effect, "src/Sounds/Guns/FuturisticPistol/futuristicPistol.wav");
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

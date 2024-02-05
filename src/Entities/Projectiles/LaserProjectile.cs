@@ -7,7 +7,7 @@ public class LaserProjectile : Projectile
         this.Name = "Laser Projectile";
 
         this.Inicial = position;
-        this.Size = new SizeF(12, 12);
+        this.Size = new SizeF(50, 50);
         this.Hitbox.rectangles.Add(new RectangleF(
             0, 0,
             this.Size.Width,
@@ -16,13 +16,12 @@ public class LaserProjectile : Projectile
         this.Position = position;
         this.OldPosition = this.Position;
         this.damage = 3;
-
+        
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 9, 3, 10, 4);
     }
 
-    public override void OnHit(Entity entity)
+    public override void Draw(float angle = 0, int layer = 1)
     {
-        if (entity.Mob?.Life > 0 || entity is CalcMap)
-            this.Destroy();
+        base.Draw(Angle, layer);
     }
 }

@@ -19,10 +19,4 @@ public class YellowProjectile : Projectile
 
         this.AddStaticAnimation("projectiles/projectiles-sprite.png", 8, 1, 10, 4);
     }
-
-    public override void OnHit(Entity entity)
-    {
-        if (entity.Mob?.Life > 0 || entity is CalcMap)
-            this.Destroy();
-    }
 }

@@ -10,6 +10,38 @@ public static class Collision
         RectangleF comparRect = new RectangleF();
 
         bool result = false;
+        // int tolerance = 100;
+        // double distance = entity.Position.Distance(entity.OldPosition);
+
+        // if (entity.Position.Distance(entity.OldPosition) > tolerance)
+        // {
+        //     for (int i = 0; i < distance; i++)
+        //     {
+        //         foreach (var thisRect in entity.Hitbox.rectangles)
+        //         {
+        //             foreach (var otherRect in other.Hitbox.rectangles)
+        //             {
+        //                 var entityPos = entity.OldPosition.LinearInterpolation(entity.Position, i);
+        //                 entityRect.X = entityPos.X + thisRect.X;
+        //                 entityRect.Y = entityPos.Y + thisRect.Y;
+        //                 entityRect.Width = thisRect.Width;
+        //                 entityRect.Height = thisRect.Height;
+
+        //                 comparRect.X = other.Position.X + otherRect.X;
+        //                 comparRect.Y = other.Position.Y + otherRect.Y;
+        //                 comparRect.Width = otherRect.Width;
+        //                 comparRect.Height = otherRect.Height;
+
+        //                 if (entityRect.IntersectsWith(comparRect))
+        //                 {
+        //                     entity.OnHit(other);
+        //                     result = true;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }    
+
         foreach (var thisRect in entity.Hitbox.rectangles)
         {
             foreach (var otherRect in other.Hitbox.rectangles)
