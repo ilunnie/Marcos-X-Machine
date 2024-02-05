@@ -12,8 +12,8 @@ public class MelBotPlayingGuitar : IAnimation
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
-        int state = State >= 16 ? 15 : State % 16;
-        SubImage frame = Image.Cut(state, 0, 16);
+        int state = State % 12;
+        SubImage frame = Image.Cut(state, 0, 12);
 
         SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size * 1.2f);
         PointF camPosition = position.PositionOnCam();
@@ -25,7 +25,7 @@ public class MelBotPlayingGuitar : IAnimation
     public IAnimation NextFrame()
     {
         this.Frame++;
-        if (this.Frame % 12 == 0)
+        if (this.Frame % 2 == 0)
         {
             this.State++;
         }

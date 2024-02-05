@@ -39,5 +39,11 @@ public class DTALoad : Loader
             // ))
             .Then(() => new MolFaseDois() { Entity = new MolEntity(new PointF(700,700)) })
             .Then(() => Memory.Level.Event = new Spotlights())
+            .Then(() => {
+                foreach (var entity in Memory.Entities)
+                {
+                    if (entity.Mob is not null) entity.Mob.OnInit();
+                }
+            })
                 ;
 }
