@@ -23,12 +23,6 @@ public class MolFaseDois : Mob
         this.MaxLife = 20;
         this.Life = 10;
         this.Speed = 0.00095f;
-
-        var Leser = new LaserProjectile(new PointF(200, 200))
-        {
-            Speed = 1
-        };
-        this.Hands.Add(new Hand(this, Leser, 90));
     }
 
     public override void OnInit()
@@ -38,9 +32,9 @@ public class MolFaseDois : Mob
 
     public override void OnFrame()
     {
-
-
+        
         this.Entity.Size = new SizeF(120, 130);
+
         if (player == null)
         {
             foreach (var entity in Memory.Entities)
@@ -57,9 +51,22 @@ public class MolFaseDois : Mob
 
         if (player.Life > 0)
         {
-            this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
-            this.Hands[hand].Click();
-            this.Hands[hand].Draw();
+            PointF center = new PointF(this.Entity.Position.X + this.Entity.Size.Width / 2, this.Entity.Position.Y + this.Entity.Size.Height / 2);
+            
+            PointF PositionNow = new PointF(this.Entity.Position.X, this.Entity.Position.Y);
+
+            if (this.Life < 10){
+
+            this.nextPosition = new PointF(this.Entity.Position.X + 200, this.Entity.Position.Y + 200);
+
+            for (int i = 0; i < 360; i+=15)
+                new LaserProjectile(center){
+                    Mob = this,
+                    cooldown = 5000,
+                    Angle = i,
+                    Speed = 0.5f,
+                };
+            }
         }
 
         else

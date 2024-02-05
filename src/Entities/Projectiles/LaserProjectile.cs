@@ -9,9 +9,9 @@ public class LaserProjectile : Projectile
         this.Inicial = position;
         this.Size = new SizeF(50, 50);
         this.Hitbox.rectangles.Add(new RectangleF(
-            0, 0,
-            this.Size.Width,
-            this.Size.Height
+            23, 0,
+            this.Size.Width / 2,
+            this.Size.Height / 4
         ));
         this.Position = position;
         this.OldPosition = this.Position;
