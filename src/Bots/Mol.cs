@@ -4,14 +4,11 @@ using System.Threading;
 
 public class Mol : Mob
 {
-    public bool FaseOne = true;
     private bool isMoving = false;
     private float distanceFromPlayer = 300;
     Rectangle rectangle = Rectangle.Empty;
     PointF nextPosition = PointF.Empty;
     Player player = null;
-
-    private int count = 0;
 
     public Mol()
     {
@@ -21,12 +18,15 @@ public class Mol : Mob
         this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 20;
-        this.Life = 20;
+        this.Life = 50;
         this.Speed = 0.00095f;
     }
 
     public override void OnFrame()
     {
+        if(this.Life == 0)
+            SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
+            
         if (player == null)
         {
             foreach (var entity in Memory.Entities)
@@ -40,54 +40,35 @@ public class Mol : Mob
 
         if (player.Life > 0)
         {
-            if (FaseOne)
+
+            float dx = player.Entity.Position.X - this.Entity.Position.X;
+            float dy = player.Entity.Position.Y - this.Entity.Position.Y;
+
+            float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
+
+            this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
+            this.Hands[hand].Click();
+            this.Hands[hand].Draw();
+
+            if (distanceToPlayer > distanceFromPlayer)
             {
-                float dx = player.Entity.Position.X - this.Entity.Position.X;
-                float dy = player.Entity.Position.Y - this.Entity.Position.Y;
-
-                float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
-
-                this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
-                this.Hands[hand].Click();
-                this.Hands[hand].Draw();
-
-                if (distanceToPlayer > distanceFromPlayer)
-                {
-                    isMoving = true;
-                    PointF idealPosition = new PointF(
-                        player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
-                        player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
-                    );
+                isMoving = true;
+                PointF idealPosition = new PointF(
+                    player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
+                    player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
+                );
 
 
-                    isMoving = true;
-                    VerifyPosition(this.Entity.Position, this.nextPosition);
-                    nextPosition = idealPosition;
-                }
-                else
-                {
-                    this.Speed = 0;
-                    isMoving = false;
-                }
-
-
-                if (this.Life < 10)
-                {
-                    FaseOne = false;
-                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
-                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
-
-                    // wait for last sound to stop before playing
-                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav", 0);
-                    SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav", 0);
-                }
+                isMoving = true;
+                VerifyPosition(this.Entity.Position, this.nextPosition);
+                nextPosition = idealPosition;
             }
             else
             {
+                this.Speed = 0;
                 isMoving = false;
-                this.Entity.Move(new PointF(400, 400));
-                this.Entity.AddAnimation(new MelBotPlayingGuitar());
             }
+
 
         }
 

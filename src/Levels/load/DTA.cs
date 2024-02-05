@@ -37,7 +37,7 @@ public class DTALoad : Loader
             //     new PointF(640, 430),
             //     new EtsLevel()
             // ))
-            .Then(() => new Mol() { Entity = new MolEntity(new PointF(700,700)) })
+            .Then(() => new MolFaseDois() { Entity = new MolEntity(new PointF(700,700)) })
             .Then(() => Memory.Level.Event = new Spotlights())
                 ;
 }
