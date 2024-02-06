@@ -9,8 +9,8 @@ public class Drop : Entity
     {
         (new DubstepGun(), 1),
         (new ElectricRoboticGuitar(), 1),
-        (new GunBasicBotEntity(), 1),
-        (new RevolverEntity(), 1)
+        // (new GunBasicBotEntity(), 1),
+        // (new RevolverEntity(), 1)
     };
 
     public static Entity Random()
