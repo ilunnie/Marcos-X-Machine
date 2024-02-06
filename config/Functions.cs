@@ -6,6 +6,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Linq;
 
 public static class Functions
 {
@@ -17,27 +18,30 @@ public static class Functions
     public static void DrawImage(this Graphics g, Sprite sprite)
     {
         g.TranslateTransform(
-            sprite.Anchor.Position.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0),
-            sprite.Anchor.Position.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0)
+            sprite.Anchor.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0),
+            sprite.Anchor.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0)
         );
 
         g.RotateTransform(sprite.Angle);
 
         g.TranslateTransform(
-            -(sprite.Anchor.Position.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0)),
-            -(sprite.Anchor.Position.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0))
+            -(sprite.Anchor.X + (!sprite.Anchor.ScreenReference ? sprite.Position.X : 0)),
+            -(sprite.Anchor.Y + (!sprite.Anchor.ScreenReference ? sprite.Position.Y : 0))
         );
-        
+
         sprite.Draw(g);
 
         g.ResetTransform();
+
+        if (Memory.Mode == "debug" && sprite.Hitbox is not null)
+            sprite.Hitbox.Draw(g, sprite);
     }
 
     /// <summary>
     /// Distancia Euclidiana
     /// </summary>
     public static double Distance(float Dx, float Dy)
-        => Math.Sqrt( Dx * Dx + Dy * Dy );
+        => Math.Sqrt(Dx * Dx + Dy * Dy);
 
     /// <summary>
     /// Mede a distancia entre ponto A até ponto B
@@ -155,12 +159,12 @@ public static class Functions
     public static PointF CoordinateRotation(this PointF point, PointF anchor, double angle)
         => CoordinateRotation(point.X, point.Y, anchor.X, anchor.Y, angle);
 
-    public static float EuclidianDistance(PointF current, PointF goal) 
+    public static float EuclidianDistance(PointF current, PointF goal)
         => MathF.Sqrt(
-            (current.X - goal.X) * (current.X - goal.X) + 
+            (current.X - goal.X) * (current.X - goal.X) +
             (current.Y - goal.Y) * (current.Y - goal.Y)
         );
-    
+
     public static Stack<int> GetNextMoves(PointF playerPointF, PointF enemyPointF, byte[] map, int width)
     {
         var path = new Stack<int>();
@@ -169,10 +173,10 @@ public static class Functions
         var cameMap = new Dictionary<int, int>();
         var queue = new PriorityQueue<int, float>();
         int player =
-            width * ((int)(playerPointF.Y / TileSets.spriteMapSize.Height) - 1) + 
+            width * ((int)(playerPointF.Y / TileSets.spriteMapSize.Height) - 1) +
             (int)(playerPointF.X / TileSets.spriteMapSize.Width) - 1;
-        int enemy = 
-            width * ((int)(enemyPointF.Y / TileSets.spriteMapSize.Height) - 1) + 
+        int enemy =
+            width * ((int)(enemyPointF.Y / TileSets.spriteMapSize.Height) - 1) +
             (int)(enemyPointF.X / TileSets.spriteMapSize.Width) - 1;
 
         int[] neighbors = new int[8];
@@ -198,18 +202,18 @@ public static class Functions
 
             neighbors[5] = bot - 1 > 0 && bot - 1 < map.Length && map[bot - 1] != 1 ? bot - 1 : -1;
             neighbors[6] = bot > 0 && bot < map.Length && map[bot] != 1 ? bot : -1;
-            neighbors[7] = bot + 1 > 0 && bot + 1 < map.Length && map[bot + 1] != 1? bot + 1 : -1;
+            neighbors[7] = bot + 1 > 0 && bot + 1 < map.Length && map[bot + 1] != 1 ? bot + 1 : -1;
 
             foreach (var next in neighbors)
             {
                 if (next == -1)
                     continue;
-                
+
                 if (!costMap.ContainsKey(current))
                     return path;
                 newCost = costMap[current] + 1;
 
-                if(!costMap.ContainsKey(next) || newCost < costMap[next])
+                if (!costMap.ContainsKey(next) || newCost < costMap[next])
                 {
                     costMap[next] = newCost;
                     float priority = newCost + EuclidianDistance(
@@ -220,7 +224,7 @@ public static class Functions
                     cameMap[next] = current;
                 }
             }
-            
+
             if (current == player)
                 break;
         }
@@ -231,10 +235,10 @@ public static class Functions
         {
             if (!cameMap.ContainsKey(last))
                 return path;
-            
+
             last = cameMap[last];
             path.Push(last);
-            
+
             if (last == enemy)
                 break;
         }
@@ -255,5 +259,76 @@ public static class Functions
             g
         );
         return bitmap;
+    }
+
+    public static PointF[] ToPolygon(this RectangleF rect, PointF Anchor, double Angle)
+    {
+        PointF[] vertices = new PointF[4];
+
+        float[] xCoords = { rect.Left, rect.Right, rect.Right, rect.Left };
+        float[] yCoords = { rect.Top, rect.Top, rect.Bottom, rect.Bottom };
+
+        for (int i = 0; i < 4; i++)
+        {
+            double deltaX = xCoords[i] - Anchor.X;
+            double deltaY = yCoords[i] - Anchor.Y;
+
+            double newX = Anchor.X + deltaX * Math.Cos(Angle * Math.PI / 180) - deltaY * Math.Sin(Angle * Math.PI / 180);
+            double newY = Anchor.Y + deltaX * Math.Sin(Angle * Math.PI / 180) + deltaY * Math.Cos(Angle * Math.PI / 180);
+
+            vertices[i] = new PointF((float)newX, (float)newY);
+        }
+
+        return vertices;
+    }
+
+    public static bool SAT(PointF axis, PointF[] A, PointF[] B)
+    {
+        float min1 = float.MaxValue, max1 = float.MinValue;
+        float min2 = float.MaxValue, max2 = float.MinValue;
+
+        foreach (PointF p in A)
+        {
+            float dotProduct = (p.X * axis.X) + (p.Y * axis.Y);
+            min1 = Math.Min(min1, dotProduct);
+            max1 = Math.Max(max1, dotProduct);
+        }
+
+        foreach (PointF p in B)
+        {
+            float dotProduct = (p.X * axis.X) + (p.Y * axis.Y);
+            min2 = Math.Min(min2, dotProduct);
+            max2 = Math.Max(max2, dotProduct);
+        }
+
+        if (max1 < min2 || max2 < min1)
+            return true;
+
+        return false;
+    }
+
+    public static bool IntersectsWith(this PointF[] A, PointF[] B)
+    {
+        for (int i = 0; i < A.Length; i++)
+        {
+            PointF p1 = A[i];
+            PointF p2 = A[(i + 1) % A.Length];
+            PointF axis = new PointF(p2.Y - p1.Y, p1.X - p2.X);
+
+            if (SAT(axis, A, B))
+                return false;
+        }
+
+        for (int i = 0; i < B.Length; i++)
+        {
+            PointF p1 = B[i];
+            PointF p2 = B[(i + 1) % B.Length];
+            PointF axis = new PointF(p2.Y - p1.Y, p1.X - p2.X);
+
+            if (SAT(axis, A, B))
+                return false;
+        }
+
+        return true;
     }
 }

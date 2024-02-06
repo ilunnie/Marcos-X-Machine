@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 public static class Collision
 {
@@ -10,53 +12,25 @@ public static class Collision
         RectangleF comparRect = new RectangleF();
 
         bool result = false;
-        // int tolerance = 100;
-        // double distance = entity.Position.Distance(entity.OldPosition);
-
-        // if (entity.Position.Distance(entity.OldPosition) > tolerance)
-        // {
-        //     for (int i = 0; i < distance; i++)
-        //     {
-        //         foreach (var thisRect in entity.Hitbox.rectangles)
-        //         {
-        //             foreach (var otherRect in other.Hitbox.rectangles)
-        //             {
-        //                 var entityPos = entity.OldPosition.LinearInterpolation(entity.Position, i);
-        //                 entityRect.X = entityPos.X + thisRect.X;
-        //                 entityRect.Y = entityPos.Y + thisRect.Y;
-        //                 entityRect.Width = thisRect.Width;
-        //                 entityRect.Height = thisRect.Height;
-
-        //                 comparRect.X = other.Position.X + otherRect.X;
-        //                 comparRect.Y = other.Position.Y + otherRect.Y;
-        //                 comparRect.Width = otherRect.Width;
-        //                 comparRect.Height = otherRect.Height;
-
-        //                 if (entityRect.IntersectsWith(comparRect))
-        //                 {
-        //                     entity.OnHit(other);
-        //                     result = true;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }    
-
         foreach (var thisRect in entity.Hitbox.rectangles)
         {
+            entityRect.X = thisRect.X;
+            entityRect.Y = thisRect.Y;
+            entityRect.Width = thisRect.Width;
+            entityRect.Height = thisRect.Height;
+
+            PointF[] thisPoly = entityRect.ToPolygon(entity.Anchor, entity.Hitbox.Angle);
+            thisPoly = thisPoly.Select(v => new PointF(v.X + entity.Position.X, v.Y + entity.Position.Y)).ToArray();
             foreach (var otherRect in other.Hitbox.rectangles)
             {
-                entityRect.X = entity.Position.X + thisRect.X;
-                entityRect.Y = entity.Position.Y + thisRect.Y;
-                entityRect.Width = thisRect.Width;
-                entityRect.Height = thisRect.Height;
-
-                comparRect.X = other.Position.X + otherRect.X;
-                comparRect.Y = other.Position.Y + otherRect.Y;
+                comparRect.X = otherRect.X;
+                comparRect.Y = otherRect.Y;
                 comparRect.Width = otherRect.Width;
                 comparRect.Height = otherRect.Height;
 
-                if (entityRect.IntersectsWith(comparRect))
+                PointF[] otherPoly = comparRect.ToPolygon(other.Anchor, other.Hitbox.Angle);
+                otherPoly = otherPoly.Select(v => new PointF(v.X + other.Position.X, v.Y + other.Position.Y)).ToArray();
+                if (thisPoly.IntersectsWith(otherPoly))
                 {
                     entity.OnHit(other);
                     result = true;
@@ -69,23 +43,32 @@ public static class Collision
 
     public static void VerifyCollision()
     {
-        foreach (var entity in Memory.Colliders)
+        object lockObject = new object(); // Objeto de bloqueio para garantir acesso seguro ao estado compartilhado
+        Parallel.ForEach(Memory.Colliders, entity =>
         {
             if (entity.Hitbox is null)
-                continue;
-            bool collision = false;
-            foreach (var other in Memory.Colliders)
-            {
-                if (other.Hitbox is null)
-                    continue;
-                if (entity != other && entity.VerifyCollision(other))
-                {
-                    collision = true;
-                    break;
-                }
-            }
+                return;
 
-            entity.Hitbox.Pen = collision ? Pens.Red : Pens.Blue;
-        }
+            bool collision = false;
+            Parallel.ForEach(Memory.Colliders, other =>
+            {
+                if (other.Hitbox is null || entity == other)
+                    return;
+
+                if (entity.VerifyCollision(other))
+                {
+                    lock (lockObject) // Bloqueia o acesso ao estado compartilhado durante a atualização
+                    {
+                        collision = true;
+                    }
+                }
+            });
+
+            lock (lockObject) // Bloqueia o acesso ao estado compartilhado durante a atualização
+            {
+                entity.Hitbox.Pen = collision ? Pens.Red : Pens.Blue;
+            }
+        });
     }
+
 }

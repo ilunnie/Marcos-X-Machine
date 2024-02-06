@@ -20,6 +20,7 @@ public class ElectricRoboticGuitar : Entity
                 Size.Height
             )
         };
+
         this.Hitbox = new Hitbox(rectangles);
 
         Anchor = new PointF(0, Size.Height );

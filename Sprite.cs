@@ -26,15 +26,13 @@ public class Sprite : IComparable<Sprite>
 
         foreach (TextImage text in Text)
             text.Draw(g, Position);
-
-        if (Memory.Mode == "debug" && Hitbox is not null)
-            Hitbox.Draw(g, Position);
     }
 
     public Sprite(SubImage image, Hitbox hitbox, PointF position, SizeF size, float angle = 0, int layer = 1)
     {
         this.Image = image;
         this.Hitbox = hitbox;
+        if (Hitbox is not null) this.Hitbox.Angle = angle;
         this.Position = position;
         this.Size = size;
         this.Angle = angle;
