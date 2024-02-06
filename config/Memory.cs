@@ -19,6 +19,7 @@ public static class Memory
     public static List<Sound> Sounds { get; set; } = new List<Sound>();
     public static List<Entity> ToDelete { get; set; } = new List<Entity>();
     public static CalcMap[] Tileset { get; set; }
+    public static Queue<Action> PostProcessing { get; set; } = new();
 
     public static void Collide()
     {
@@ -54,17 +55,17 @@ public static class Memory
         }
         
         foreach (var map in Map)
-        {
             map.Draw();
-        }
+
         foreach (var entity in Entities)
         {
             entity.Draw();
             if (entity.Mob?.Life <= 0) entity.Destroy();
         }
         foreach (var projectile in Projectiles)
-        {
             projectile.Draw();
-        }
+
+        while (PostProcessing.Count > 0)
+            PostProcessing.Dequeue().Invoke();
     }
 }

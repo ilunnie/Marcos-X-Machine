@@ -16,6 +16,8 @@ public class Player : Mob
     public bool isMoving = false;
     public PointF tp { get; set; } = PointF.Empty;
 
+    public int MaxHand = 2;
+
     public Player()
     {
         var bulletgun = new BulletGun();
@@ -24,11 +26,11 @@ public class Player : Mob
         var dubstepgun = new DubstepGun();
         this.Hands.Add(new Hand(this, dubstepgun, 30));
 
-        var revolver = new Revolver();
-        this.Hands.Add(new Hand(this, revolver, 20));
+        // var revolver = new Revolver();
+        // this.Hands.Add(new Hand(this, revolver, 20));
 
-        var gun_basicbot = new GunBasicBot();
-        this.Hands.Add(new Hand(this, gun_basicbot, 25));
+        // var gun_basicbot = new GunBasicBot();
+        // this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
 
@@ -42,10 +44,13 @@ public class Player : Mob
             this.Entity.Move(tp);
             this.tp = PointF.Empty;
         }
-        if (Memory.MouseButton == MouseButtons.Left)
+        if (Memory.MouseButton == MouseButtons.Left && hand < this.Hands.Count )
             this.Hands[hand].Click();
-        this.Hands[hand].Set(Memory.Cursor, true);
-        this.Hands[hand].Draw();
+        if (hand >= 0 && hand < this.Hands.Count)
+        {
+            this.Hands[hand]?.Set(Memory.Cursor, true);
+            this.Hands[hand]?.Draw();
+        }
         if (isMovingLeft || isMovingRight || isMovingUp || isMovingDown)
         {
             this.Entity.AddWalkingAnimation("marcos/marcos-sprites-old.png", Direction);
@@ -90,6 +95,9 @@ public class Player : Mob
     {
         switch (e.KeyCode)
         {
+            case Keys.F:
+                Drop.Get(this);
+                break;
             case Keys.A:
                 isMovingLeft = true;
                 isMoving = true;

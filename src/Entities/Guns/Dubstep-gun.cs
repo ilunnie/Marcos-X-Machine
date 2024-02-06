@@ -4,7 +4,6 @@ using System.Drawing;
 
 public class DubstepGun : Entity
 {
-    private PointF Anchor { get; set; }
     private float Angle = 0;
     public DubstepGun(PointF position)
     {

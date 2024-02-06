@@ -19,6 +19,7 @@ public abstract class Entity
     public Mob Mob = null;
     public IAnimation Animation { get; set; }
     public Hitbox Hitbox { get; set; } = new Hitbox();
+    public PointF Anchor { get; protected set; }
 
     public Entity()
     {
