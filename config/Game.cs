@@ -13,8 +13,8 @@ public class Game : App
         // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
         Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").Play();
 
-        // Sound.SetMusicVolume(0); 
-        // Sound.SetVolume(100);
+        Sound.SetEffectVolume(10);
+        Sound.SetMusicVolume(50);
     }
     public override void OnFrame()
     {

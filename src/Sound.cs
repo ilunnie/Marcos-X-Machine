@@ -48,12 +48,12 @@ public class Sound
         if (waveOut == MusicWaveOut)
         {
             musics.Add(this);
-            audio.Volume = float.Min(musicVolume / 100f, 1f);
+            audio.Volume = musicVolume / 100f;
         }
         else if (waveOut == EffectWaveOut)
         {
             effects.Add(this);
-            audio.Volume = float.Min(effectVolume / 100f, 1f);
+            audio.Volume = effectVolume / 100f;
         }
         
         this.waveOut = waveOut;
