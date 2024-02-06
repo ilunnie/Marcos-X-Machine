@@ -43,8 +43,9 @@ public class EtsLoad : Loader
                 .And(() => new Teleport(
                     new PointF((1 + 21 * 3) * (TileSets.spriteMapSize.Width / 3), 3 * TileSets.spriteMapSize.Height),
                     new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
-                    new PointF(18 * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
+                    new PointF(98 * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
                     new FrenteEtsLevel()
                 ))
-            .Then(() => new BasicBot () {Entity = new BasicBotEntity(new PointF(1200,1000))});
+            .Then(() => new BasicBot () {Entity = new BasicBotEntity(new PointF(1200,1000))})
+            ;
 }

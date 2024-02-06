@@ -34,16 +34,19 @@ public static class Functions
     }
 
     /// <summary>
+    /// Distancia Euclidiana
+    /// </summary>
+    public static double Distance(float Dx, float Dy)
+        => Math.Sqrt( Dx * Dx + Dy * Dy );
+
+    /// <summary>
     /// Mede a distancia entre ponto A até ponto B
     /// </summary>
     public static double Distance(float Ax, float Ay, float Bx, float By)
     {
         float dx = Bx - Ax;
         float dy = By - Ay;
-        return Math.Sqrt(
-            dx * dx +
-            dy * dy
-        );
+        return Distance(dx, dy);
     }
     /// <summary>
     /// Mede a distancia entre ponto A até ponto B
@@ -55,6 +58,22 @@ public static class Functions
     /// </summary>
     public static double Distance(this PointF A, float Bx, float By)
         => Distance(A.X, A.Y, Bx, By);
+
+    /// <summary>
+    /// Mede a distancia entre retangulo A até retangulo B
+    /// </summary>
+    public static double Distance(float Atop, float Aright, float Abottom, float Aleft, float Btop, float Bright, float Bbottom, float Bleft)
+    {
+        float dx = Math.Max(0, Math.Max(Aleft, Bleft) - Math.Min(Aright, Bright));
+        float dy = Math.Max(0, Math.Max(Atop, Btop) - Math.Min(Abottom, Bbottom));
+
+        return Distance(dx, dy);
+    }
+    /// <summary>
+    /// Mede a distancia entre retangulo A até retangulo B
+    /// </summary>
+    public static double Distance(this RectangleF A, RectangleF B)
+        => Distance(A.Top, A.Right, A.Bottom, A.Left, B.Top, B.Right, B.Bottom, B.Left);
 
     /// <summary>
     /// Calcula a interpolação linear entre ponto A e B

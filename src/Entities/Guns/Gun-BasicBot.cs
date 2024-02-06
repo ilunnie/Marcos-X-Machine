@@ -4,7 +4,6 @@ using System.Drawing;
 
 public class GunBasicBot : Entity
 {
-    private PointF Anchor { get; set; }
     private float Angle = 0;
     public GunBasicBot(PointF position)
     {
