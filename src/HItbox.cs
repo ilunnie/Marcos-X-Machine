@@ -16,7 +16,7 @@ public class Hitbox
         {
             PointF location = new PointF(
                 rectangle.Location.X + position.X,
-                rectangle.Location.X + position.Y
+                rectangle.Location.Y + position.Y
             );
             Rectangle rect = new Rectangle(
                 (int)location.X,

@@ -20,17 +20,20 @@ public class Player : Mob
 
     public Player()
     {
-        // var acidgun = new AcidGun();
-        // this.Hands.Add(new Hand(this, acidgun, 30));
+        var icestaff = new IceStaff();
+        this.Hands.Add(new Hand(this, icestaff, 30));
 
-        // var roboticguitar = new ElectricRoboticGuitar();
-        // this.Hands.Add(new Hand(this, roboticguitar, 30));
+        var acidgun = new AcidGun();
+        this.Hands.Add(new Hand(this, acidgun, 30));
 
-        // var pogshark = new PogSharkGun();
-        // this.Hands.Add(new Hand(this, pogshark, 30));
+        var roboticguitar = new ElectricRoboticGuitar();
+        this.Hands.Add(new Hand(this, roboticguitar, 30));
 
-        // var cshark = new CSharkGun();
-        // this.Hands.Add(new Hand(this, cshark, 30));
+        var pogshark = new PogSharkGun();
+        this.Hands.Add(new Hand(this, pogshark, 30));
+
+        var cshark = new CSharkGun();
+        this.Hands.Add(new Hand(this, cshark, 30));
 
         // var bulletgun = new BulletGun();
         // this.Hands.Add(new Hand(this, bulletgun, 30));
@@ -41,8 +44,8 @@ public class Player : Mob
         var revolver = new Revolver();
         this.Hands.Add(new Hand(this, revolver, 20));
 
-        // var gun_basicbot = new GunBasicBot();
-        // this.Hands.Add(new Hand(this, gun_basicbot, 25));
+        var gun_basicbot = new GunBasicBot();
+        this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
 
@@ -91,12 +94,12 @@ public class Player : Mob
 
         VerifyPosition(player, mouse);
 
-        if (e.Delta > 0)
+        if (e.Delta < 0)
         {
             this.hand += 1;
             if (this.hand >= this.Hands.Count) this.hand = this.Hands.Count - 1;
         }
-        if (e.Delta < 0)
+        if (e.Delta > 0)
         {
             this.hand -= 1;
             if (this.hand < 0) this.hand = 0;

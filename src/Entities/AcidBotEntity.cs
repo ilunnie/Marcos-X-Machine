@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-public class BasicBotEntity : Entity
+public class AcidBotEntity : Entity
 {
-    public BasicBotEntity(PointF position){
+    public AcidBotEntity(PointF position){
         this.Name = "Basic bot";
 
-        this.Size = new SizeF(90, 100);
+        this.Size = new SizeF(90, 115);
         this.Position = position;
         this.OldPosition = this.Position;
         this.damage = 1;
@@ -21,10 +21,10 @@ public class BasicBotEntity : Entity
 
         this.Hitbox = new Hitbox(rectangles);
 
-        this.AddStaticAnimation("enemies/basic-bot/basic-bot-sprites.png");
+        this.AddStaticAnimation("enemies/acid-bot/acid-bot-sprites.png");
     }
 
-    public BasicBotEntity() : this(new PointF(0, 0)) {}
+    public AcidBotEntity() : this(new PointF(0, 0)) {}
 
     public override void Destroy()
     {

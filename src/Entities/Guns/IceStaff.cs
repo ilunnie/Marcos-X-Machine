@@ -1,19 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO.Compression;
-using System.Windows.Forms;
 
-public class Revolver : Entity
+public class IceStaff : Entity
 {
     private float Angle = 0;
-    public Revolver(PointF position)
+    public IceStaff(PointF position)
     {
-        this.Name = "Revolver";
+        this.Name = "Robot head";
 
-        this.Size = new SizeF(100, 50);
+        this.Size = new SizeF(60, 130);
         this.Position = position;
-        
+
 
         var rectangles = new List<RectangleF> {
             new RectangleF(
@@ -24,15 +22,22 @@ public class Revolver : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        Anchor = new PointF(0, Size.Height * .75f);
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
-        this.AddAnimation(new StaticAnimation(){
+        this.Anchor = new PointF(0, Size.Height / 2);
+
+        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/ice-staff.png");
+
+        this.AddAnimation(new LoopAnimation()
+        {
             Image = sprite,
+            SpritesQuantity = 10,
+            SpritesLine = 0,
+            ImageWidth = 10,
+            ImageHeight = 1,
             AnchorPosition = Anchor
         });
-    }
-    public Revolver() : this(new PointF(0, 0)) {}
 
+    }
+    public IceStaff() : this(new PointF(0, 0)) {}
     public override void Draw(float angle = 0, int layer = 1)
     {
         Angle = angle;
@@ -44,23 +49,21 @@ public class Revolver : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 2000;
-        this.recoil = 2000;
+        this.cooldown = 1500;
+        this.recoil = 0;
         
-        var size = this.Size.Width * 0.7f;
-        var altura = this.Size.Height * 0.8f;
+        var size = this.Size.Width * 0.5f;
+        var altura = this.Size.Height * 0.7f;
         var cos = MathF.Cos(MathF.PI * Angle / 180);
         var sin = MathF.Sin(MathF.PI * Angle / 180);
         var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
-        new YellowProjectile(happyPoint){
+        new D20Projectile(happyPoint){
             Mob = this.Mob,
-            cooldown = 10000,
+            cooldown = 5000,
             Angle = Angle,
-            Speed = 1.5f,
+            Speed = 1f,
         };
-
-        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

@@ -9,8 +9,9 @@ public class Game : App
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
-        Memory.Level = new FrenteEtsLevel();
-        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(20);
+        Memory.Level = new SalaDigitalLevel();
+        // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
+        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").Play();
 
         // Sound.SetMusicVolume(0); 
         // Sound.SetVolume(100);

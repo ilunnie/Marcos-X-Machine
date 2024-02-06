@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-public class BasicBotEntity : Entity
+public class MissingHeadBotEntity : Entity
 {
-    public BasicBotEntity(PointF position){
-        this.Name = "Basic bot";
+    public MissingHeadBotEntity(PointF position){
+        this.Name = "Missing head bot";
 
-        this.Size = new SizeF(90, 100);
+        this.Size = new SizeF(90, 170);
         this.Position = position;
         this.OldPosition = this.Position;
         this.damage = 1;
@@ -21,10 +21,10 @@ public class BasicBotEntity : Entity
 
         this.Hitbox = new Hitbox(rectangles);
 
-        this.AddStaticAnimation("enemies/basic-bot/basic-bot-sprites.png");
+        this.AddStaticAnimation("enemies/missing-head-bot/missing-head-bot-sprites.png");
     }
 
-    public BasicBotEntity() : this(new PointF(0, 0)) {}
+    public MissingHeadBotEntity() : this(new PointF(0, 0)) {}
 
     public override void Destroy()
     {

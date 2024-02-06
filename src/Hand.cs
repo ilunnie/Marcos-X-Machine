@@ -36,8 +36,8 @@ public class Hand
 
     public void Set(PointF point, bool ScreenRef = false)
     {
-        float x = Mob.Entity.Position.X + Mob.Entity.Size.Width / 2;
-        float y = Mob.Entity.Position.Y + Mob.Entity.Size.Height / 2;
+        float x = Mob.Entity.Position.X + Mob.Anchor.X;
+        float y = Mob.Entity.Position.Y + Mob.Anchor.Y;
         PointF centerPosition = new PointF(x, y);
 
         double angle = ScreenRef ? centerPosition.PositionOnCam().AngleTo(point) : centerPosition.AngleTo(point);

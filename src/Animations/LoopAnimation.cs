@@ -1,11 +1,15 @@
 using System.Drawing;
 
-public class AcidAnimation : IAnimation
+public class LoopAnimation : IAnimation
 {
     private IAnimation next = null;
     public IAnimation Next { get => next; set => next = value; }
     public Image Image { get; set; } = null;
     public PointF AnchorPosition { get; set; } = PointF.Empty;
+    public int SpritesQuantity { get; set; } = 0;
+    public int SpritesLine { get; set; } = 0;
+    public int ImageWidth { get; set; } = 16;
+    public int ImageHeight { get; set; } = 3;
     public bool AnchorScreenReference = false;
 
     int Frame = 0;
@@ -13,8 +17,8 @@ public class AcidAnimation : IAnimation
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
-        int state = State >= 16 ? 15 : State % 16;
-        SubImage frame = Image.Cut(state, 2, 16, 3);
+        int state = State % SpritesQuantity;
+        SubImage frame = Image.Cut(state, SpritesLine, ImageWidth, ImageHeight);
 
         SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size * 1.2f);
         PointF camPosition = position.PositionOnCam();
