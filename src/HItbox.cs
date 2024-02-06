@@ -16,19 +16,9 @@ public class Hitbox
     {
         foreach (var rectangle in this.rectangles)
         {
-<<<<<<< HEAD
             RectangleF rect = new RectangleF(
                 (int)rectangle.Location.X,
                 (int)rectangle.Location.Y,
-=======
-            PointF location = new PointF(
-                rectangle.Location.X + position.X,
-                rectangle.Location.Y + position.Y
-            );
-            Rectangle rect = new Rectangle(
-                (int)location.X,
-                (int)location.Y,
->>>>>>> 321ff39214a8b46d49911e6b020bec88c9d348db
                 (int)(rectangle.Width * Camera.Zoom),
                 (int)(rectangle.Height * Camera.Zoom)
             );

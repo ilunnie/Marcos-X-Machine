@@ -23,13 +23,8 @@ public class Player : Mob
         var icestaff = new IceStaff();
         this.Hands.Add(new Hand(this, icestaff, 30));
 
-<<<<<<< HEAD
-        var roboticguitar = new ElectricRoboticGuitar();
-        this.Hands.Add(new Hand(this, roboticguitar, 30));
-=======
         var acidgun = new AcidGun();
         this.Hands.Add(new Hand(this, acidgun, 30));
->>>>>>> 321ff39214a8b46d49911e6b020bec88c9d348db
 
         var roboticguitar = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, roboticguitar, 30));
@@ -37,12 +32,9 @@ public class Player : Mob
         var pogshark = new PogSharkGun();
         this.Hands.Add(new Hand(this, pogshark, 30));
 
-<<<<<<< HEAD
-=======
         var cshark = new CSharkGun();
         this.Hands.Add(new Hand(this, cshark, 30));
 
->>>>>>> 321ff39214a8b46d49911e6b020bec88c9d348db
         // var bulletgun = new BulletGun();
         // this.Hands.Add(new Hand(this, bulletgun, 30));
 
