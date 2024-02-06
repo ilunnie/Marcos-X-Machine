@@ -23,4 +23,9 @@ public class AcidProjectile : Projectile
             AnchorPosition = new PointF(Size.Width / 2, Size.Height / 2)
         });
     }
+
+    public override void Draw(float angle = 0, int layer = 1)
+    {
+        base.Draw(Angle, layer);
+    }
 }

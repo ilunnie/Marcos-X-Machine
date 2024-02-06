@@ -18,8 +18,8 @@ public class Mol : Mob
         var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
 
-        this.MaxLife = 20;
-        this.Life = 50;
+        this.MaxLife = 200;
+        this.Life = 200;
         this.Speed = 0.00095f;
     }
 

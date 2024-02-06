@@ -22,7 +22,7 @@ public class GunBasicBot : Entity
         };
         this.Hitbox = new Hitbox(rectangles);
 
-        Anchor = new PointF(0, Size.Height / 2);
+        this.Anchor = new PointF(0, Size.Height / 2);
 
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/basic-bot-gun.png");
 

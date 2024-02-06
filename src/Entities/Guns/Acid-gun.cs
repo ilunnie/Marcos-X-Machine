@@ -38,7 +38,7 @@ public class AcidGun : Entity
     public override void Draw(float angle = 0, int layer = 3)
     {
         Angle = angle;
-        this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, angle, layer);
+        this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, Angle, layer);
         Animation = Animation.NextFrame();
     }
 

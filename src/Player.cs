@@ -20,17 +20,17 @@ public class Player : Mob
 
     public Player()
     {
-        var acidgun = new AcidGun();
-        this.Hands.Add(new Hand(this, acidgun, 30));
+        // var acidgun = new AcidGun();
+        // this.Hands.Add(new Hand(this, acidgun, 30));
 
-        var roboticguitar = new ElectricRoboticGuitar();
-        this.Hands.Add(new Hand(this, roboticguitar, 30));
+        // var roboticguitar = new ElectricRoboticGuitar();
+        // this.Hands.Add(new Hand(this, roboticguitar, 30));
 
-        var pogshark = new PogSharkGun();
-        this.Hands.Add(new Hand(this, pogshark, 30));
+        // var pogshark = new PogSharkGun();
+        // this.Hands.Add(new Hand(this, pogshark, 30));
 
-        var cshark = new CSharkGun();
-        this.Hands.Add(new Hand(this, cshark, 30));
+        // var cshark = new CSharkGun();
+        // this.Hands.Add(new Hand(this, cshark, 30));
 
         var bulletgun = new BulletGun();
         this.Hands.Add(new Hand(this, bulletgun, 30));

@@ -20,8 +20,8 @@ public class MolFaseDois : Mob
         s1.Wait(() => s2.Play());
         s1.Play();
 
-        this.MaxLife = 20;
-        this.Life = 10;
+        this.MaxLife = 200;
+        this.Life = 200;
         this.Speed = 0.00095f;
     }
 
@@ -55,7 +55,7 @@ public class MolFaseDois : Mob
             
             PointF PositionNow = new PointF(this.Entity.Position.X, this.Entity.Position.Y);
 
-            if (this.Life < 10){
+            if (this.Life < 100){
 
             this.nextPosition = new PointF(this.Entity.Position.X + 200, this.Entity.Position.Y + 200);
 
