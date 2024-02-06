@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 public class Revolver : Entity
 {
+
+    // public Sound sound;
     private float Angle = 0;
     public Revolver(PointF position)
     {
@@ -14,7 +16,6 @@ public class Revolver : Entity
         this.Size = new SizeF(100, 50);
         this.Position = position;
         
-
         var rectangles = new List<RectangleF> {
             new RectangleF(
                 -3, 0,
@@ -59,9 +60,8 @@ public class Revolver : Entity
             Angle = Angle,
             Speed = 1.5f,
         };
-
-        var sound = Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav");
-        sound.Play();
+        
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

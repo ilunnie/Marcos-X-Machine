@@ -48,12 +48,12 @@ public class Sound
         if (waveOut == MusicWaveOut)
         {
             musics.Add(this);
-            audio.Volume = float.Min(musicVolume / 100f, 1f);
+            audio.Volume = musicVolume / 100f;
         }
         else if (waveOut == EffectWaveOut)
         {
             effects.Add(this);
-            audio.Volume = float.Min(effectVolume / 100f, 1f);
+            audio.Volume = effectVolume / 100f;
         }
         
         this.waveOut = waveOut;
@@ -67,10 +67,36 @@ public class Sound
             waveOut.Dispose();
             Audio.Position = 0;
         }
+        Audio.Position = 0;
+        waveOut.Init(Audio);
+        waveOut.Play();
+    }
+    public virtual void PlayOnce()
+    {
+        if (waveOut.PlaybackState == PlaybackState.Playing)
+        {
+            return;
+        }
+        
+        Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
     }
 
+    public virtual void PlayAt(long position)
+    {
+        if (waveOut.PlaybackState == PlaybackState.Playing)
+        {
+            waveOut.Stop();
+            waveOut.Dispose();
+            Audio.Position = 0;
+        }
+        waveOut.Init(Audio);
+        long audioStart = (long)(position * waveOut.OutputWaveFormat.AverageBytesPerSecond);
+        Audio.Position = audioStart;
+        waveOut.Play();
+    }
+    
     public void Wait(Action action)
     {
         EventHandler<StoppedEventArgs> stopedEvent = null;
@@ -80,21 +106,6 @@ public class Sound
             waveOut.PlaybackStopped -= stopedEvent;
         };
         waveOut.PlaybackStopped += stopedEvent;
-    }
-
-    public virtual void PlayLoop(LoopedAudio stream, long position)
-    {
-        if (waveOut.PlaybackState == PlaybackState.Playing)
-        {
-            waveOut.Stop();
-            waveOut.Dispose();
-        }
-
-        LoopedAudio loop = new LoopedAudio(stream);
-        long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
-        loop.Position = audioStart;
-        waveOut.Init(loop);
-        waveOut.Play();
     }
 
     public virtual void Stop()

@@ -12,10 +12,14 @@ public class Mob
         get => entity;
         set {
             this.entity = value;
-            if (value is not null) value.Mob = this;
+            if (value is not null) {
+                value.Mob = this;
+                this.Anchor = new PointF(this.Entity.Size.Width / 2, this.Entity.Size.Height / 2);
+            };
         }
     }
     public List<Hand> Hands { get; set; } = new List<Hand>();
+    public PointF Anchor { get; set; } = PointF.Empty;
     public int hand = 0;
     public float MaxLife;
     public float Life;

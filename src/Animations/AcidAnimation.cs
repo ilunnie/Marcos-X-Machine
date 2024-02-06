@@ -6,7 +6,6 @@ public class AcidAnimation : IAnimation
     public IAnimation Next { get => next; set => next = value; }
     public Image Image { get; set; } = null;
     public PointF AnchorPosition { get; set; } = PointF.Empty;
-    public float Angle { get; set; } = 0;
     public bool AnchorScreenReference = false;
 
     int Frame = 0;
@@ -20,7 +19,7 @@ public class AcidAnimation : IAnimation
         SizeF relativeSize = Functions.ProportionalSize(frame.Width, frame.Height, size * 1.2f);
         PointF camPosition = position.PositionOnCam();
 
-        Sprite sprite = new Sprite(frame, hitbox, camPosition, relativeSize, Angle, layer);
+        Sprite sprite = new Sprite(frame, hitbox, camPosition, relativeSize, angle, layer);
         sprite.SetAnchor(AnchorPosition, AnchorScreenReference);
         Screen.Queue.Add(sprite);
     }

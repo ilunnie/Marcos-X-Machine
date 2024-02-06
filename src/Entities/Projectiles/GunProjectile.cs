@@ -18,7 +18,7 @@ public class GunProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 10;
+        this.damage = 6;
         
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new SpinAnimation() {
