@@ -67,6 +67,7 @@ public class Sound
             waveOut.Dispose();
             Audio.Position = 0;
         }
+        Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
     }
@@ -94,21 +95,6 @@ public class Sound
             waveOut.PlaybackStopped -= stopedEvent;
         };
         waveOut.PlaybackStopped += stopedEvent;
-    }
-
-    public virtual void PlayLoop(LoopedAudio stream, long position)
-    {
-        if (waveOut.PlaybackState == PlaybackState.Playing)
-        {
-            waveOut.Stop();
-            waveOut.Dispose();
-        }
-
-        LoopedAudio loop = new LoopedAudio(stream);
-        long audioStart = (long)(position * stream.WaveFormat.AverageBytesPerSecond);
-        loop.Position = audioStart;
-        waveOut.Init(loop);
-        waveOut.Play();
     }
 
     public virtual void Stop()
