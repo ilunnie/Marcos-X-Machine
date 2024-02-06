@@ -8,7 +8,7 @@ public class DubstepGun : Entity
     private float Angle = 0;
     public DubstepGun(PointF position)
     {
-        this.Name = "DubstepGun";
+        this.Name = "Dubstep gun";
 
         this.Size = new SizeF(120, 90);
         this.Position = position;

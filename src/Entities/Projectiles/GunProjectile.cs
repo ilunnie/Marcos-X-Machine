@@ -22,7 +22,7 @@ public class GunProjectile : Projectile
         
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new SpinAnimation() {
-            Image = sprite.Cut(6, 3, 10, 4),
+            Image = sprite.Cut(10, 1, 16, 3),
             AnchorPosition = new PointF(Size.Width / 2, Size.Height / 2)
         });
     }

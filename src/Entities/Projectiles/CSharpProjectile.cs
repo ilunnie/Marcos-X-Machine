@@ -1,12 +1,10 @@
-using System;
 using System.Drawing;
 
-public class NoteProjectile : Projectile
+public class CSharpProjectile : Projectile
 {
-    public static Random rand = new Random();
-    public NoteProjectile(PointF position)
+    public CSharpProjectile(PointF position)
     {
-        this.Name = "Music note";
+        this.Name = "C# Projectile";
 
         this.Inicial = position;
         this.Size = new SizeF(50, 50);
@@ -17,11 +15,12 @@ public class NoteProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 20;
-        
+        this.damage = 8;
+
         Image sprite = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new SpinAnimation() {
-            Image = sprite.Cut(rand.Next(2, 7), 1, 16, 3)
+            Image = sprite.Cut(11, 1, 16, 3),
+            AnchorPosition = new PointF(Size.Width / 2, Size.Height / 2)
         });
     }
 }

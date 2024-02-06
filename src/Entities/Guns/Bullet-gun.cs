@@ -8,7 +8,7 @@ public class BulletGun : Entity
     private float Angle = 0;
     public BulletGun(PointF position)
     {
-        this.Name = "DubstepGun";
+        this.Name = "Bullet gun";
 
         this.Size = new SizeF(100, 60);
         this.Position = position;

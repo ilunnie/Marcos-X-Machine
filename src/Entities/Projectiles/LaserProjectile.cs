@@ -7,7 +7,7 @@ public class LaserProjectile : Projectile
         this.Name = "Laser Projectile";
 
         this.Inicial = position;
-        this.Size = new SizeF(50, 50);
+        this.Size = new SizeF(90, 70);
         this.Hitbox.rectangles.Add(new RectangleF(
             23, 0,
             this.Size.Width / 2,
@@ -17,7 +17,7 @@ public class LaserProjectile : Projectile
         this.OldPosition = this.Position;
         this.damage = 8;
         
-        this.AddStaticAnimation("projectiles/projectiles-sprite.png", 9, 3, 10, 4);
+        this.AddStaticAnimation("projectiles/projectiles-sprite.png", 13, 1, 16, 3);
     }
 
     public override void Draw(float angle = 0, int layer = 1)
