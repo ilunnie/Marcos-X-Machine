@@ -71,6 +71,17 @@ public class Sound
         waveOut.Init(Audio);
         waveOut.Play();
     }
+    public virtual void PlayOnce()
+    {
+        if (waveOut.PlaybackState == PlaybackState.Playing)
+        {
+            return;
+        }
+        
+        Audio.Position = 0;
+        waveOut.Init(Audio);
+        waveOut.Play();
+    }
 
     public virtual void PlayAt(long position)
     {
@@ -85,7 +96,7 @@ public class Sound
         Audio.Position = audioStart;
         waveOut.Play();
     }
-
+    
     public void Wait(Action action)
     {
         EventHandler<StoppedEventArgs> stopedEvent = null;

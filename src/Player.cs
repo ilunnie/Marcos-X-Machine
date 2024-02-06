@@ -38,11 +38,11 @@ public class Player : Mob
         // var bulletgun = new BulletGun();
         // this.Hands.Add(new Hand(this, bulletgun, 30));
 
-        // var dubstepgun = new DubstepGun();
-        // this.Hands.Add(new Hand(this, dubstepgun, 30));
+        var dubstepgun = new DubstepGun();
+        this.Hands.Add(new Hand(this, dubstepgun, 30));
 
-        var revolver = new Revolver();
-        this.Hands.Add(new Hand(this, revolver, 20));
+        // var revolver = new Revolver();
+        // this.Hands.Add(new Hand(this, revolver, 20));
 
         var gun_basicbot = new GunBasicBot();
         this.Hands.Add(new Hand(this, gun_basicbot, 25));

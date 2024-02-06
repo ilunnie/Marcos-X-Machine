@@ -7,7 +7,7 @@ using System.Windows.Forms;
 public class Revolver : Entity
 {
 
-    public Sound sound;
+    // public Sound sound;
     private float Angle = 0;
     public Revolver(PointF position)
     {
@@ -60,7 +60,7 @@ public class Revolver : Entity
             Angle = Angle,
             Speed = 1.5f,
         };
-
+        
         Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PistolaXexelenta/PistolaXexelentaCortada.wav").Play();
     }
 

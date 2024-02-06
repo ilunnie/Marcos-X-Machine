@@ -60,8 +60,8 @@ public class GunBasicBot : Entity
             Angle = Angle,
             Speed = 1f,
         };
-
-        // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Guns/FuturisticPistol/futuristicPistol.wav");
+        
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/FuturisticPistol/futuristicPistol.wav");
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
