@@ -10,9 +10,9 @@ public class Game : App
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
         Memory.Level = new FrenteEtsLevel();
-        // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Musics/introMusic.wav", 20);
+        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(20);
 
-        // Sound.SetMusicVolume(0);
+        // Sound.SetMusicVolume(0); 
         // Sound.SetVolume(100);
     }
     public override void OnFrame()

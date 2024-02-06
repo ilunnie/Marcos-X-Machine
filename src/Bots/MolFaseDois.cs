@@ -17,7 +17,7 @@ public class MolFaseDois : Mob
         var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav");
         var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav");
 
-        s1.Wait(() => s2.Play());
+        s1.Wait(s2.Play);
         s1.Play();
 
         this.MaxLife = 200;
