@@ -64,6 +64,8 @@ public class IceStaff : Entity
             Angle = Angle,
             Speed = 1f,
         };
+        
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Enemies/BolemBot/iceWand.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
