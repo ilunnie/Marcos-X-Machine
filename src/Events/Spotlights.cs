@@ -16,7 +16,7 @@ public class Spotlights : IEvent
     public IEvent OnFrame()
     {
         // Screen.Filters.Add(new Lighting() { Illuminators = Illuminators });
-        return this;
+        return null;
         if (player == null || mol == null)
         {
             foreach (var entity in Memory.Entities)
