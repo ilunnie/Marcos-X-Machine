@@ -135,6 +135,10 @@ public static class Functions
         );
     public static SizeF ProportionalSize(this SubImage image, float scale)
         => ProportionalSize(image.Width, image.Height, scale);
+    public static SizeF ProportionalSize(this SubImage image, SizeF scaledSize)
+        => ProportionalSize(image, 
+            Math.Min(scaledSize.Width / image.Width, scaledSize.Height / image.Height)
+        );
 
     /// <summary>
     /// Calcula o Angulo que Ponto B está referente ao Ponto A

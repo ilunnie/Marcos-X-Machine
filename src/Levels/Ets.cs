@@ -28,7 +28,7 @@ public class EtsLevel : ILevel
     {
         if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
-        if (!IsClear && Memory.Entities.Count == 1)
+        if (!IsClear && Memory.AllEnemiesDead)
         {
             IsClear = true;
             new Teleport(
