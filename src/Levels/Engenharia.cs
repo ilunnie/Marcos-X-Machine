@@ -21,6 +21,7 @@ public class EngenhariaLevel : ILevel
     public Loader Loader => new EngenhariaLoad();
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
+    public bool IsClear { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public void OnFrame()
     {

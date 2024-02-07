@@ -18,22 +18,24 @@ public class Menu : ILevel
 
     public Sprite backgroundSprite;
     public List<Button> Buttons { get; set; } = new List<Button>();
+    public bool IsClear { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     public Menu()
     {
         backgroundSprite = new Sprite(background, PointF.Empty, Camera.Size, layer: 0);
         Buttons.Add(new Button(
-            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .4f),
-            new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
-            SpriteBuffer.Current.Get("src/Sprites/Koala.jpg"),
+            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .1f),
+            new SizeF(Camera.Size.Width * .15f, Camera.Size.Height * .05f),
+            SpriteBuffer.Current.Get("src/Sprites/start-game.png"),
             () => {
                 Memory.Level = new EntradaDTALevel();
             }
         ));
 
         Buttons.Add(new Button(
-            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .7f),
-            new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
-            SpriteBuffer.Current.Get("src/Sprites/Koala.jpg"),
+            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * 0.2f),
+            new SizeF(Camera.Size.Width * .08f, Camera.Size.Height * .05f),
+            SpriteBuffer.Current.Get("src/Sprites/quit-game.png"),
             () => {
                 Memory.App.Close();
             }

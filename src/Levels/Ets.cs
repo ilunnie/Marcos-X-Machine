@@ -21,11 +21,29 @@ public class EtsLevel : ILevel
     public Loader Loader => new EtsLoad();
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
+    private bool isClear = false;
+    public bool IsClear { get => isClear; set => isClear = value; }
 
     public void OnFrame()
     {
         if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
+        if (!IsClear && Memory.Entities.Count == 1)
+        {
+            IsClear = true;
+            new Teleport(
+                new PointF(5 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
+                new PointF(12 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
+                new SalaDigitalLevel()
+            );
+            new Teleport(
+                new PointF((1 + 21 * 3) * (TileSets.spriteMapSize.Width / 3), 3 * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
+                new PointF(98 * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
+                new FrenteEtsLevel()
+            );
+        }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)

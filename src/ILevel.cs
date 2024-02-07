@@ -7,6 +7,7 @@ public interface ILevel
     Player Player { get; }
     Loader Loader { get; }
     bool IsLoaded { get; set; }
+    bool IsClear { get; set; }
     Image BackgroundLoad { get; set; }
     void Load(Graphics g, PictureBox pb)
     {
