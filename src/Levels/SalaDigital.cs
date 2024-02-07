@@ -16,11 +16,7 @@ public class SalaDigitalLevel : ILevel
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
-                            .FirstOrDefault() ?? new Player() { 
-                                Entity = new Marcos(InitialPosition),
-                                Life = 6,
-                                MaxLife = 6
-                            };
+                            .FirstOrDefault() ?? new Player() { Entity = new Marcos(InitialPosition) };
     public bool IsLoaded { get; set; } = false;
 
     public Loader Loader => new SalaDigitalLoad();

@@ -3,15 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
-public class Kirby : Mob
+public class Kirby : Bot
 {
-    private bool isMoving = false;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    PointF lastPlayerPosition = PointF.Empty;
-    Stack<int> nextMoves;
-    Player player = null;
-
     public Kirby()
     {
         this.MaxLife = 50;

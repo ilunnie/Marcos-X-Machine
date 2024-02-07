@@ -2,15 +2,8 @@ using System;
 using System.Drawing;
 using System.Threading;
 
-public class MolFaseDois : Mob
+public class MolFaseDois : Bot
 {
-    private bool isMoving = false;
-    private float distanceFromPlayer = 300;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    Player player = null;
-    Rectangle MapSize = Rectangle.Empty;
-
     bool started = false;
 
     public MolFaseDois()

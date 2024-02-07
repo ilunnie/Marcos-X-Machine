@@ -2,14 +2,8 @@ using System;
 using System.Drawing;
 using System.Threading;
 
-public class Mol : Mob
+public class Mol : Bot
 {
-    private bool isMoving = false;
-    private float distanceFromPlayer = 300;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    Player player = null;
-
     public Mol()
     {
         Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav")

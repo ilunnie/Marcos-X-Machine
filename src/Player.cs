@@ -20,8 +20,8 @@ public class Player : Mob
 
     public Player()
     {
-        var vandal = new VandalReaver();
-        this.Hands.Add(new Hand(this, vandal, 0));
+        // var vandal = new VandalReaver();
+        // this.Hands.Add(new Hand(this, vandal, 30));
 
         // var icestaff = new IceStaff();
         // this.Hands.Add(new Hand(this, icestaff, 30));
@@ -51,7 +51,6 @@ public class Player : Mob
         // this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
-
         this.MaxLife = 10;
     }
 
@@ -87,6 +86,9 @@ public class Player : Mob
         WalkYDown = isMovingDown == true ? Walk.Front : Walk.Stop;
 
         this.Move();
+
+        this
+            .DrawLife(new PointF(10, 10), 3);
     }
 
 
@@ -159,4 +161,11 @@ public class Player : Mob
 
     private void Move()
         => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
+
+    public override void OnDamage(Entity entity)
+    {
+        if (entity.Mob is null) return;
+        this.Life -= entity.Mob.Entity.damage;
+        this.Entity.cooldown = entity.Mob.Entity.damage > 0 && this.Life > 0 ? 2000 : 0;
+    }
 }

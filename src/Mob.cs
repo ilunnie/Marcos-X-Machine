@@ -25,9 +25,8 @@ public class Mob
     public float Life;
     public float Speed = 0.6f;
 
-    public virtual void OnDestroy()
-    {
-    }
+    public virtual void OnDestroy() {}
+    public virtual void OnDamage(Entity entity) {}
     public virtual void OnInit() {}
     public virtual void OnFrame() {}
     public virtual void OnMouseMove(object o, MouseEventArgs e) {}

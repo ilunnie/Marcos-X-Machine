@@ -2,16 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-public class BasicBot : Mob
+public class BasicBot : Bot
 {
-    private bool isMoving = false;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    Stack<int> nextMoves;
-    Player player = null;
-
-    private float distanceFromPlayer = 500;
-
     public BasicBot()
     {
         this.Hands.Add(new Hand(this, new GunBasicBot(), 90));

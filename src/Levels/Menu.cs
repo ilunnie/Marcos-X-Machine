@@ -20,7 +20,7 @@ public class Menu : ILevel
     public List<Button> Buttons { get; set; } = new List<Button>();
     public Menu()
     {
-        backgroundSprite = new Sprite(background, PointF.Empty, Camera.Size, layer: 1);
+        backgroundSprite = new Sprite(background, PointF.Empty, Camera.Size, layer: 0);
         Buttons.Add(new Button(
             new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .4f),
             new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
@@ -45,7 +45,7 @@ public class Menu : ILevel
         Screen.GUI.Add(backgroundSprite);
         foreach (var button in Buttons)
         {
-            button.Draw(layer: 11);
+            button.Draw(layer: 1);
         }
     }
 

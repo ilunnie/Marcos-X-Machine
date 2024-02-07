@@ -2,15 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-public class MissingHeadBot : Mob
+public class MissingHeadBot : Bot
 {
-    private bool isMoving = false;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    Stack<int> nextMoves;
-    Player player = null;
-    private float distanceFromPlayer = 200;
-
     public MissingHeadBot()
     {
         this.Hands.Add(new Hand(this, new RobotHead(), 0));

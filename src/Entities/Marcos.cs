@@ -37,8 +37,7 @@ public class Marcos : Entity
 
         if(this == entity.Mob?.Entity) return;
 
-        this.Mob.Life -= entity.damage;
-        this.cooldown = entity.damage > 0 && this.Mob.Life > 0 ? 120 : 0;
+        this.Mob.OnDamage(entity);
         if (this.Mob.Life <= 0)
         {
             this.Destroy();
@@ -47,7 +46,8 @@ public class Marcos : Entity
     }
     public override void Destroy()
     {
-        this.AddAnimation(new MarcosDying());
+        this.Animation = new MarcosDying();
+
         if (Mob is not null) Mob.OnDestroy();
         this.Mob = null;
     }

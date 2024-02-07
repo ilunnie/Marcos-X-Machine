@@ -28,6 +28,8 @@ public abstract class Projectile : Entity
         if (entity is Projectile)
             return;
 
+        if (this.Mob is Bot && entity.Mob is Bot) return;
+
         if (entity.Mob?.Life > 0 || entity is CalcMap)
             this.Destroy();
     }
