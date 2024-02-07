@@ -71,9 +71,10 @@ public abstract class App
             g.Clear(Color.DarkGray);
             pb.Refresh();
 
+            Memory.App = this;
             Camera.Size = new SizeF(bmp.Width, bmp.Height);
 
-            if (Memory.Mode == "debug") Debug.Open(this);
+            if (Memory.Mode == "debug") Debug.Open();
             this.Open();
             timer.Start();
             stopwatch.Start();

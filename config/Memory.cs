@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 public static class Memory
 {
+    public static App App { get; set; }
     public static ILevel Level { get; set; } = new SalaDigitalLevel();
     public static long Frame { get; set; }
     public static string Mode { get; set; }

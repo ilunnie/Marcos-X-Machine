@@ -13,9 +13,8 @@ public static class Debug
     };
     // static DamagedBot damagedbot = new DamagedBot();
 
-    public static void Open(App app)
+    public static void Open()
     {   
-        Debug.app = app;
 
         // Marcos marcolas = new Marcos(new PointF(1000, 400));
         // marquitos.Entity = marcolas;
