@@ -21,6 +21,8 @@ public abstract class Entity
     public Hitbox Hitbox { get; set; } = new Hitbox();
     public PointF Anchor { get; protected set; }
 
+    public Image Thumbnail { get; protected set; } = SpriteBuffer.Current.Get("src/sprites/default-talk.png");
+
     public Entity()
     {
         this.Spawn();

@@ -10,42 +10,37 @@ public class Spotlights : IEvent
         new PointF(1000, 600)
     };
 
+    private Player player = null;
+
     public IEvent OnFrame()
     {
         // Screen.Filters.Add(new Lighting() { Illuminators = Illuminators });
-        return null;
-        foreach (var entity in Memory.Entities)
+        // return null;
+        if (player == null)
         {
-            if (entity.Mob != null)
-                entity.Mob.OnFrame();
+            foreach (var entity in Memory.Entities)
+            {
+                if (entity.Mob is Player)
+                    { player = (Player)entity.Mob; break; }
+            }
+            return this;
         }
+        player.Entity.Talk("nois da o cu poha kkkkkk");
         return this;
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        foreach (var entity in Memory.Entities)
-        {
-            if (entity.Mob != null)
-                entity.Mob.OnKeyDown(o, e);
-        }
+        
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
     {
-        foreach (var entity in Memory.Entities)
-        {
-            if (entity.Mob != null)
-                entity.Mob.OnKeyUp(o, e);
-        }
+        
     }
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        foreach (var entity in Memory.Entities)
-        {
-            if (entity.Mob != null)
-                entity.Mob.OnMouseMove(o, e);
-        }
+        
     }
 }
