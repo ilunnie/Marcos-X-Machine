@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Xml.Serialization;
-using NAudio.Wasapi.CoreAudioApi;
+using System.Windows.Forms;
 using NAudio.Wave;
 
 public class Sound
@@ -13,6 +11,7 @@ public class Sound
     private static List<Sound> musics = new();
     private static int effectVolume = 100;
     private static int musicVolume = 100;
+    public static DateTime startTime;
     public static void SetEffectVolume(int value)
     {
         effectVolume = value;
@@ -41,7 +40,8 @@ public class Sound
     {
         MusicWaveOut.Stop();
         MusicWaveOut.Dispose();
-        MusicWaveOut = new WaveOut();
+        var newWaveOut = new WaveOut();
+        MusicWaveOut = newWaveOut;
         musics.Clear();
     }
     
@@ -78,6 +78,7 @@ public class Sound
         Audio.Position = 0;
         waveOut.Init(Audio);
         waveOut.Play();
+        startTime = DateTime.Now;
     }
     public virtual void PlayOnce()
     {

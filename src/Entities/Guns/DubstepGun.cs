@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-
+using System.Windows.Forms;
 public class DubstepGun : Entity
 {
     private float Angle = 0;
+    private long totalTime;
+    private long initialTime = 20;
+    private long seconds = 0;
+    private DateTime timeClicked;
     public DubstepGun(PointF position)
     {
         this.Name = "Dubstep gun";
@@ -39,11 +43,24 @@ public class DubstepGun : Entity
         Angle = angle;
         this.Animation.Draw(new PointF(Position.X, Position.Y - (Size.Height - (Size.Height / 4))), Size, Hitbox, angle, layer);
         Animation = Animation.NextFrame();
+
+        if (Memory.MouseButton != MouseButtons.Left)
+        {
+            if (isRunning)
+            {
+                seconds = (long)(timeClicked - Sound.startTime).TotalSeconds;
+                totalTime = seconds + initialTime;
+                initialTime = totalTime;
+                Sound.StopMusics();
+                Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(totalTime);
+            }
+            isRunning = false;
+        }
     }
 
+    bool isRunning = false;
     public override void Interact()
     {
-
         if (cooldown > 0) return;
 
         this.cooldown = 800;
@@ -63,11 +80,15 @@ public class DubstepGun : Entity
             Speed = 1f,
         };
         
-        bool isClicked = false;
-        var s1 = Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/DubstepGun/crabRave.wav");
-        var s2 = Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/DubstepGun/surprise.wav");
-        
-        s2.PlayAt(0);
+        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Guns/DubstepGun/crabRave.wav");
+
+        if (isRunning)
+            return;
+        isRunning = true;
+        Sound.StopMusics();
+        var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Guns/DubstepGun/surprise.wav");
+        s2.Play();
+        timeClicked = DateTime.Now;
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

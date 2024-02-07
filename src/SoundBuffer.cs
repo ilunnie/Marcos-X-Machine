@@ -13,9 +13,9 @@ public class SoundBuffer
 
     public Sound Get(string file, SoundType type)
     {
-        var key = $"{file}::{type}";
-        if (map.ContainsKey(key))
-            return map[key];
+        // var key = $"{file}::{type}";
+        // if (map.ContainsKey(key))
+        //     return map[key];
 
         Sound newSound = type switch
         {
@@ -23,7 +23,7 @@ public class SoundBuffer
             SoundType.Music => new MusicEffect(new AudioFileReader(file)),
             _ => null
         };
-        map.Add(key, newSound);
+        // map.Add(key, newSound);
         return newSound;
     }
 }
