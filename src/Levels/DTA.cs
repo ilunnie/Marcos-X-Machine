@@ -7,7 +7,7 @@ public class DTALevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(540, 560);
+    private PointF InitialPosition => new PointF(600, 200);
 
     private Player player = null;
     public Player Player
