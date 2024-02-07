@@ -20,6 +20,9 @@ public class Player : Mob
 
     public Player()
     {
+        var vandal = new VandalReaver();
+        this.Hands.Add(new Hand(this, vandal, 30));
+
         var icestaff = new IceStaff();
         this.Hands.Add(new Hand(this, icestaff, 30));
 

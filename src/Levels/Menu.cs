@@ -22,11 +22,20 @@ public class Menu : ILevel
     {
         backgroundSprite = new Sprite(background, PointF.Empty, Camera.Size, layer: 10);
         Buttons.Add(new Button(
-            new PointF(Camera.Size.Width * .5f, Camera.Size.Height * .7f),
+            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .4f),
             new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
             SpriteBuffer.Current.Get("src/Sprites/Koala.jpg"),
             () => {
                 Memory.Level = new SalaDigitalLevel();
+            }
+        ));
+
+        Buttons.Add(new Button(
+            new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .7f),
+            new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
+            SpriteBuffer.Current.Get("src/Sprites/Koala.jpg"),
+            () => {
+                
             }
         ));
     }
