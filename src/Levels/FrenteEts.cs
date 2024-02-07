@@ -7,7 +7,7 @@ public class FrenteEtsLevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(940, 730);
+    private PointF InitialPosition => new PointF(1045, 600);
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities

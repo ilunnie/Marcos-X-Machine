@@ -10,7 +10,7 @@ public class Game : App
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
         Memory.Level = new Menu();
-        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(20);
+        // Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(20);
 
         Sound.SetMusicVolume(40);
         Sound.SetEffectVolume(100);
