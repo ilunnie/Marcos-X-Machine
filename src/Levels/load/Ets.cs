@@ -47,8 +47,7 @@ public class EtsLoad : Loader
                     new FrenteEtsLevel()
                 ))
             .Then(() => {
-                new Kirby () {Entity = new KirbyEntity(new PointF(1200,1000))};
-                new AcidBot () {Entity = new AcidBotEntity(new PointF(1200,1000))};
+                new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
             })
             ;
 }

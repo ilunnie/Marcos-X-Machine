@@ -6,7 +6,6 @@ using System.Windows.Forms.Design.Behavior;
 
 public static class Debug
 { 
-    static App app = null;
     static Player marquitos = new Player() {
         Life = 10,
         MaxLife = 10
@@ -54,7 +53,7 @@ public static class Debug
     {
         // SoundBuilder.Play(SoundType.Effect, "src/Sounds/Marcos/andando.wav");
         // marquitos.OnKeyDown(o, e);
-        if (e.KeyCode == Keys.Escape) app.Close();
+        if (e.KeyCode == Keys.Escape) Memory.App.Close();
     }
 
     public static void OnKeyUp(object o, KeyEventArgs e)

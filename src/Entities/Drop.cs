@@ -14,6 +14,7 @@ public class Drop : Entity
         (typeof(AcidGun), 1, 30),
         (typeof(PogSharkGun), 1, 30),
         (typeof(CSharkGun), 1, 30),
+        (typeof(VandalReaver), 1, 10),
     };
     private static Random rand = new Random();
     public static double Distance { get; set; }
