@@ -19,7 +19,7 @@ public class Mol : Bot
 
     public override void OnFrame()
     {
-        if(this.Life == 0)
+        // if(this.Life == 0)
             // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
             
         if (player == null)

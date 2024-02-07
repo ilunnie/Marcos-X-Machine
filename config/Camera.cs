@@ -45,12 +45,12 @@ public static class Camera
 
         if (MaxLimitX - MinimumLimitX > Size.Width)
         {
-            x = (float)(x + Size.Width * Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
+            x = (float)(x + Size.Width / Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
             x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
         }
         if (MaxLimitY - MinimumLimitY > Size.Height)
         {
-            y = (float)(y + Size.Height * Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
+            y = (float)(y + Size.Height / Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
             y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
         }
 

@@ -11,21 +11,29 @@ public class Spotlights : IEvent
     };
 
     private Player player = null;
+    private Mob mol = null;
 
     public IEvent OnFrame()
     {
         // Screen.Filters.Add(new Lighting() { Illuminators = Illuminators });
-        // return null;
-        if (player == null)
+        return this;
+        if (player == null || mol == null)
         {
             foreach (var entity in Memory.Entities)
             {
                 if (entity.Mob is Player)
-                    { player = (Player)entity.Mob; break; }
+                    player = (Player)entity.Mob;
+
+                if (entity.Mob is Mol or MolFaseDois)
+                    mol = entity.Mob;
+
+                if (player != null && mol != null) break;
             }
             return this;
         }
-        player.Entity.Talk("nois da o cu poha kkkkkk");
+        mol.Entity.Talk("nois da o cu poha kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+        mol.Entity.FocusCam(false);
+        Camera.Zoom = 2;
         return this;
     }
 

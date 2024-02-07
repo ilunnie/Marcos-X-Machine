@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public static class Memory
@@ -69,4 +70,6 @@ public static class Memory
         while (PostProcessing.Count > 0)
             PostProcessing.Dequeue().Invoke();
     }
+
+    public static bool AllEnemiesDead => !Entities.Any(entity => entity.Mob is Bot);
 }
