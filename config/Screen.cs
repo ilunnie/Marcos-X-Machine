@@ -10,6 +10,7 @@ public sealed class Screen : IScreen
     
     public static List<Sprite> Sprites { get;  private set; } = new List<Sprite>();
     public static List<IFilter> Filters { get; private set; } = new List<IFilter>();
+    public static List<Sprite> GUI { get; private set; } = new List<Sprite>();
 
     public static Screen Queue
     {
@@ -50,7 +51,11 @@ public sealed class Screen : IScreen
         foreach (var filter in Filters)
             filter.Apply(g, bmp);
 
+        foreach (var gui in GUI)
+            g.DrawImage(gui);
+
         Sprites.Clear();
         Filters.Clear();
+        GUI.Clear();
     }
 }

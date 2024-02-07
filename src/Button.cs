@@ -18,5 +18,5 @@ public class Button : Entity
         => this.Action.Invoke();
 
     public override void Draw(float angle = 0, int layer = 1)
-        => Screen.Queue.Add(new Sprite(this.Image, null, this.Position, this.Size, angle, layer));
+        => Screen.GUI.Add(new Sprite(this.Image, null, this.Position, this.Size, angle, layer));
 }
