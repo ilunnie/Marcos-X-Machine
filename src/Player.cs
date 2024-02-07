@@ -23,32 +23,32 @@ public class Player : Mob
         var vandal = new VandalReaver();
         this.Hands.Add(new Hand(this, vandal, 0));
 
-        var icestaff = new IceStaff();
-        this.Hands.Add(new Hand(this, icestaff, 30));
+        // var icestaff = new IceStaff();
+        // this.Hands.Add(new Hand(this, icestaff, 30));
 
-        var acidgun = new AcidGun();
-        this.Hands.Add(new Hand(this, acidgun, 30));
+        // var acidgun = new AcidGun();
+        // this.Hands.Add(new Hand(this, acidgun, 30));
 
-        var roboticguitar = new ElectricRoboticGuitar();
-        this.Hands.Add(new Hand(this, roboticguitar, 30));
+        // var roboticguitar = new ElectricRoboticGuitar();
+        // this.Hands.Add(new Hand(this, roboticguitar, 30));
 
-        var pogshark = new PogSharkGun();
-        this.Hands.Add(new Hand(this, pogshark, 30));
+        // var pogshark = new PogSharkGun();
+        // this.Hands.Add(new Hand(this, pogshark, 30));
 
-        var cshark = new CSharkGun();
-        this.Hands.Add(new Hand(this, cshark, 30));
+        // var cshark = new CSharkGun();
+        // this.Hands.Add(new Hand(this, cshark, 30));
 
         // var bulletgun = new BulletGun();
         // this.Hands.Add(new Hand(this, bulletgun, 30));
 
-        // var dubstepgun = new DubstepGun();
-        // this.Hands.Add(new Hand(this, dubstepgun, 30));
+        var dubstepgun = new DubstepGun();
+        this.Hands.Add(new Hand(this, dubstepgun, 30));
 
         var revolver = new Revolver();
         this.Hands.Add(new Hand(this, revolver, 20));
 
-        var gun_basicbot = new GunBasicBot();
-        this.Hands.Add(new Hand(this, gun_basicbot, 25));
+        // var gun_basicbot = new GunBasicBot();
+        // this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
 

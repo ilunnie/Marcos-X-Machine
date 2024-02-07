@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Xml.Serialization;
 using NAudio.Wasapi.CoreAudioApi;
 using NAudio.Wave;
 
@@ -35,6 +36,13 @@ public class Sound
                 music.Audio.Volume = 0f;
             else music.Audio.Volume = value / 100f;
         }
+    }
+    public static void StopMusics()
+    {
+        MusicWaveOut.Stop();
+        MusicWaveOut.Dispose();
+        MusicWaveOut = new WaveOut();
+        musics.Clear();
     }
     
     public static Sound OpenFrom(SoundType type, string file)
@@ -112,6 +120,7 @@ public class Sound
     {
         waveOut.Stop();
         waveOut.Dispose();
+        waveOut = null;
     }
 
     public virtual void Restart()

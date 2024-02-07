@@ -26,7 +26,7 @@ public class Menu : ILevel
             new SizeF(Camera.Size.Width * .2f, Camera.Size.Height * .2f),
             SpriteBuffer.Current.Get("src/Sprites/Koala.jpg"),
             () => {
-                Memory.Level = new SalaDigitalLevel();
+                Memory.Level = new EntradaDTALevel();
             }
         ));
 

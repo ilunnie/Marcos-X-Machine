@@ -15,6 +15,7 @@ public class MolFaseDois : Mob
 
     public MolFaseDois()
     {
+        Sound.StopMusics();
         var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase2.wav");
         var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav");
 
