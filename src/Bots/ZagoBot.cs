@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-public class ZagoBot : Mob
+public class ZagoBot : Bot
 {
     private bool isMoving = false;
     Rectangle rectangle = Rectangle.Empty;

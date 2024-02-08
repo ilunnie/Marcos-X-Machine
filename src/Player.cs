@@ -57,6 +57,13 @@ public class Player : Mob
 
     public override void OnFrame()
     {
+        if (this.Entity.cooldown > 0)
+        {
+            Screen.Filters.Add(new RedFilter{
+                Intensity = this.Entity.cooldown / 1000 * 0.5f
+            });
+        }
+
         if (!this.tp.IsEmpty)
         {
             this.Entity.Move(tp);

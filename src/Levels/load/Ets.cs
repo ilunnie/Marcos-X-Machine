@@ -39,8 +39,8 @@ public class EtsLoad : Loader
             .Then(() => {
                 new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
                 })
-                .And(() => {
-                    new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
-                })
+                // .And(() => {
+                //     new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
+                // })
             ;
 }

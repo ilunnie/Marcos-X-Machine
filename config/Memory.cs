@@ -33,6 +33,7 @@ public static class Memory
         {
             if(entity.cooldown > 0)
                 entity.cooldown -= 1 * (int)Frame;
+                
             Colliders.Add(entity);
         }
         foreach (var projectile in Projectiles)
