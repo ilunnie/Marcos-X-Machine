@@ -7,9 +7,10 @@ public class DamagedBot : Bot
 {
     public DamagedBot()
     {
-        this.MaxLife = 20;
-        this.Life = 20;
+        this.MaxLife = 10;
+        this.Life = 10;
         this.Speed = 0.001f;
+        this.distanceFromPlayer = 0;
     }
 
     public override void OnFrame()

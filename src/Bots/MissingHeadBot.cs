@@ -8,9 +8,10 @@ public class MissingHeadBot : Bot
     {
         this.Hands.Add(new Hand(this, new RobotHead(), 0));
 
-        this.MaxLife = 25;
-        this.Life = 25;
+        this.MaxLife = 35;
+        this.Life = 35;
         this.Speed = 0.0007f;
+        this.distanceFromPlayer = 250;
     }
 
     public override void OnFrame()

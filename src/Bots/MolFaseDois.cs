@@ -4,13 +4,8 @@ using System.Threading;
 
 public class MolFaseDois : Bot
 {
-    private bool isMoving = false;
-    private float distanceFromPlayer = 300;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
     private float oldLife = 0;
     private int frames = 0;
-    Player player = null;
     Rectangle MapSize = Rectangle.Empty;
 
     bool started = false;

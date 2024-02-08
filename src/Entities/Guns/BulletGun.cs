@@ -24,7 +24,7 @@ public class BulletGun : Entity
 
         Anchor = new PointF(0, Size.Height / 2);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/bullet-gun.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/bullet-gun.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -45,8 +45,8 @@ public class BulletGun : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1600;
-        this.recoil = 2000;
+        this.cooldown = 1800;
+        this.recoil = 1500;
         
         var size = this.Size.Width * 0.5f;
         var altura = this.Size.Height * 0.55f;

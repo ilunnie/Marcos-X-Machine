@@ -24,7 +24,7 @@ public class GunBasicBot : Entity
 
         this.Anchor = new PointF(0, Size.Height / 2);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/basic-bot-gun.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/basic-bot-gun.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -45,7 +45,7 @@ public class GunBasicBot : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 2000;
+        this.cooldown = 2700;
         this.recoil = 1000;
         
         var size = this.Size.Width * 0.5f;

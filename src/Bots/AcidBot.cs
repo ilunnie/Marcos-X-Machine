@@ -8,9 +8,10 @@ public class AcidBot : Bot
     {
         this.Hands.Add(new Hand(this, new AcidGun(), 20));
 
-        this.MaxLife = 40;
-        this.Life = 40;
-        this.Speed = 0.0008f;
+        this.MaxLife = 35;
+        this.Life = 35;
+        this.Speed = 0.0005f;
+        this.distanceFromPlayer = 350;
     }
 
     public override void OnFrame()

@@ -23,7 +23,7 @@ public class AcidGun : Entity
 
         Anchor = new PointF(0, Size.Height);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/acid-gun.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/acid-gun.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -44,7 +44,7 @@ public class AcidGun : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 2500;
+        this.cooldown = 3000;
         this.recoil = 2000;
         
         var size = this.Size.Width * 0.5f;

@@ -24,7 +24,7 @@ public class IceStaff : Entity
 
         this.Anchor = new PointF(0, Size.Height / 2);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/ice-staff.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/ice-staff.png");
 
         this.AddAnimation(new LoopAnimation()
         {
@@ -49,7 +49,7 @@ public class IceStaff : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1500;
+        this.cooldown = 1200;
         this.recoil = 0;
         
         var size = this.Size.Width * 0.5f;

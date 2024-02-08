@@ -24,7 +24,7 @@ public static class AnimationBuilder
 
     public static void AddStaticAnimation(this Entity entity, string local, int x, int y = 0, int spritesQuantX = 4, int spritesQuantY = 1)
     {
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/" + local);
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/" + local);
         entity.AddAnimation(new StaticAnimation() {
             Image = sprite.Cut(x, y, spritesQuantX, spritesQuantY)
         });
@@ -34,7 +34,7 @@ public static class AnimationBuilder
 
     public static void AddWalkingAnimation(this Entity entity, string local, int x, int y = 0, int spritesQuantX = 4, int spritesQuantY = 1)
     {
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/" + local);
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/" + local);
         entity.AddAnimation(new WalkingAnimation() {
             Image = sprite.Cut(x, y, spritesQuantX, spritesQuantY)
         });

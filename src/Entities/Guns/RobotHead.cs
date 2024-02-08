@@ -24,7 +24,7 @@ public class RobotHead : Entity
 
         this.Anchor = new PointF(0, Size.Height / 2);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/robot-head-null.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/robot-head-null.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -46,7 +46,6 @@ public class RobotHead : Entity
         if (cooldown > 0) return;
 
         this.cooldown = 3000;
-        this.recoil = 1000;
         
         var size = this.Size.Width * 0.5f;
         var altura = this.Size.Height * 0.5f;

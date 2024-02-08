@@ -8,10 +8,10 @@ public class ZagoBot : Bot
     {
         this.Hands.Add(new Hand(this, new VandalReaver(), 0));
 
-        this.MaxLife = 80;
-        this.Life = 80;
+        this.MaxLife = 150;
+        this.Life = 150;
         this.Speed = 0.00085f;
-        this.distanceFromPlayer = 400;
+        this.distanceFromPlayer = 600;
     }
 
     public override void OnFrame()

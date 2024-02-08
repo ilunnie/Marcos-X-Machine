@@ -43,10 +43,16 @@ public class EtsLoad : Loader
                 new SubterraneoLevel()
             ))
             .Then(() => {
-                new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 5.5f, TileSets.spriteMapSize.Height * 13))};
                 })
-                // .And(() => {
-                //     new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
-                // })
+            .Then(() => {
+                new AcidBot () {Entity = new AcidBotEntity(new PointF(TileSets.spriteMapSize.Width * 13.5f, TileSets.spriteMapSize.Height * 13.5f))};
+            })
+            .Then(() => {
+                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 20.5f, TileSets.spriteMapSize.Height * 5))};
+            })
+            .Then(() => {
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 19.5f, TileSets.spriteMapSize.Height * 13))};
+            })
             ;
 }

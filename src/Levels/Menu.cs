@@ -13,7 +13,7 @@ public class Menu : ILevel
 
     public bool IsLoaded { get; set; } = true;
 
-    public Image background = SpriteBuffer.Current.Get("src/Sprites/logo-game.png");
+    public Image background = SpriteBuffer.Current.Get("src/sprites/logo-game.png");
     public Image BackgroundLoad { get => background; set => background = value; }
 
     public Sprite backgroundSprite;
@@ -27,7 +27,7 @@ public class Menu : ILevel
         Buttons.Add(new Button(
             new PointF(Camera.Size.Width * .1f, Camera.Size.Height * .1f),
             new SizeF(Camera.Size.Width * .15f, Camera.Size.Height * .05f),
-            SpriteBuffer.Current.Get("src/Sprites/start-game.png"),
+            SpriteBuffer.Current.Get("src/sprites/start-game.png"),
             () => {
                 Memory.Level = new SalaDigitalLevel();
                 Sound.StopMusics();
@@ -37,7 +37,7 @@ public class Menu : ILevel
         Buttons.Add(new Button(
             new PointF(Camera.Size.Width * .1f, Camera.Size.Height * 0.2f),
             new SizeF(Camera.Size.Width * .08f, Camera.Size.Height * .05f),
-            SpriteBuffer.Current.Get("src/Sprites/quit-game.png"),
+            SpriteBuffer.Current.Get("src/sprites/quit-game.png"),
             () => {
                 Memory.App.Close();
             }

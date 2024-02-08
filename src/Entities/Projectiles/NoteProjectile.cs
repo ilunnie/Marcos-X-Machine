@@ -19,7 +19,7 @@ public class NoteProjectile : Projectile
         this.OldPosition = this.Position;
         this.damage = 20;
         
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new SpinAnimation() {
             Image = sprite.Cut(rand.Next(2, 7), 1, 16, 3)
         });

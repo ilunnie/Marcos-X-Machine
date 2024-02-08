@@ -6,11 +6,11 @@ public class BasicBot : Bot
 {
     public BasicBot()
     {
-        this.Hands.Add(new Hand(this, new GunBasicBot(), 90));
+        this.Hands.Add(new Hand(this, new GunBasicBot{ cooldown = 3000 }, 90));
 
-        this.MaxLife = 30;
-        this.Life = 30;
-        this.Speed = 0.001f;
+        this.MaxLife = 20;
+        this.Life = 20;
+        this.Speed = 0.0005f;
     }
 
     public override void OnFrame()

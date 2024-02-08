@@ -15,9 +15,9 @@ public class RobotHeadProjectile : Projectile
         ));
         this.Position = position;
         this.OldPosition = this.Position;
-        this.damage = 8;
+        this.damage = 1;
         
-        Image image = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
+        Image image = SpriteBuffer.Current.Get("src/sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new LoopAnimation() {
             Image = image,
             SpritesQuantity = 2,

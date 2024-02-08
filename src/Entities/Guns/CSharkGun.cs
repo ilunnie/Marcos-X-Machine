@@ -24,7 +24,7 @@ public class CSharkGun : Entity
 
         Anchor = new PointF(0, Size.Height / 1.5f);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/c-shark.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/c-shark.png");
 
         this.AddAnimation(new StaticAnimation()
         {

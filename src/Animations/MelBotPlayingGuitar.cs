@@ -5,7 +5,7 @@ public class MelBotPlayingGuitar : IAnimation
     private IAnimation next = null;
     public IAnimation Next { get => next; set => next = value; }
 
-    private Image Image = SpriteBuffer.Current.Get("src/Sprites/bosses/mel-bot/mel-bot-playing-sprites.png");
+    private Image Image = SpriteBuffer.Current.Get("src/sprites/bosses/mel-bot/mel-bot-playing-sprites.png");
 
     int Frame = 0;
     int State = 0;

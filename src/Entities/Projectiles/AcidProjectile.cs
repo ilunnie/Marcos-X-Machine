@@ -17,7 +17,7 @@ public class AcidProjectile : Projectile
         this.OldPosition = this.Position;
         this.damage = 10;
 
-        Image image = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
+        Image image = SpriteBuffer.Current.Get("src/sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new AcidAnimation() {
             Image = image,
             AnchorPosition = new PointF(Size.Width / 2, Size.Height / 2)

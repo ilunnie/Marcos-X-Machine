@@ -25,7 +25,7 @@ public class VandalReaver : Entity
 
         Anchor = new PointF(0, Size.Height );
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/vandal-reaver.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/vandal-reaver.png");
 
         this.AddAnimation(new StaticAnimation()
         {

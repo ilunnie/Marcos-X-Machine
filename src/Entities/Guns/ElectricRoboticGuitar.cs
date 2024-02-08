@@ -25,7 +25,7 @@ public class ElectricRoboticGuitar : Entity
 
         Anchor = new PointF(0, Size.Height );
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/electric-robotic-guitar.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/electric-robotic-guitar.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -46,7 +46,7 @@ public class ElectricRoboticGuitar : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 700;
+        this.cooldown = 800;
 
         var size = this.Size.Width * 0.5f;
         var altura = this.Size.Height * 0.8f;

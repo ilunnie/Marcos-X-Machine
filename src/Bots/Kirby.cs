@@ -10,6 +10,7 @@ public class Kirby : Bot
         this.MaxLife = 50;
         this.Life = 50;
         this.Speed = 0.001f;
+        this.distanceFromPlayer = 0;
     }
 
     public override void OnFrame()

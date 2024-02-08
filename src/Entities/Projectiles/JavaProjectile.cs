@@ -17,7 +17,7 @@ public class JavaProjectile : Projectile
         this.OldPosition = this.Position;
         this.damage = 10;
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/projectiles/projectiles-sprite.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/projectiles/projectiles-sprite.png");
         this.AddAnimation(new SpinAnimation() {
             Image = sprite.Cut(12, 1, 16, 3),
             AnchorPosition = new PointF(Size.Width / 2, Size.Height / 2)

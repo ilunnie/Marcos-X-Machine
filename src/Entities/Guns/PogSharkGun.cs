@@ -25,7 +25,7 @@ public class PogSharkGun : Entity
 
         Anchor = new PointF(0, Size.Height / 1.5f);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/pog-shark.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/pog-shark.png");
 
         this.AddAnimation(new StaticAnimation()
         {

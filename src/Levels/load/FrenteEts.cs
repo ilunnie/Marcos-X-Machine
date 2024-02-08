@@ -33,18 +33,20 @@ public class FrenteEtsLoad : Loader
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
             .Then(() => player.Entity.FocusCam(false))
-            .Then(() => new Teleport(
-                new PointF((32 * 3 + 1.25f)*(TileSets.spriteMapSize.Width / 3), 3.75f * TileSets.spriteMapSize.Height),
-                new SizeF((TileSets.spriteMapSize.Width / 3) * 3.5f, TileSets.spriteMapSize.Height / 3),
-                new PointF(18 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 4 * TileSets.spriteMapSize.Height),
-                new EtsLevel()
-            ))
-            .Then(() => new Teleport(
-                new PointF(TileSets.spriteMapSize.Width, 19 * TileSets.spriteMapSize.Height),
-                new SizeF((TileSets.spriteMapSize.Width ) * 3.5f, TileSets.spriteMapSize.Height / 3),
-                new PointF(25 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 2 * TileSets.spriteMapSize.Height),
-                new EntradaDTALevel()
-            ));
-            // .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1200)) })
-            
+            .Then(() => {
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 5.5f, TileSets.spriteMapSize.Height * 13))};
+            })
+            .Then(() => {
+                new MissingHeadBot () {Entity = new MissingHeadBotEntity(new PointF(TileSets.spriteMapSize.Width * 13.5f, TileSets.spriteMapSize.Height * 13.5f))};
+            })
+            .Then(() => {
+                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 19.5f, TileSets.spriteMapSize.Height * 6.5f))};
+            })
+            .Then(() => {
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 20.5f, TileSets.spriteMapSize.Height * 5f))};
+            })
+            .Then(() => {
+                new AcidBot () {Entity = new AcidBotEntity(new PointF(TileSets.spriteMapSize.Width * 19.5f, TileSets.spriteMapSize.Height * 13))};
+            })
+            ;
 }

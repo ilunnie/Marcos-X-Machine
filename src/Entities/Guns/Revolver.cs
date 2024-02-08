@@ -26,7 +26,7 @@ public class Revolver : Entity
         this.Hitbox = new Hitbox(rectangles);
 
         Anchor = new PointF(0, Size.Height * .75f);
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/revolver.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/revolver.png");
         this.AddAnimation(new StaticAnimation(){
             Image = sprite,
             AnchorPosition = Anchor
@@ -46,7 +46,7 @@ public class Revolver : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 2000;
+        this.cooldown = 1700;
         this.recoil = 2000;
         
         var size = this.Size.Width * 0.7f;

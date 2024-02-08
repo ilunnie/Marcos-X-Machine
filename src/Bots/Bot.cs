@@ -4,7 +4,7 @@ using System.Drawing;
 public class Bot : Mob
 {
     protected bool isMoving = false;
-    protected float distanceFromPlayer = 300;
+    protected float distanceFromPlayer = 500;
 
     protected Rectangle rectangle = Rectangle.Empty;
     protected PointF nextPosition = PointF.Empty;

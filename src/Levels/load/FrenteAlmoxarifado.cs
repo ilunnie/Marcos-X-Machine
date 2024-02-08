@@ -35,5 +35,17 @@ public class FrenteAlmoxarifadoLoad : Loader
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
             .Then(() => player.Entity.FocusCam(false))
+            .Then(() => {
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 5.5f, TileSets.spriteMapSize.Height * 13))};
+            })
+            .Then(() => {
+                new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 17.5f, TileSets.spriteMapSize.Height * 2))};
+            })
+            .Then(() => {
+                new MissingHeadBot () {Entity = new MissingHeadBotEntity(new PointF(TileSets.spriteMapSize.Width * 13.5f, TileSets.spriteMapSize.Height * 13.5f))};
+            })
+            .Then(() => {
+                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 5.5f, TileSets.spriteMapSize.Height * 5.5f))};
+            })
             ;
 }

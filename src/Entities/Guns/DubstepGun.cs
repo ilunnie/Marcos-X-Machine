@@ -28,7 +28,7 @@ public class DubstepGun : Entity
 
         Anchor = new PointF(0, Size.Height / 2);
 
-        Image sprite = SpriteBuffer.Current.Get("src/Sprites/guns/dubstep-gun.png");
+        Image sprite = SpriteBuffer.Current.Get("src/sprites/guns/dubstep-gun.png");
 
         this.AddAnimation(new StaticAnimation()
         {
@@ -59,7 +59,7 @@ public class DubstepGun : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 800;
+        this.cooldown = 1000;
         this.recoil = 2000;
 
         var size = this.Size.Width * 0.5f;
