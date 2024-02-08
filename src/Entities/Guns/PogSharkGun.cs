@@ -61,6 +61,7 @@ public class PogSharkGun : Entity
             Angle = Angle,
             Speed = 1f,
         };
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/PogShark/java.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

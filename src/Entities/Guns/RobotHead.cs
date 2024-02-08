@@ -60,6 +60,8 @@ public class RobotHead : Entity
             Angle = Angle,
             Speed = 1f,
         };
+
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/RobotHead/robotHead.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

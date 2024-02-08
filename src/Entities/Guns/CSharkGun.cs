@@ -60,6 +60,7 @@ public class CSharkGun : Entity
             Angle = Angle,
             Speed = 1f,
         };
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/CShark/cesharp.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
