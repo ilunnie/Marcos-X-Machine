@@ -60,6 +60,7 @@ public class ElectricRoboticGuitar : Entity
             Angle = Angle,
             Speed = 1f,
         };
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/LaserGuitar/laserGuitar.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

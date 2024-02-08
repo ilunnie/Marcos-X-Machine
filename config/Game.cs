@@ -11,10 +11,10 @@ public class Game : App
 
         Memory.Level = new Menu();
         
-        Sound.SetMusicVolume(40);
+        Sound.SetMusicVolume(10);
         Sound.SetEffectVolume(100);
         
-        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(20);
+        Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introGameMusic.wav").PlayAt(57);
 
     }
     public override void OnFrame()

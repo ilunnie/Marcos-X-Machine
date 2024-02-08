@@ -59,6 +59,7 @@ public class AcidGun : Entity
             Angle = Angle,
             Speed = 0.5f,
         };
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/AcidGun/acidGun.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

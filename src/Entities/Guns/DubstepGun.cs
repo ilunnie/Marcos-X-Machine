@@ -48,8 +48,6 @@ public class DubstepGun : Entity
         {
             if (isRunning)
             {
-                seconds = (long)(timeClicked - Sound.startTime).TotalSeconds;
-                totalTime = seconds + initialTime;
                 Sound.StopMusics();
             }
             isRunning = false;

@@ -25,6 +25,7 @@ public abstract class Projectile : Entity
         if (entity.Mob == this.Mob)
             return;
 
+
         if (entity is Projectile)
             return;
 

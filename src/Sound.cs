@@ -71,9 +71,10 @@ public class Sound
     {
         if (waveOut.PlaybackState == PlaybackState.Playing)
         {
-            waveOut.Stop();
-            waveOut.Dispose();
-            Audio.Position = 0;
+            // waveOut.Stop();
+            // waveOut.Dispose();
+            // Audio.Position = 0;
+            waveOut = new WaveOutEvent();
         }
         Audio.Position = 0;
         waveOut.Init(Audio);
@@ -84,7 +85,9 @@ public class Sound
     {
         if (waveOut.PlaybackState == PlaybackState.Playing)
         {
-            return;
+            waveOut.Stop();
+            waveOut.Dispose();
+            Audio.Position = 0;
         }
         
         Audio.Position = 0;
