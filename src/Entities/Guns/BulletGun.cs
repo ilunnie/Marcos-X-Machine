@@ -45,7 +45,7 @@ public class BulletGun : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 1000;
+        this.cooldown = 1600;
         this.recoil = 2000;
         
         var size = this.Size.Width * 0.5f;
@@ -60,6 +60,8 @@ public class BulletGun : Entity
             Angle = Angle,
             Speed = 1f,
         };
+        
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/BulletGun/sillyGun.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

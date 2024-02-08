@@ -21,26 +21,26 @@ public class Player : Mob
 
     public Player()
     {
-        // var vandal = new VandalReaver();
-        // this.Hands.Add(new Hand(this, vandal, 30));
+        var vandal = new VandalReaver();
+        this.Hands.Add(new Hand(this, vandal, 30));
 
-        // var icestaff = new IceStaff();
-        // this.Hands.Add(new Hand(this, icestaff, 30));
+        var icestaff = new IceStaff();
+        this.Hands.Add(new Hand(this, icestaff, 30));
 
-        // var acidgun = new AcidGun();
-        // this.Hands.Add(new Hand(this, acidgun, 30));
+        var acidgun = new AcidGun();
+        this.Hands.Add(new Hand(this, acidgun, 30));
 
-        // var roboticguitar = new ElectricRoboticGuitar();
-        // this.Hands.Add(new Hand(this, roboticguitar, 30));
+        var roboticguitar = new ElectricRoboticGuitar();
+        this.Hands.Add(new Hand(this, roboticguitar, 30));
 
-        // var pogshark = new PogSharkGun();
-        // this.Hands.Add(new Hand(this, pogshark, 30));
+        var pogshark = new PogSharkGun();
+        this.Hands.Add(new Hand(this, pogshark, 30));
 
-        // var cshark = new CSharkGun();
-        // this.Hands.Add(new Hand(this, cshark, 30));
+        var cshark = new CSharkGun();
+        this.Hands.Add(new Hand(this, cshark, 30));
 
-        // var bulletgun = new BulletGun();
-        // this.Hands.Add(new Hand(this, bulletgun, 30));
+        var bulletgun = new BulletGun();
+        this.Hands.Add(new Hand(this, bulletgun, 30));
 
         var revolver = new Revolver();
         this.Hands.Add(new Hand(this, revolver, 20));
@@ -180,5 +180,6 @@ public class Player : Mob
         if (entity.Mob is null) return;
         this.Life -= entity.Mob.Entity.damage;
         this.Entity.cooldown = entity.Mob.Entity.damage > 0 && this.Life > 0 ? 1000 : 0;
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Marcos/marcosAi.wav").Play();
     }
 }

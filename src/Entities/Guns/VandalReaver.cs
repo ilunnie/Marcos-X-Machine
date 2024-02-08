@@ -46,7 +46,7 @@ public class VandalReaver : Entity
     {
         if (cooldown > 0) return;
 
-        this.cooldown = 700;
+        this.cooldown = 1000;
         this.recoil = 1000;
 
         var size = this.Size.Width * 0.5f;
@@ -61,6 +61,8 @@ public class VandalReaver : Entity
             Angle = Angle,
             Speed = 1f,
         };
+
+        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/VandalReaver/saqueadora.wav").Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
