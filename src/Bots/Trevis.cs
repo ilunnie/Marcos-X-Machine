@@ -3,26 +3,27 @@ using System.Drawing;
 
 public class Trevis : Bot
 {
-
+    private int frames = 0;
+    private float angle = 40;
     public Trevis()
     {
         Sound.StopMusics();
         Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/TreviBot/Hiroyuki-Sawano-Exorcist.wav")
             .Play();
-        
+
         var gun = new CSharkGun();
         this.Hands.Add(new Hand(this, gun, 0));
 
-        this.MaxLife = 200;
-        this.Life = 200;
-        this.Speed = 0.095f;
+        this.MaxLife = 500;
+        this.Life = 500;
+        this.Speed = 0.0006f;
     }
 
     public override void OnFrame()
     {
-        if(this.Life <= 0)
+        if (this.Life <= 0)
             Sound.StopMusics();
-            
+
         if (player == null)
         {
             foreach (var entity in Memory.Entities)
@@ -35,44 +36,140 @@ public class Trevis : Bot
 
         if (player.Life > 0)
         {
-            float dx = player.Entity.Position.X - this.Entity.Position.X;
-            float dy = player.Entity.Position.Y - this.Entity.Position.Y;
+            if (frames > 900)
+                frames = 0;
 
-            float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
-
-            this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
-            this.Hands[hand].Click();
-            this.Hands[hand].Draw();
-
-            if (distanceToPlayer > distanceFromPlayer )
+            else if (frames < 300)
             {
-                isMoving = true;
-                PointF idealPosition = new PointF(
-                    player.Entity.Position.X - dx / distanceToPlayer * distanceFromPlayer,
-                    player.Entity.Position.Y - dy / distanceToPlayer * distanceFromPlayer
-                );
-                
-                int width = (int)TileSets.ColumnLength;
-            
-                nextMoves = Functions.GetNextMoves(
-                    idealPosition,
-                    this.Entity.Position,
-                    Memory.ArrayMap,
-                    width
-                );
-                
-                if (nextMoves.Count > 2)
+                float dx = player.Entity.Position.X - this.Entity.Position.X;
+                float dy = player.Entity.Position.Y - this.Entity.Position.Y;
+
+                float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
+
+                this.Hands[hand].Set(new PointF(player.Entity.Position.X + player.Entity.Size.Width / 2, player.Entity.Position.Y + player.Entity.Size.Height / 2));
+                this.Hands[hand].Click();
+                this.Hands[hand].Draw();
+
+                if (distanceToPlayer > distanceFromPlayer)
                 {
-                    nextMoves.Pop();
-                    nextMoves.Pop();
-                    var next = nextMoves.Pop();
-                    nextPosition = new PointF(
-                        (next % width + 1) * TileSets.spriteMapSize.Width,
-                        (next / width + 1) * TileSets.spriteMapSize.Height
+                    isMoving = true;
+                    PointF idealPosition = new PointF(
+                        player.Entity.Position.X - dx / distanceToPlayer * distanceFromPlayer,
+                        player.Entity.Position.Y - dy / distanceToPlayer * distanceFromPlayer
                     );
+
+                    int width = (int)TileSets.ColumnLength;
+
+                    nextMoves = Functions.GetNextMoves(
+                        idealPosition,
+                        this.Entity.Position,
+                        Memory.ArrayMap,
+                        width
+                    );
+                    if (nextMoves.Count > 2)
+                    {
+                        nextMoves.Pop();
+                        nextMoves.Pop();
+                        var next = nextMoves.Pop();
+                        nextPosition = new PointF(
+                            (next % width + 1) * TileSets.spriteMapSize.Width,
+                            (next / width + 1) * TileSets.spriteMapSize.Height
+                        );
+                    }
                 }
             }
-            else {
+
+            else if (frames < 400 && frames > 300)
+            {
+                PointF centerMap = new PointF(6.5f * 3 * (this.Entity.Size.Width / 3), 5.7f * 3 * (this.Entity.Size.Height / 3));
+                nextPosition = centerMap;
+            }
+
+            else if (frames < 500 && frames > 400)
+            {
+                for (int i = 0; i < 360; i += 45)
+                {
+                    if (frames % 2 == 0)
+                        new BlueProjectile(new PointF(1000, 1000))
+                        {
+                            Mob = this,
+                            cooldown = 9000,
+                            Speed = 0.7f,
+                            Angle = i + 45
+
+                        };
+                }
+            }
+
+            else if (frames < 700 && frames > 500)
+            {
+
+                
+
+                if (frames % 3 == 0 )
+                    for (int i = 0; i < 7; i++)
+                    {
+                        new BlueProjectile(new PointF(1000, 1000))
+                        {
+                            Mob = this,
+                            cooldown = 10000,
+                            Speed = 0.7f,
+                            Angle = angle 
+
+                        };
+                        new BlueProjectile(new PointF(1000, 1000))
+                        {
+                            Mob = this,
+                            cooldown = 10000,
+                            Speed = 0.7f,
+                            Angle = 90 + angle 
+
+                        };
+                        new BlueProjectile(new PointF(1000, 1000))
+                        {
+                            Mob = this,
+                            cooldown = 10000,
+                            Speed = 0.7f,
+                            Angle = 180 + angle 
+
+                        };
+                        new BlueProjectile(new PointF(1000, 1000))
+                        {
+                            Mob = this,
+                            cooldown = 10000,
+                            Speed = 0.7f,
+                            Angle = 270 + angle 
+
+                        };
+
+                        angle++;
+                    }
+            }
+             else if (frames < 800 && frames > 700)
+            {
+                PointF center = new PointF(this.Entity.Position.X + this.Entity.Size.Width / 2, this.Entity.Position.Y + this.Entity.Size.Height / 2);
+                float initialAngle = 0f; 
+                float angleIncrement = 45f; 
+
+                if (frames % 3 == 0)
+                {
+                    for (int i = 0; i < 8; i++) 
+                    {
+                        float angle = (initialAngle + (i * angleIncrement)) * (float)Math.PI / 180f; 
+
+                        new BlueProjectile(center)
+                        {
+                            Mob = this,
+                            cooldown = 9000,
+                            Speed = 0.7f,
+                            Angle = angle * i
+                        };
+                    }
+                }
+            }
+
+            else
+            {
                 isMoving = false;
             }
         }
@@ -104,6 +201,7 @@ public class Trevis : Bot
                 nextPosition,
                 this.Speed * Memory.Frame)
         );
+
+        frames++;
     }
-    
 }
