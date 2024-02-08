@@ -88,7 +88,7 @@ public class DubstepGun : Entity
 
         Random random = new();
 
-        var rand = random.NextInt64(1, 10);
+        var rand = random.NextInt64(1, 20);
         if(rand == 4)
             s2.Play();
         else
