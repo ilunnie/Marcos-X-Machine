@@ -27,13 +27,25 @@ public class EntradaDTALevel : ILevel
     {
         if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
-        if (!isClear || Memory.AllEnemiesDead)
+        if (!IsClear && Memory.AllEnemiesDead)
         {
+            IsClear = true;
             new Teleport(
-                new PointF(22 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height),
-                new SizeF((TileSets.spriteMapSize.Width ) * 5, TileSets.spriteMapSize.Height / 3),
+                new PointF(22 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 4 * (TileSets.spriteMapSize.Height / 3)),
+                new SizeF((TileSets.spriteMapSize.Width) * 5, TileSets.spriteMapSize.Height / 3),
                 new PointF(TileSets.spriteMapSize.Width, 18 * TileSets.spriteMapSize.Height),
                 new FrenteAlmoxarifadoLevel()
+            );
+            new Teleport(
+                new PointF((4 * 3) * (TileSets.spriteMapSize.Width / 3), 9 * 3 * (TileSets.spriteMapSize.Height / 3)),
+                new SizeF(TileSets.spriteMapSize.Width / 2, TileSets.spriteMapSize.Height / 3 * 2),
+                PointF.Empty,
+                new DTALevel()
+            );
+            new EventCaller(
+                    new PointF((1 + 9 * 3) * (TileSets.spriteMapSize.Width / 3), (2 + 10 * 3) * (TileSets.spriteMapSize.Height / 3)),
+                    new SizeF(new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height / 3)),
+                    new DTALayer()
             );
         }
 

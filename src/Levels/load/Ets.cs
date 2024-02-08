@@ -33,12 +33,12 @@ public class EtsLoad : Loader
                 Camera.MinimumLimitX = Xmin * TileSets.spriteMapSize.Width;
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
-            .Then(() => player.Entity.FocusCam(false));
-            // .Then(() => {
-            //     new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
-            //     })
-            //     .And(() => {
-            //         new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
-            //     })
-            // ;
+            .Then(() => player.Entity.FocusCam(false))
+            .Then(() => {
+                new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
+                })
+                .And(() => {
+                    new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
+                })
+            ;
 }

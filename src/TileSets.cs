@@ -101,7 +101,9 @@ public static class TileSets
         {
             string[] tileset = tilesets[i].Split('h');
             int index = int.Parse(tileset[0]);
-
+            if (index == -1)
+                continue;
+                
             CalcMap clone = Memory.Tileset[index].Clone();
             clone.Layer = i;
             clone.Move(
