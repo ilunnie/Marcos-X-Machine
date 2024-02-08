@@ -25,7 +25,7 @@ public class MolFaseDois : Bot
         s1.Play();
 
         this.MaxLife = 200;
-        this.Life = 100;
+        this.Life = 200;
         this.Speed = 0.00095f;
         this.oldLife = this.Life;
     }
@@ -34,7 +34,18 @@ public class MolFaseDois : Bot
     {
         this.Entity.AddAnimation(new MelBotPlayingGuitar());
         this.Entity.Size = new SizeF(120, 130);
+    }
 
+    public override void OnDestroy()
+    {
+        // Memory.PostProcessing.Enqueue(() => {new Drop(new ElectricRoboticGuitar(), this.Entity.Position);});
+        this.Entity.Mob = null;
+        this.Entity = null;
+    }
+
+    public override void OnFrame()
+    {
+        OnInit();
         if (player == null)
         {
             foreach (var entity in Memory.Entities)
@@ -44,11 +55,6 @@ public class MolFaseDois : Bot
             }
             return;
         }
-
-    }
-
-    public override void OnFrame()
-    {
 
         if (player.Life > 0)
         {

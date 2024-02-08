@@ -40,6 +40,10 @@ public class FrenteEtsLevel : ILevel
                 new PointF((22 * 3 + 1) * (TileSets.spriteMapSize.Width / 3), 6.5f * TileSets.spriteMapSize.Height),
                 new FrenteAlmoxarifadoLevel()
             );
+            player.Destiny = new PointF(
+                0,
+                6.5f * TileSets.spriteMapSize.Height
+            );
         }
 
         foreach (var entity in Memory.Entities)

@@ -4,14 +4,6 @@ using System.Drawing;
 
 public class ZagoBot : Bot
 {
-    private bool isMoving = false;
-    Rectangle rectangle = Rectangle.Empty;
-    PointF nextPosition = PointF.Empty;
-    Stack<int> nextMoves;
-    Player player = null;
-
-    private float distanceFromPlayer = 400;
-
     public ZagoBot()
     {
         this.Hands.Add(new Hand(this, new VandalReaver(), 0));
@@ -19,6 +11,7 @@ public class ZagoBot : Bot
         this.MaxLife = 80;
         this.Life = 80;
         this.Speed = 0.00085f;
+        this.distanceFromPlayer = 400;
     }
 
     public override void OnFrame()

@@ -22,12 +22,13 @@ public class MolEntity : Entity
         this.Hitbox = new Hitbox(rectangles);
 
         this.AddStaticAnimation("bosses/mel-bot/mel-bot-sprites.png");
+        this.Thumbnail = SpriteBuffer.Current.Get("src/sprites/bosses/mel-bot/mel-talk.png");
     }
 
     public MolEntity() : this(new PointF(0, 0)) {}
 
     public override void Destroy()
     {
-        Memory.ToDelete.Add(this);
+        if (Mob is not null) Mob.OnDestroy();
     }
 }

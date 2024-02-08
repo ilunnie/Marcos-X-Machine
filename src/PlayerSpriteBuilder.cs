@@ -115,8 +115,8 @@ public static class PlayerSpriteBuilder
         if (!camera.Contains(destiny))
         {
             destiny = new PointF(
-                Math.Max(camera.Left + gap, Math.Min(destiny.X, camera.Right - gap)),
-                Math.Max(camera.Top + gap, Math.Min(destiny.Y, camera.Bottom - gap))
+                Math.Max(camera.Left + gap, Math.Min(destiny.X, camera.Right - size.Width - gap)),
+                Math.Max(camera.Top + gap, Math.Min(destiny.Y, camera.Bottom - size.Height - gap))
             );
         }
 

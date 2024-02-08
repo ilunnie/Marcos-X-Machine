@@ -39,7 +39,6 @@ public class DTALoad : Loader
             //     new PointF(640, 430),
             //     new EtsLevel()
             // ))
-            .Then(() => new Mol() { Entity = new MolEntity(new PointF(900,780)) })
             .Then(() => Memory.Level.Event = new Spotlights())
             .Then(() => {
                 foreach (var entity in Memory.Entities)

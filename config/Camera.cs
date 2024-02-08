@@ -38,34 +38,41 @@ public static class Camera
         Position = Position.LinearInterpolation(Destiny, t);
     }
 
-    public static void MoveTo(float X, float Y, bool motion = true)
+    public static void MoveTo(float X, float Y, bool motion = true, float? zoom = null, bool inLimit = true)
     {
-        float x = X - Camera.Size.Width / (2 * Zoom);
-        float y = Y - Camera.Size.Height / (2 * Zoom);
+        Zoom = zoom ?? Zoom;
+        float x = X - (Camera.Size.Width / (2 * Zoom));
+        float y = Y - (Camera.Size.Height / (2 * Zoom));
 
-        if (MaxLimitX - MinimumLimitX > Size.Width)
+        if (inLimit)
         {
-            x = (float)(x + Size.Width / Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
-            x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
-        }
-        if (MaxLimitY - MinimumLimitY > Size.Height)
-        {
-            y = (float)(y + Size.Height / Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
-            y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
+            if (MaxLimitX - MinimumLimitX > Size.Width)
+            {
+                x = (float)(x + Size.Width / Zoom > MaxLimitX ? MaxLimitX - Size.Width : x);
+                x = (float)(x < MinimumLimitX ? MinimumLimitX : x);
+            }
+            if (MaxLimitY - MinimumLimitY > Size.Height)
+            {
+                y = (float)(y + Size.Height / Zoom > MaxLimitY ? MaxLimitY - Size.Height : y);
+                y = (float)(y < MinimumLimitY ? MinimumLimitY : y);
+            }
         }
 
         if (!motion)
+        {
             Position = new PointF(x, y);
+            Destiny = Position;
+        }
         else
             Destiny = new PointF(x, y);
     }
-    public static void MoveTo(PointF position, bool motion = true)
-        => MoveTo(position.X, position.Y, motion);
-    public static void FocusCam(this Entity entity, bool motion = true)
+    public static void MoveTo(PointF position, bool motion = true, float? zoom = null, bool inLimit = true)
+        => MoveTo(position.X, position.Y, motion, zoom, inLimit);
+    public static void FocusCam(this Entity entity, bool motion = true, float? zoom = null, bool inLimit = true)
         => MoveTo(
             entity.Position.X + entity.Size.Width / 2,
             entity.Position.Y + entity.Size.Height / 2,
-        motion);
+        motion, zoom, inLimit);
     public static PointF PositionOnCam(this PointF point)
     {
         float x = (point.X - Camera.Position.X) * Zoom;

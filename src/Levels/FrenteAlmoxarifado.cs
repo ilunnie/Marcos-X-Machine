@@ -36,9 +36,13 @@ public class FrenteAlmoxarifadoLevel : ILevel
             );
             new Teleport(
                 new PointF(TileSets.spriteMapSize.Width, 19 * TileSets.spriteMapSize.Height),
-                new SizeF((TileSets.spriteMapSize.Width ) * 3.5f, TileSets.spriteMapSize.Height / 3),
+                new SizeF(TileSets.spriteMapSize.Width * 3.5f, TileSets.spriteMapSize.Height / 3),
                 new PointF(25 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 2 * TileSets.spriteMapSize.Height),
                 new EntradaDTALevel()
+            );
+            player.Destiny = new PointF(
+                TileSets.spriteMapSize.Width,
+                19 * TileSets.spriteMapSize.Height
             );
         }
 

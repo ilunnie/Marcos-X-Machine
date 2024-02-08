@@ -29,9 +29,9 @@ public class ZagoBotEntity : Entity
 
     public override void Destroy()
     {
-        var random = Random.Shared.Next(0, 10);
-        if (random == 7)
-            Memory.PostProcessing.Enqueue(() => {new Drop(new VandalReaver(), this.Position);});
+        var random = Random.Shared.Next(1, 100);
+        if (random <= 10)
+            Memory.PostProcessing.Enqueue(() => new Drop(new VandalReaver(), this.Position));
         Memory.ToDelete.Add(this);
     }
 }

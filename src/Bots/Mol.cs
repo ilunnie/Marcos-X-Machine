@@ -94,4 +94,9 @@ public class Mol : Bot
                 this.Speed * Memory.Frame)
         );
     }
+
+    public override void OnDestroy()
+    {
+        Memory.Level.Event = new MolSecondState();
+    }
 }

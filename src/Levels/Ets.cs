@@ -43,6 +43,10 @@ public class EtsLevel : ILevel
                 new PointF((2 + 8 * 3) * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
                 new FrenteEtsLevel()
             );
+            player.Destiny = new PointF(
+                (2f + 21 * 3) * (TileSets.spriteMapSize.Width / 3),
+                3 * TileSets.spriteMapSize.Height
+            );
         }
         foreach (var entity in Memory.Entities)
         {
