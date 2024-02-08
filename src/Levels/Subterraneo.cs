@@ -6,7 +6,7 @@ public class SubterraneoLevel : ILevel
 {
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
-    private PointF InitialPosition => new PointF(540, 280);
+    private PointF InitialPosition => new PointF(940, 480);
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities

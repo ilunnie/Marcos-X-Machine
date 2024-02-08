@@ -37,5 +37,13 @@ public class SubterraneoLoad : Loader
                 Camera.MinimumLimitX = Xmin * TileSets.spriteMapSize.Width;
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
-            .Then(() => player.Entity.FocusCam(false));
+            .Then(() => player.Entity.FocusCam(false))
+            .Then(() => new Trevis(){ Entity = new TrevisEntity(new PointF(900,900))})
+            .Then(() => new Teleport(
+                new PointF(15 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
+                new SizeF(20 , 20),
+                new PointF(1680, 430),
+                new EtsLevel()
+            ));
+
 }
