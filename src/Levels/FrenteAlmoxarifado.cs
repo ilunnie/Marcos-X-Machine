@@ -2,20 +2,21 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-public class SubterraneoLevel : ILevel
+public class FrenteAlmoxarifadoLevel : ILevel
 {
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
-    private PointF InitialPosition => new PointF(540, 280);
+
+    private PointF InitialPosition => new PointF(2650, 775);
     private Player player = null;
     public Player Player
         => player ??= Memory.Entities
                             .Select(entity => entity.Mob)
                             .OfType<Player>()
                             .FirstOrDefault() ?? new Player() { Entity = new Marcos(InitialPosition) };
-                            
+
     public bool IsLoaded { get; set; } = false;
-    public Loader Loader => new SubterraneoLoad();
+    public Loader Loader => new FrenteAlmoxarifadoLoad();
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
     private bool isClear = false;
@@ -24,6 +25,23 @@ public class SubterraneoLevel : ILevel
     public void OnFrame()
     {
         Player.Entity.FocusCam();
+        if (!IsClear && Memory.AllEnemiesDead)
+        {
+            IsClear = true;
+            new Teleport(
+                new PointF((23 * 3 + 1) * (TileSets.spriteMapSize.Width / 3), 6.5f * TileSets.spriteMapSize.Height),
+                new SizeF((TileSets.spriteMapSize.Width) / 3, TileSets.spriteMapSize.Height),
+                new PointF(2 * TileSets.spriteMapSize.Width, 6.5f * TileSets.spriteMapSize.Height),
+                new FrenteEtsLevel()
+            );
+            new Teleport(
+                new PointF(TileSets.spriteMapSize.Width, 19 * TileSets.spriteMapSize.Height),
+                new SizeF((TileSets.spriteMapSize.Width ) * 3.5f, TileSets.spriteMapSize.Height / 3),
+                new PointF(25 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 2 * TileSets.spriteMapSize.Height),
+                new EntradaDTALevel()
+            );
+        }
+
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)

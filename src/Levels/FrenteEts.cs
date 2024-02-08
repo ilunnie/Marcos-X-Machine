@@ -19,11 +19,29 @@ public class FrenteEtsLevel : ILevel
     public Loader Loader => new FrenteEtsLoad();
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
-    public bool IsClear { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    private bool isClear = false;
+    public bool IsClear { get => isClear; set => isClear = value; }
 
     public void OnFrame()
     {
         Player.Entity.FocusCam();
+        if (!IsClear && Memory.AllEnemiesDead)
+        {
+            IsClear = true;
+            new Teleport(
+                new PointF(8 * TileSets.spriteMapSize.Width, 4 * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width * 2, TileSets.spriteMapSize.Height / 3),
+                new PointF((1 + 21 * 3) * (TileSets.spriteMapSize.Width / 3), 4 * TileSets.spriteMapSize.Height),
+                new EtsLevel()
+            );
+            new Teleport(
+                new PointF(TileSets.spriteMapSize.Width / 3, 6.5f * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height),
+                new PointF((22 * 3 + 1) * (TileSets.spriteMapSize.Width / 3), 6.5f * TileSets.spriteMapSize.Height),
+                new FrenteAlmoxarifadoLevel()
+            );
+        }
+
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)

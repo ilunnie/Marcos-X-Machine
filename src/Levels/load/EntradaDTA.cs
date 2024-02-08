@@ -45,11 +45,5 @@ public class EntradaDTAload : Loader
                     new SizeF(new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height / 3)),
                     new DTALayer()
                 ))
-            .Then(() => new Teleport(
-                new PointF(22 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height),
-                new SizeF((TileSets.spriteMapSize.Width ) * 5, TileSets.spriteMapSize.Height / 3),
-                 new PointF(TileSets.spriteMapSize.Width, 18 * TileSets.spriteMapSize.Height),
-                new FrenteEtsLevel()
-            ))
             ;
 }

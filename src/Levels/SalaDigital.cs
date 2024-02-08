@@ -23,7 +23,8 @@ public class SalaDigitalLevel : ILevel
 
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
-    public bool IsClear { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    private bool isClear = false;
+    public bool IsClear { get => isClear; set => isClear = value; }
 
     public void OnFrame()
     {

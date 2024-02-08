@@ -18,7 +18,8 @@ public class Menu : ILevel
 
     public Sprite backgroundSprite;
     public List<Button> Buttons { get; set; } = new List<Button>();
-    public bool IsClear { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    private bool isClear = false;
+    public bool IsClear { get => isClear; set => isClear = value; }
 
     public Menu()
     {
@@ -28,7 +29,7 @@ public class Menu : ILevel
             new SizeF(Camera.Size.Width * .15f, Camera.Size.Height * .05f),
             SpriteBuffer.Current.Get("src/Sprites/start-game.png"),
             () => {
-                Memory.Level = new FrenteEtsLevel();
+                Memory.Level = new SalaDigitalLevel();
             }
         ));
 

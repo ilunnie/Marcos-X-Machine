@@ -34,13 +34,13 @@ public class EtsLevel : ILevel
             new Teleport(
                 new PointF(5 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height),
                 new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
-                new PointF(12 * TileSets.spriteMapSize.Width, 7 * TileSets.spriteMapSize.Height),
+                new PointF(13 * TileSets.spriteMapSize.Width, 6.5f * TileSets.spriteMapSize.Height),
                 new SalaDigitalLevel()
             );
             new Teleport(
                 new PointF((1 + 21 * 3) * (TileSets.spriteMapSize.Width / 3), 3 * TileSets.spriteMapSize.Height),
                 new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3),
-                new PointF(98 * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
+                new PointF((2 + 8 * 3) * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
                 new FrenteEtsLevel()
             );
         }

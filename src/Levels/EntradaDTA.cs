@@ -20,12 +20,23 @@ public class EntradaDTALevel : ILevel
     public Loader Loader => new EntradaDTAload();
     private Image backgroundLoad = null;
     public Image BackgroundLoad { get => backgroundLoad; set => backgroundLoad = value; }
-    public bool IsClear { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    private bool isClear = false;
+    public bool IsClear { get => isClear; set => isClear = value; }
 
     public void OnFrame()
     {
         if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
+        if (!isClear || Memory.AllEnemiesDead)
+        {
+            new Teleport(
+                new PointF(22 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height),
+                new SizeF((TileSets.spriteMapSize.Width ) * 5, TileSets.spriteMapSize.Height / 3),
+                new PointF(TileSets.spriteMapSize.Width, 18 * TileSets.spriteMapSize.Height),
+                new FrenteAlmoxarifadoLevel()
+            );
+        }
+
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
