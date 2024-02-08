@@ -17,6 +17,7 @@ public class Player : Mob
     public PointF tp { get; set; } = PointF.Empty;
 
     public int MaxHand = 2;
+    public PointF Destiny = PointF.Empty;
 
     public Player()
     {
@@ -41,14 +42,14 @@ public class Player : Mob
         // var bulletgun = new BulletGun();
         // this.Hands.Add(new Hand(this, bulletgun, 30));
 
+        var revolver = new Revolver();
+        this.Hands.Add(new Hand(this, revolver, 20));
+        
         var dubstepgun = new DubstepGun();
         this.Hands.Add(new Hand(this, dubstepgun, 30));
 
-        var revolver = new Revolver();
-        this.Hands.Add(new Hand(this, revolver, 20));
-
-        // var gun_basicbot = new GunBasicBot();
-        // this.Hands.Add(new Hand(this, gun_basicbot, 25));
+        var gun_basicbot = new GunBasicBot();
+        this.Hands.Add(new Hand(this, gun_basicbot, 25));
 
         this.Life = 10;
         this.MaxLife = 10;
@@ -60,6 +61,7 @@ public class Player : Mob
         {
             this.Entity.Move(tp);
             this.tp = PointF.Empty;
+            this.Entity.FocusCam(false);
         }
         if (Memory.MouseButton == MouseButtons.Left && hand < this.Hands.Count )
             this.Hands[hand].Click();
@@ -89,7 +91,8 @@ public class Player : Mob
 
         this
             .DrawLife(new PointF(10, 10), 3)
-            .DrawWeapons(3, .5f);
+            .DrawWeapons(3, .5f)
+            .DrawDestiny(1.5f);
 
         if (Drop.PlayerInDrop) this.DrawButtonF(1.5f);
     }
@@ -169,6 +172,6 @@ public class Player : Mob
     {
         if (entity.Mob is null) return;
         this.Life -= entity.Mob.Entity.damage;
-        this.Entity.cooldown = entity.Mob.Entity.damage > 0 && this.Life > 0 ? 2000 : 0;
+        this.Entity.cooldown = entity.Mob.Entity.damage > 0 && this.Life > 0 ? 1000 : 0;
     }
 }

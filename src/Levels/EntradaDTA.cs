@@ -47,6 +47,9 @@ public class EntradaDTALevel : ILevel
                     new SizeF(new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height / 3)),
                     new DTALayer()
             );
+            player.Destiny = new PointF(
+                (1.5f + 4 * 3) * (TileSets.spriteMapSize.Width / 3),
+                (2.5f + 7 * 3) * (TileSets.spriteMapSize.Height / 3));
         }
 
         foreach (var entity in Memory.Entities)

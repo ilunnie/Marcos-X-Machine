@@ -102,4 +102,29 @@ public static class PlayerSpriteBuilder
 
         return player;
     }
+
+    public static Player DrawDestiny(this Player player, float scale, float gap = 20)
+    {
+        if (player.Destiny.IsEmpty) return player;
+
+        SubImage image = SpriteBuffer.Current.Get("src/sprites/icons/exclamation.png");
+        SizeF size = image.ProportionalSize(scale);
+        PointF destiny = (player.Destiny - size / 2).PositionOnCam();
+
+        var camera = new RectangleF(PointF.Empty, Camera.Size);
+        if (!camera.Contains(destiny))
+        {
+            destiny = new PointF(
+                Math.Max(camera.Left + gap, Math.Min(destiny.X, camera.Right - gap)),
+                Math.Max(camera.Top + gap, Math.Min(destiny.Y, camera.Bottom - gap))
+            );
+        }
+
+
+        Screen.GUI.Add(new Sprite(
+            image, null,
+            destiny, size
+        ));
+        return player;
+    }
 }
