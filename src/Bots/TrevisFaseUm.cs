@@ -2,18 +2,15 @@ using System;
 using System.Drawing;
 using System.Threading;
 
-public class Mol : Bot
+public class TrevisFaseUm : Bot
 {
-    public Mol()
+    public TrevisFaseUm()
     {
         Sound.StopMusics();
-        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase1.wav");
-        var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav");
-
-        s1.Wait(s2.Play);
-        s1.Play();
+        Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/TreviBot/Hiroyuki-Sawano-Exorcist.wav")
+            .Play();
         
-        var gun = new ElectricRoboticGuitar();
+        var gun = new CSharkGun();
         this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 200;
@@ -64,6 +61,8 @@ public class Mol : Bot
                 this.Speed = 0;
                 isMoving = false;
             }
+
+
         }
 
         else
@@ -83,9 +82,9 @@ public class Mol : Bot
         }
 
         if (isMoving)
-            this.Entity.AddWalkingAnimation("bosses/mel-bot/mel-bot-sprites.png", Direction);
+            this.Entity.AddWalkingAnimation("bosses/trevi-bot/trevi-bot.png", Direction);
         else
-            this.Entity.AddStaticAnimation("bosses/mel-bot/mel-bot-sprites.png", Direction);
+            this.Entity.AddStaticAnimation("bosses/trevi-bot/trevi-bot.png", Direction);
         this.Entity.Animation = this.Entity.Animation.Skip();
 
         this.Entity.Move(

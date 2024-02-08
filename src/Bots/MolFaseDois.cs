@@ -53,60 +53,19 @@ public class MolFaseDois : Bot
         if (player.Life > 0)
         {
 
-
-
             PointF center = new PointF(this.Entity.Position.X + this.Entity.Size.Width / 2, this.Entity.Position.Y + this.Entity.Size.Height / 2);
-
-            PointF PositionNow = new PointF(this.Entity.Position.X, this.Entity.Position.Y);
 
             float angle = (float)(center.AngleTo(player.Entity.Position + player.Entity.Size / 2) * (180 / Math.PI));
 
             switch (frames)
             {
                 case < 100:
-                    if (frames % 2 == 0)
-                    {
+                    this.Entity.Move(new PointF(1320,900));
 
-                        if (frames == 10)
-                        {
-                            new LaserProjectile(new PointF(150, 150))
-                            {
-                                Mob = this,
-                                cooldown = 90000,
-                                Speed = 0.6f,
-                            };
-
-
-                        }
-
-                        else if (frames == 20)
-                        {
-                            new LaserProjectile(new PointF(150, 250))
-                            {
-                                Mob = this,
-                                cooldown = 90000,
-                                Speed = 0.6f,
-                            };
-                        }
-                        else if (frames == 30)
-                        {
-                            new LaserProjectile(new PointF(150, 550))
-                            {
-                                Mob = this,
-                                cooldown = 90000,
-                                Speed = 0.6f,
-                            };
-                        }
-
-                    }
-                    break;
-
-                case < 200 and > 100:
                     if (frames % 4 == 0)
                     {
-
-                        for (int i = 0; i <= 10; i++)
-                            new LaserProjectile(new PointF(150, 50 * i))
+                        for (int i = 0; i <= 2000; i += 200)
+                            new LaserProjectile(new PointF(150, 600 + i))
                             {
                                 Mob = this,
                                 cooldown = 90000,
@@ -115,40 +74,49 @@ public class MolFaseDois : Bot
                     }
                     break;
 
-                case < 300 and > 200:
+                case < 300:
                     if (frames % 4 == 0)
                     {
+                        this.Entity.Move(new PointF(1200, 1200));
 
-                        this.Entity.Move(new PointF(1650, 900));
-                        for (int i = 0; i <= 10; i++)
-                            new LaserProjectile(new PointF(150, 200 * i))
+                        for (int i = 0; i <= 2000; i += 200)
+                            new LaserProjectile(new PointF(150 + i, 600))
                             {
                                 Mob = this,
                                 cooldown = 90000,
                                 Speed = 0.6f,
+                                Angle = 90
                             };
                     }
                     break;
 
-                case < 400 and > 300:
+                case < 400:
                     if (frames % 4 == 0)
                     {
-                        this.Entity.Move(new PointF(1100, 500));
+                        this.Entity.Move(new PointF(1000, 800));
 
-                        for (int i = 0; i <= 10; i++)
-                            new LaserProjectile(new PointF(1870, 300 * i))
+                        for (int i = 0; i <= 2000; i += 200){
+
+                            new LaserProjectile(new PointF(1630, 620 + i))
                             {
                                 Mob = this,
                                 cooldown = 90000,
                                 Angle = 180,
                                 Speed = 0.6f,
                             };
+                            new LaserProjectile(new PointF(150 + i, 600))
+                            {
+                                Mob = this,
+                                cooldown = 90000,
+                                Speed = 0.6f,
+                                Angle = 90
+                            };
+                        }
 
-                        break;
                     }
                     break;
 
-                case < 500 and > 400:
+                case < 500:
                     this.Entity.Move(new PointF(1400, 800));
 
                     if (frames % 2 == 0)
@@ -166,45 +134,28 @@ public class MolFaseDois : Bot
 
                     break;
 
-                case < 600 and > 500:
-                    this.Entity.Move(new PointF(150, 150));
-                    
+                case < 600:
+                    this.Entity.Move(new PointF(900, 780));
 
-                        for (int i = 0; i <= 10; i++)
-                            new LaserProjectile(new PointF(300 * i, 300))
+                    if (frames % 4 == 0)
+                    {
+
+                        for (int i = 0; i < 360; i += 45)
+                            new LaserProjectile(center)
                             {
                                 Mob = this,
-                                cooldown = 90000,
-                                Angle = 90,
-                                Speed = 0.6f,
+                                cooldown = 9000,
+                                Angle = i,
+                                Speed = 0.4f,
                             };
-                    
+                    }
                     break;
 
-                    // case 70:
-                    //     this.Entity.Move(new PointF(400, 400));
+                case < 700:
+                    frames = 0;
+                    break;
 
-                    //     for (int i = 0; i <= 10; i++)
-                    //         new LaserProjectile(new PointF(1870, 200 * i))
-                    //         {
-                    //             Mob = this,
-                    //             cooldown = 90000,
-                    //             Angle = 180,
-                    //             Speed = 0.6f,
-                    //         };
 
-                    //     break;
-
-                    // case 20:
-                    //     for (int i = 0; i < 360; i += 15)
-                    //         new LaserProjectile(center)
-                    //         {
-                    //             Mob = this,
-                    //             cooldown = 4000,
-                    //             Angle = i,
-                    //             Speed = 0.4f,
-                    //         };
-                    //     break;
 
             }
 
@@ -213,25 +164,3 @@ public class MolFaseDois : Bot
 
     }
 }
-
-
-//ataque em sol
-
-// for (int i = 0; i < 360; i += 15)
-// new LaserProjectile(center)
-// {
-// Mob = this,
-// cooldown = 4000,
-// Angle = i,
-// Speed = 0.4f,
-// };
-
-// distancia para o player
-
-// float dx = player.Entity.Position.X - this.Entity.Position.X;
-// float dy = player.Entity.Position.Y - this.Entity.Position.Y;
-// float distanceToPlayer = (float)Math.Sqrt(dx * dx + dy * dy);
-// if (distanceToPlayer > distanceFromPlayer)
-// {
-
-// }

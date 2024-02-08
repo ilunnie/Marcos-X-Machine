@@ -11,7 +11,7 @@ public class Trevis : Bot
         Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/TreviBot/Hiroyuki-Sawano-Exorcist.wav")
             .Play();
 
-        var gun = new CSharkGun();
+        var gun = new PogSharkGun();
         this.Hands.Add(new Hand(this, gun, 0));
 
         this.MaxLife = 500;
@@ -36,7 +36,7 @@ public class Trevis : Bot
 
         if (player.Life > 0)
         {
-            if (frames > 900)
+            if (frames > 700)
                 frames = 0;
 
             else if (frames < 300)
@@ -103,7 +103,6 @@ public class Trevis : Bot
 
             else if (frames < 700 && frames > 500)
             {
-
                 
 
                 if (frames % 3 == 0 )
@@ -144,28 +143,6 @@ public class Trevis : Bot
 
                         angle++;
                     }
-            }
-             else if (frames < 800 && frames > 700)
-            {
-                PointF center = new PointF(this.Entity.Position.X + this.Entity.Size.Width / 2, this.Entity.Position.Y + this.Entity.Size.Height / 2);
-                float initialAngle = 0f; 
-                float angleIncrement = 45f; 
-
-                if (frames % 3 == 0)
-                {
-                    for (int i = 0; i < 8; i++) 
-                    {
-                        float angle = (initialAngle + (i * angleIncrement)) * (float)Math.PI / 180f; 
-
-                        new BlueProjectile(center)
-                        {
-                            Mob = this,
-                            cooldown = 9000,
-                            Speed = 0.7f,
-                            Angle = angle * i
-                        };
-                    }
-                }
             }
 
             else
