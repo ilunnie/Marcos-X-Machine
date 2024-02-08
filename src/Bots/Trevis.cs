@@ -6,6 +6,7 @@ public class Trevis : Bot
 
     public Trevis()
     {
+        Sound.StopMusics();
         Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/TreviBot/Hiroyuki-Sawano-Exorcist.wav")
             .Play();
         
@@ -19,8 +20,8 @@ public class Trevis : Bot
 
     public override void OnFrame()
     {
-        // if(this.Life <= 0)
-            // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/TreviBot/Hiroyuki-Sawano-Exorcist.wav", 0);
+        if(this.Life <= 0)
+            Sound.StopMusics();
             
         if (player == null)
         {
@@ -32,10 +33,8 @@ public class Trevis : Bot
             return;
         }
 
-
         if (player.Life > 0)
         {
-
             float dx = player.Entity.Position.X - this.Entity.Position.X;
             float dy = player.Entity.Position.Y - this.Entity.Position.Y;
 
@@ -45,26 +44,37 @@ public class Trevis : Bot
             this.Hands[hand].Click();
             this.Hands[hand].Draw();
 
-            if (distanceToPlayer > distanceFromPlayer)
+            if (distanceToPlayer > distanceFromPlayer )
             {
                 isMoving = true;
                 PointF idealPosition = new PointF(
-                    player.Entity.Position.X - (dx / distanceToPlayer) * distanceFromPlayer,
-                    player.Entity.Position.Y - (dy / distanceToPlayer) * distanceFromPlayer
+                    player.Entity.Position.X - dx / distanceToPlayer * distanceFromPlayer,
+                    player.Entity.Position.Y - dy / distanceToPlayer * distanceFromPlayer
                 );
-
-
-                isMoving = true;
-                VerifyPosition(this.Entity.Position, this.nextPosition);
-                nextPosition = idealPosition;
+                
+                int width = (int)TileSets.ColumnLength;
+            
+                nextMoves = Functions.GetNextMoves(
+                    idealPosition,
+                    this.Entity.Position,
+                    Memory.ArrayMap,
+                    width
+                );
+                
+                if (nextMoves.Count > 2)
+                {
+                    nextMoves.Pop();
+                    nextMoves.Pop();
+                    var next = nextMoves.Pop();
+                    nextPosition = new PointF(
+                        (next % width + 1) * TileSets.spriteMapSize.Width,
+                        (next / width + 1) * TileSets.spriteMapSize.Height
+                    );
+                }
             }
-            else
-            {
-                this.Speed = 0;
+            else {
                 isMoving = false;
             }
-
-
         }
 
         else

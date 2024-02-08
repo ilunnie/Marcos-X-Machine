@@ -37,12 +37,12 @@ public class EtsLoad : Loader
             .Then(() => new Teleport(
                 new PointF(14 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 3 * TileSets.spriteMapSize.Height ),
                 new SizeF(20 , 20),
-                new PointF(1680, 430),
+                new PointF(1680, 930),
                 new SubterraneoLevel()
-            ));
-            // .Then(() => {
-            //     new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
-            //     })
+            ))
+            .Then(() => {
+                new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
+                });
             //     .And(() => {
             //         new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
             //     })

@@ -43,6 +43,6 @@ public class FrenteEtsLoad : Loader
                 new PointF(25 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 2 * TileSets.spriteMapSize.Height),
                 new EntradaDTALevel()
             ))
-            // .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1200)) })
+            .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1200)) })
             ;
 }

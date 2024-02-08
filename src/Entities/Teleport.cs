@@ -29,6 +29,7 @@ public class Teleport : Entity
 
         ((Player)entity.Mob).tp = TpPosition;
         Memory.Level = this.Level;
+
     }
 
     public override void Draw(float angle = 0, int layer = 1)

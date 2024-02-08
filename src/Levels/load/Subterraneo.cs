@@ -44,6 +44,10 @@ public class SubterraneoLoad : Loader
                 new SizeF(20 , 20),
                 new PointF(1680, 430),
                 new EtsLevel()
-            ));
+            ))
+            // .Then(() => {
+            //     new ZagoBot () {Entity = new ZagoBotEntity(new PointF(900,1000))};
+            //     })
+                ;
 
 }
