@@ -9,9 +9,11 @@ public class EtsLoad : Loader
         => builder
             .Then(() => {
                 Memory.Entities.Clear();
-                Memory.Entities.Add(player.Entity);
+                Memory.Projectiles.Clear();
                 Memory.Map.Clear();
+                player.Destiny = PointF.Empty;
             })
+            .Then(() => Memory.Entities.Add(player.Entity))
             .Then(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"))
                 .And(() => TileSets.ReadFile("src/Area/Ets.csv"))
             .Then(() => {
@@ -43,8 +45,8 @@ public class EtsLoad : Loader
             .Then(() => {
                 new ZagoBot () {Entity = new ZagoBotEntity(new PointF(1200,1000))};
                 })
-                .And(() => {
-                    new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
-                })
+                // .And(() => {
+                //     new Kirby () {Entity = new KirbyEntity(new PointF(2000,1200))};
+                // })
             ;
 }

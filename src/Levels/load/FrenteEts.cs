@@ -6,7 +6,9 @@ public class FrenteEtsLoad : Loader
         => builder
             .Then(() => {
                 Memory.Entities.Clear();
+                Memory.Projectiles.Clear();
                 Memory.Map.Clear();
+                player.Destiny = PointF.Empty;
             })
             .Then(() => Memory.Entities.Add(player.Entity))
             .Then(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"))
@@ -42,7 +44,7 @@ public class FrenteEtsLoad : Loader
                 new SizeF((TileSets.spriteMapSize.Width ) * 3.5f, TileSets.spriteMapSize.Height / 3),
                 new PointF(25 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 2 * TileSets.spriteMapSize.Height),
                 new EntradaDTALevel()
-            ))
-            .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1200)) })
-            ;
+            ));
+            // .Then(() => new BasicBot() { Entity = new BasicBotEntity(new PointF(1000,1200)) })
+            
 }

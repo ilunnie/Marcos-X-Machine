@@ -8,10 +8,11 @@ public class SubterraneoLoad : Loader
 {
     protected override void Init(Player player, LoadProcessBuilder builder)
     => builder
-            .Then(() =>
-            {
+            .Then(() => {
                 Memory.Entities.Clear();
+                Memory.Projectiles.Clear();
                 Memory.Map.Clear();
+                player.Destiny = PointF.Empty;
             })
             .Then(() => Memory.Entities.Add(player.Entity))
             .Then(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"))

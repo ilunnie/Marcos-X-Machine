@@ -31,7 +31,7 @@ public class ZagoBotEntity : Entity
     {
         var random = Random.Shared.Next(0, 10);
         if (random == 7)
-            new Drop(new VandalReaver(), this.Position);
+            Memory.PostProcessing.Enqueue(() => {new Drop(new VandalReaver(), this.Position);});
         Memory.ToDelete.Add(this);
     }
 }

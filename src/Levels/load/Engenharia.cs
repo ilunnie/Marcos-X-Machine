@@ -1,12 +1,16 @@
+using System.Drawing;
+
 public class EngenhariaLoad : Loader
 {
     protected override void Init(Player player, LoadProcessBuilder builder)
         => builder
             .Then(() => {
                 Memory.Entities.Clear();
-                Memory.Entities.Add(player.Entity);
+                Memory.Projectiles.Clear();
                 Memory.Map.Clear();
+                player.Destiny = PointF.Empty;
             })
+            .Then(() => Memory.Entities.Add(player.Entity))
             .Then(() => TileSets.SetSprites("src/sprites/tileset/Tile.png"))
                 .And(() => TileSets.ReadFile("src/Area/Engenharia.csv"))
             .Then(() => {
