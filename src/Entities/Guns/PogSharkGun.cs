@@ -32,7 +32,7 @@ public class PogSharkGun : Entity
             Image = sprite,
             AnchorPosition = Anchor
         });
-
+        this.Thumbnail = sprite;
     }
     public PogSharkGun() : this(new PointF(0, 0)) {}
     public override void Draw(float angle = 0, int layer = 3)

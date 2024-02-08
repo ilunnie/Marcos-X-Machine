@@ -40,6 +40,7 @@ public class Drop : Entity
 
     private static List<Drop> Discart = new();
     private static List<Drop> ToPlayer = new();
+    public static bool PlayerInDrop => ToPlayer.Count > 0;
 
     public Entity Entity { get; set; }
     private double _distance;

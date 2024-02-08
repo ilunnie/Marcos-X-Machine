@@ -88,7 +88,10 @@ public class Player : Mob
         this.Move();
 
         this
-            .DrawLife(new PointF(10, 10), 3);
+            .DrawLife(new PointF(10, 10), 3)
+            .DrawWeapons(3, .5f);
+
+        if (Drop.PlayerInDrop) this.DrawButtonF(1.5f);
     }
 
 
@@ -99,12 +102,12 @@ public class Player : Mob
 
         VerifyPosition(player, mouse);
 
-        if (e.Delta < 0)
+        if (e.Delta > 0)
         {
             this.hand += 1;
             if (this.hand >= this.Hands.Count) this.hand = this.Hands.Count - 1;
         }
-        if (e.Delta > 0)
+        if (e.Delta < 0)
         {
             this.hand -= 1;
             if (this.hand < 0) this.hand = 0;

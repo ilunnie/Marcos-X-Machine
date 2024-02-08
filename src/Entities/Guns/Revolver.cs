@@ -31,6 +31,7 @@ public class Revolver : Entity
             Image = sprite,
             AnchorPosition = Anchor
         });
+        this.Thumbnail = sprite;
     }
     public Revolver() : this(new PointF(0, 0)) {}
 

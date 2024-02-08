@@ -29,7 +29,7 @@ public class Menu : ILevel
             new SizeF(Camera.Size.Width * .15f, Camera.Size.Height * .05f),
             SpriteBuffer.Current.Get("src/Sprites/start-game.png"),
             () => {
-                Memory.Level = new DTALevel();
+                Memory.Level = new SalaDigitalLevel();
             }
         ));
 

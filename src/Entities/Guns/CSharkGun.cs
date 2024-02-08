@@ -31,7 +31,7 @@ public class CSharkGun : Entity
             Image = sprite,
             AnchorPosition = Anchor
         });
-
+        this.Thumbnail = sprite;
     }
     public CSharkGun() : this(new PointF(0, 0)) {}
     public override void Draw(float angle = 0, int layer = 3)

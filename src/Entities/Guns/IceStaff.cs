@@ -35,7 +35,7 @@ public class IceStaff : Entity
             ImageHeight = 1,
             AnchorPosition = Anchor
         });
-
+        this.Thumbnail = sprite.Cut(0, 0, 10);
     }
     public IceStaff() : this(new PointF(0, 0)) {}
     public override void Draw(float angle = 0, int layer = 1)

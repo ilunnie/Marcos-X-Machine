@@ -109,6 +109,7 @@ public abstract class App
             pb.Refresh();
 
             Memory.Frame = stopwatch.ElapsedMilliseconds;
+            PlayerSpriteBuilder.Frame += Memory.Frame;
             stopwatch.Restart();
         };
 
