@@ -50,9 +50,7 @@ public class DubstepGun : Entity
             {
                 seconds = (long)(timeClicked - Sound.startTime).TotalSeconds;
                 totalTime = seconds + initialTime;
-                initialTime = totalTime;
                 Sound.StopMusics();
-                Sound.OpenFrom(SoundType.Music, "src/Sounds/Musics/introMusic.wav").PlayAt(totalTime);
             }
             isRunning = false;
         }
@@ -80,14 +78,21 @@ public class DubstepGun : Entity
             Speed = 1f,
         };
         
-        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Guns/DubstepGun/crabRave.wav");
 
         if (isRunning)
             return;
         isRunning = true;
         Sound.StopMusics();
+        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Guns/DubstepGun/crabRave.wav");
         var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Guns/DubstepGun/surprise.wav");
-        s2.Play();
+
+        Random random = new();
+
+        var rand = random.NextInt64(1, 10);
+        if(rand == 4)
+            s2.Play();
+        else
+            s1.PlayAt(75);
         timeClicked = DateTime.Now;
     }
 

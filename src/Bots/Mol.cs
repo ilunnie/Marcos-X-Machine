@@ -6,8 +6,12 @@ public class Mol : Bot
 {
     public Mol()
     {
-        Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav")
-            .Play();
+        Sound.StopMusics();
+        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase1.wav");
+        var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav");
+
+        s1.Wait(s2.Play);
+        s1.Play();
         
         var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
@@ -18,10 +22,7 @@ public class Mol : Bot
     }
 
     public override void OnFrame()
-    {
-        // if(this.Life == 0)
-            // SoundBuilder.PlayBackGroundMusic(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav", 0);
-            
+    {            
         if (player == null)
         {
             foreach (var entity in Memory.Entities)

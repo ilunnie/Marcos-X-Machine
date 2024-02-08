@@ -22,7 +22,7 @@ public class MolFaseDois : Bot
         var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase2Music.wav");
 
         s1.Wait(s2.Play);
-        // s1.Play();
+        s1.Play();
 
         this.MaxLife = 200;
         this.Life = 100;

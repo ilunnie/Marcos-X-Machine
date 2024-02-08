@@ -30,6 +30,7 @@ public class Menu : ILevel
             SpriteBuffer.Current.Get("src/Sprites/start-game.png"),
             () => {
                 Memory.Level = new SalaDigitalLevel();
+                Sound.StopMusics();
             }
         ));
 
