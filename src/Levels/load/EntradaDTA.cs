@@ -46,7 +46,7 @@ public class EntradaDTAload : Loader
                 new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 25.5f, TileSets.spriteMapSize.Height * 18))};
             })
             .Then(() => {
-                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 20.5f, TileSets.spriteMapSize.Height * 5))};
+                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 19.5f, TileSets.spriteMapSize.Height * 5))};
             })
             ;
 }
