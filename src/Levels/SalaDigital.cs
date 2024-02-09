@@ -7,7 +7,7 @@ public class SalaDigitalLevel : ILevel
     private IEvent nowEvent = new Introduction();
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(TileSets.spriteMapSize.Width * 9, TileSets.spriteMapSize.Height * 7);
+    private PointF InitialPosition => new PointF(TileSets.spriteMapSize.Width * 12.6f, TileSets.spriteMapSize.Height * 8.5f);
 
     private PointF playerPosition = PointF.Empty;
     public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }

@@ -7,7 +7,7 @@ public class DTALevel : ILevel
     private IEvent nowEvent = null;
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(900, 600);
+    private PointF InitialPosition => new PointF(TileSets.spriteMapSize.Width * 7.2f, TileSets.spriteMapSize.Height * 5);
 
     private Player player = null;
     public Player Player

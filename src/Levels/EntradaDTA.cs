@@ -39,13 +39,13 @@ public class EntradaDTALevel : ILevel
             new Teleport(
                 new PointF((4 * 3) * (TileSets.spriteMapSize.Width / 3), 9 * 3 * (TileSets.spriteMapSize.Height / 3)),
                 new SizeF(TileSets.spriteMapSize.Width / 2, TileSets.spriteMapSize.Height / 3 * 2),
-                PointF.Empty,
+                new PointF(TileSets.spriteMapSize.Width * 7.2f, TileSets.spriteMapSize.Height * 5),
                 new DTALevel()
             );
             new EventCaller(
-                    new PointF((1 + 9 * 3) * (TileSets.spriteMapSize.Width / 3), (2 + 10 * 3) * (TileSets.spriteMapSize.Height / 3)),
-                    new SizeF(new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height / 3)),
-                    new DTALayer()
+                new PointF((1 + 9 * 3) * (TileSets.spriteMapSize.Width / 3), (2 + 10 * 3) * (TileSets.spriteMapSize.Height / 3)),
+                new SizeF(new SizeF(TileSets.spriteMapSize.Width / 3, TileSets.spriteMapSize.Height / 3)),
+                new DTALayer()
             );
             player.Destiny = new PointF(
                 (1.5f + 4 * 3) * (TileSets.spriteMapSize.Width / 3),

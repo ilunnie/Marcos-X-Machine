@@ -5,14 +5,7 @@ using System.Threading;
 public class Mol : Bot
 {
     public Mol()
-    {
-        Sound.StopMusics();
-        var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase1.wav");
-        var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav");
-
-        s1.Wait(s2.Play);
-        s1.Play();
-        
+    {        
         var gun = new ElectricRoboticGuitar();
         this.Hands.Add(new Hand(this, gun, 0));
 

@@ -70,6 +70,12 @@ public class Spotlights : IEvent
             Screen.Filters.Add(new WhiteFilter() { Intensity = 0 });
             intensityLight -= 50;
             if (intensityLight <= 0) state++;
+            Sound.StopMusics();
+            var s1 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/guitarraMolFase1.wav");
+            var s2 = Sound.OpenFrom(SoundType.Music, "src/Sounds/Enemies/MelBot/fase1Music.wav");
+
+            s1.Wait(s2.Play);
+            s1.Play();
         },
         () => {
             molEntity.FocusCam(motion: false, inLimit: false);
@@ -96,10 +102,10 @@ public class Spotlights : IEvent
     {
         if (state >= states.Count) return next;
         if (DateTime.Now.Subtract(time).TotalSeconds > 1)
-            {
-                time = DateTime.Now;
-                illuminatorsQuant += 2;
-            }
+        {
+            time = DateTime.Now;
+            illuminatorsQuant += 2;
+        }
         if (player == null)
         {
             Screen.Filters.Add(new Lighting() { Illuminators = GetIluminators(illuminatorsQuant), Intensity = .72f });
@@ -114,6 +120,15 @@ public class Spotlights : IEvent
 
                 if (player != null) break;
             }
+            if (player is not null && !player.tp.IsEmpty)
+            {
+                player.Entity.Move(player.tp);
+                player.tp = PointF.Empty;
+                player.Entity.FocusCam(false);
+                player.Entity.AddStaticAnimation("marcos/marcos-sprites-old.png", Direction.BottomLeft);
+                player.Entity.Animation = player.Entity.Animation.Skip();
+            }
+
             return this;
         }
         states[state].Invoke();
@@ -122,7 +137,7 @@ public class Spotlights : IEvent
 
     public void OnKeyDown(object o, KeyEventArgs e)
     {
-        
+
     }
 
     public void OnKeyUp(object o, KeyEventArgs e)
