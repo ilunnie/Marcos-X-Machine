@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -28,6 +29,11 @@ public class TrevisEntity : Entity
 
     public override void Destroy()
     {
+        var random = Random.Shared.Next(1, 100);
+        if (random <= 70)
+            Memory.PostProcessing.Enqueue(() => new Drop(new CSharkGun(), this.Position));
+        else
+            Memory.PostProcessing.Enqueue(() => new Drop(new PogSharkGun(), this.Position));
         Memory.ToDelete.Add(this);
     }
 }
