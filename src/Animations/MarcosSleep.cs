@@ -1,14 +1,13 @@
 using System.Drawing;
 
-public class MarcosDying : IAnimation
+public class MarcosSleep : IAnimation
 {
     private IAnimation next = null;
     public IAnimation Next { get => next; set => next = value; }
 
     private Image Image = SpriteBuffer.Current.Get("src/sprites/marcos/marcos-dying-sprites.png");
 
-    int Frame = 0;
-    public int State = 0;
+    public int State = 4;
 
     public void Draw(PointF position, SizeF size, Hitbox hitbox, float angle = 0, int layer = 1)
     {
@@ -24,11 +23,6 @@ public class MarcosDying : IAnimation
 
     public IAnimation NextFrame()
     {
-        this.Frame++;
-        if (this.Frame % 4 == 0)
-        {
-            this.State++;
-        }
         return this;
     }
 
@@ -40,7 +34,7 @@ public class MarcosDying : IAnimation
         return this.Next;
     }
 
-    public IAnimation Clone() => new MarcosDying()
+    public IAnimation Clone() => new MarcosSleep()
     {
         Next = this.Next
     };

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public class EtsLevel : ILevel
 {
-    private IEvent nowEvent = null;
+    private IEvent nowEvent = new Introduction2();
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
     private PointF InitialPosition => new PointF(640, 430);

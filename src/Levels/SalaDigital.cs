@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 public class SalaDigitalLevel : ILevel
 {
-    private IEvent nowEvent = null;
+    private IEvent nowEvent = new Introduction();
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
-    private PointF InitialPosition => new PointF(640, 540);
+    private PointF InitialPosition => new PointF(750, 550);
 
     private PointF playerPosition = PointF.Empty;
     public PointF PlayerPosition { get => playerPosition; set => playerPosition = value; }

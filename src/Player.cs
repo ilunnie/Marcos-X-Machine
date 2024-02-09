@@ -175,6 +175,15 @@ public class Player : Mob
     private void Move()
         => Entity.Move(new PointF(Entity.Position.X + Speed * ((int)WalkXRight + (int)WalkXLeft) * Memory.Frame, Entity.Position.Y + Speed * ((int)WalkYUp + (int)WalkYDown) * Memory.Frame));
 
+    public void resetMove()
+    {
+        isMoving = false;
+        isMovingUp = false;
+        isMovingRight = false;
+        isMovingDown = false;
+        isMovingLeft = false;
+    }
+
     public override void OnDamage(Entity entity)
     {
         if (entity.Mob is null) return;
