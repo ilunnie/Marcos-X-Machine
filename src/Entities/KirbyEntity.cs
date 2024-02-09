@@ -28,7 +28,7 @@ public class KirbyEntity : Entity
 
     public override void Destroy()
     {
-        Memory.PostProcessing.Enqueue(() => {new Drop(this.Position);});
+        Memory.PostProcessing.Enqueue(() => { new Drop(this.Position); });
         Memory.ToDelete.Add(this);
     }
 }

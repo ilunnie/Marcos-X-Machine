@@ -35,9 +35,10 @@ public class Drop : Entity
         return null;
     }
 
-    private static List<Drop> Discart = new();
     private static List<Drop> ToPlayer = new();
     public static bool PlayerInDrop => ToPlayer.Count > 0;
+    public static void Clear()
+        => Drop.ToPlayer.Clear();
 
     public Entity Entity { get; set; }
     private double _distance;
@@ -63,15 +64,8 @@ public class Drop : Entity
     {
         if (entity.Mob is not Player || entity is Projectile) return;
 
-        Drop.Discart.Add(this);
-    }
-
-    public override void Draw(float angle = 0, int layer = 1)
-    {
-        Drop.ToPlayer.Clear();
-        Drop.ToPlayer.AddRange(Drop.Discart);
-        Drop.Discart.Clear();
-        base.Draw(angle, layer);
+        if (!Drop.ToPlayer.Contains(this))
+            Drop.ToPlayer.Add(this);
     }
 
     public static void Get(Player player)
@@ -95,7 +89,6 @@ public class Drop : Entity
         }
         if (closer is null) return;
         Drop.ToPlayer.Clear();
-        Drop.Discart.Clear();
         closer.Destroy();
         for (int i = 0; i < player.MaxHand && i < player.Hands.Count; i++)
         {

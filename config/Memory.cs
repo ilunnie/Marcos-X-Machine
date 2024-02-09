@@ -47,6 +47,7 @@ public static class Memory
 
     public static void Update()
     {
+        Drop.Clear();
         Collide();
         Collision.VerifyCollision();
         Colliders.Clear();
