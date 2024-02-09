@@ -8,7 +8,7 @@ public class ZagoBot : Bot
     {
         this.Hands.Add(new Hand(this, new VandalReaver(), 0));
 
-        this.MaxLife = 150;
+        this.MaxLife = 100;
         this.Life = 150;
         this.Speed = 0.00085f;
         this.distanceFromPlayer = 600;
