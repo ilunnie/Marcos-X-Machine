@@ -7,7 +7,7 @@ public class IceStaff : Entity
     private float Angle = 0;
     public IceStaff(PointF position)
     {
-        this.Name = "Robot head";
+        this.Name = "Ice Staff";
 
         this.Size = new SizeF(60, 130);
         this.Position = position;
