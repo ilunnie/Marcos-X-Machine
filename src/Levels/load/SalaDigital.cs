@@ -40,6 +40,5 @@ public class SalaDigitalLoad : Loader
                 new PointF(640, 430),
                 new EtsLevel()
             ))
-            .Then(() => new Drop(new PointF(800, 500)))
-                ;
+            ;
 }
