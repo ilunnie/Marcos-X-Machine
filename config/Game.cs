@@ -9,7 +9,7 @@ public class Game : App
     {
         this.form.Cursor = new Cursor("src/sprites/cursor.cur");
 
-        Memory.Level = new EntradaDTALevel();
+        Memory.Level = new Menu();
         
         Sound.SetMusicVolume(40);
         Sound.SetEffectVolume(100);
