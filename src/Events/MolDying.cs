@@ -53,6 +53,7 @@ public class MolDying : IEvent
             state++;
         },
         () => {
+            Sound.StopMusics();
             Camera.Zoom = 1;
             state++;
         },
