@@ -39,7 +39,7 @@ public class EntradaDTALevel : ILevel
             new Teleport(
                 new PointF((4 * 3) * (TileSets.spriteMapSize.Width / 3), 9 * 3 * (TileSets.spriteMapSize.Height / 3)),
                 new SizeF(TileSets.spriteMapSize.Width / 2, TileSets.spriteMapSize.Height / 3 * 2),
-                new PointF(TileSets.spriteMapSize.Width * 7.2f, TileSets.spriteMapSize.Height * 5),
+                new PointF(TileSets.spriteMapSize.Width * 7.2f, TileSets.spriteMapSize.Height * 5.07f),
                 new DTALevel()
             );
             new EventCaller(

@@ -35,7 +35,10 @@ public class MolFaseDois : Bot
     public override void OnDestroy()
     {
         // Memory.PostProcessing.Enqueue(() => {new Drop(new ElectricRoboticGuitar(), this.Entity.Position);});
+        var deadPosition = this.Entity.Position;
+        Memory.PostProcessing.Enqueue(() => new Drop(new ElectricRoboticGuitar(), deadPosition));
         this.Entity.Mob = null;
+        Memory.ToDelete.Add(this.Entity);
         this.Entity = null;
     }
 

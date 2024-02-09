@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public class DTALevel : ILevel
 {
-    private IEvent nowEvent = null;
+    private IEvent nowEvent = new Spotlights();
     public IEvent Event { get => nowEvent; set => nowEvent = value; }
 
     private PointF InitialPosition => new PointF(TileSets.spriteMapSize.Width * 7.2f, TileSets.spriteMapSize.Height * 5);
@@ -27,6 +27,19 @@ public class DTALevel : ILevel
     {
         if (Event is not null) { Event = Event.OnFrame(); return; }
         Player.Entity.FocusCam();
+        if (!IsClear && Memory.AllEnemiesDead)
+        {
+            IsClear = true;
+            new Teleport(
+                new PointF(7 * TileSets.spriteMapSize.Width, 3.7f * TileSets.spriteMapSize.Height),
+                new SizeF(TileSets.spriteMapSize.Width, TileSets.spriteMapSize.Height / 3 * 2),
+                new PointF((10 * 3) * (TileSets.spriteMapSize.Width / 3), (2 + 10 * 3) * (TileSets.spriteMapSize.Height / 3)),
+                new EntradaDTALevel()
+            );
+            player.Destiny = new PointF(
+                TileSets.spriteMapSize.Width * 7.5f,
+                TileSets.spriteMapSize.Height * 3);
+        }
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
