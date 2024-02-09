@@ -7,8 +7,8 @@ public class Kirby : Bot
 {
     public Kirby()
     {
-        this.MaxLife = 50;
-        this.Life = 50;
+        this.MaxLife = 30;
+        this.Life = 30;
         this.Speed = 0.001f;
         this.distanceFromPlayer = 0;
     }
