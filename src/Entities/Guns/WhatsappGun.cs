@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 public class WhatsappGun : Entity
 {
@@ -33,7 +34,7 @@ public class WhatsappGun : Entity
         });
         this.Thumbnail = sprite;
     }
-    public WhatsappGun() : this(new PointF(0, 0)) {}
+    public WhatsappGun() : this(new PointF(0, 0)) { }
     public override void Draw(float angle = 0, int layer = 3)
     {
         Angle = angle;
@@ -47,20 +48,25 @@ public class WhatsappGun : Entity
 
         this.cooldown = 400;
         this.recoil = 1500;
-        
+
         var size = this.Size.Width * 0.5f;
         var altura = this.Size.Height * 0.55f;
         var cos = MathF.Cos(MathF.PI * Angle / 180);
         var sin = MathF.Sin(MathF.PI * Angle / 180);
         var happyPoint = new PointF(Position.X + cos * size + altura * sin, Position.Y + sin * size - altura * cos);
 
-        new WhatsappProjectile(happyPoint){
+        new WhatsappProjectile(happyPoint)
+        {
             Mob = this.Mob,
             cooldown = 3000,
             Angle = Angle,
             Speed = 1f,
         };
-        Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/CShark/cesharp.wav").Play();
+
+
+        var s1 = Sound.OpenFrom(SoundType.Effect, "src/Sounds/Guns/ZapGun/zapzap.wav");
+        // s1.Wait(s1.Play);
+        s1.Play();
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);

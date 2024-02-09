@@ -5,10 +5,6 @@ using System.Windows.Forms;
 public class DubstepGun : Entity
 {
     private float Angle = 0;
-    private long totalTime;
-    private long initialTime = 20;
-    private long seconds = 0;
-    private DateTime timeClicked;
     public DubstepGun(PointF position)
     {
         this.Name = "Dubstep gun";
@@ -91,7 +87,6 @@ public class DubstepGun : Entity
             s2.Play();
         else
             s1.PlayAt(75);
-        timeClicked = DateTime.Now;
     }
 
     public override void Spawn() => Memory.Colliders.Add(this);
