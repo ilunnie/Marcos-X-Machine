@@ -7,10 +7,11 @@ public class Drop : Entity
 {
     public static List<(Type Entity, float Opportunity, double distance)> drops { get; set; } = new List<(Type, float, double)>
     {
-        (typeof(BulletGun), 20, 30),
-        (typeof(DubstepGun), 1, 30),
-        (typeof(GunBasicBot), 20, 25),
-        (typeof(AcidGun), 10, 30),
+        (typeof(BulletGun), 25, 30),
+        (typeof(GunBasicBot), 25, 25),
+        (typeof(AcidGun), 20, 30),
+        (typeof(WhatsappGun), 20, 30),
+        (typeof(DubstepGun), 10, 30),
     };
     private static Random rand = new Random();
     public static double Distance { get; set; }

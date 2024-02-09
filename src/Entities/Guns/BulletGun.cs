@@ -56,7 +56,7 @@ public class BulletGun : Entity
 
         new GunProjectile(happyPoint){
             Mob = this.Mob,
-            cooldown = 5000,
+            cooldown = 2000,
             Angle = Angle,
             Speed = 1f,
         };

@@ -40,15 +40,6 @@ public class SubterraneoLoad : Loader
             })
             .Then(() => player.Entity.FocusCam(false))
             .Then(() => new Trevis(){ Entity = new TrevisEntity(new PointF(975, 920))})
-            .Then(() => new Teleport(
-                new PointF(15 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
-                new SizeF(20 , 20),
-                new PointF(1680, 430),
-                new EtsLevel()
-            ))
-            // .Then(() => {
-            //     new ZagoBot () {Entity = new ZagoBotEntity(new PointF(900,1000))};
-            //     })
-                ;
+            ;
 
 }

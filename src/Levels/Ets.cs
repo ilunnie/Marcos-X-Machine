@@ -43,6 +43,12 @@ public class EtsLevel : ILevel
                 new PointF((2 + 8 * 3) * (TileSets.spriteMapSize.Width / 3), 5 * TileSets.spriteMapSize.Height),
                 new FrenteEtsLevel()
             );
+            new Teleport(
+                new PointF(14 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 3 * TileSets.spriteMapSize.Height ),
+                new SizeF(20 , 20),
+                new PointF(1680, 930),
+                new SubterraneoLevel()
+            );
             player.Destiny = new PointF(
                 (2f + 21 * 3) * (TileSets.spriteMapSize.Width / 3),
                 3 * TileSets.spriteMapSize.Height

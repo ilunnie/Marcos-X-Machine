@@ -36,12 +36,6 @@ public class EtsLoad : Loader
                 Camera.MinimumLimitY = Ymin * TileSets.spriteMapSize.Height;
             })
             .Then(() => player.Entity.FocusCam(false))
-            .Then(() => new Teleport(
-                new PointF(14 * TileSets.spriteMapSize.Width + TileSets.spriteMapSize.Width / 3, 3 * TileSets.spriteMapSize.Height ),
-                new SizeF(20 , 20),
-                new PointF(1680, 930),
-                new SubterraneoLevel()
-            ))
             .Then(() => {
                 new BasicBot () {Entity = new BasicBotEntity(new PointF(TileSets.spriteMapSize.Width * 5.5f, TileSets.spriteMapSize.Height * 13))};
                 })

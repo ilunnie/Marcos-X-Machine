@@ -57,7 +57,7 @@ public class VandalReaver : Entity
 
         new VandalBulletProjectile(happyPoint){
             Mob = this.Mob,
-            cooldown = 5000,
+            cooldown = 4000,
             Angle = Angle,
             Speed = 1f,
         };

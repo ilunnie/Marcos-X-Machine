@@ -24,11 +24,21 @@ public class SubterraneoLevel : ILevel
     public void OnFrame()
     {
         Player.Entity.FocusCam();
+        if (!IsClear && Memory.AllEnemiesDead)
+        {
+            new Teleport(
+                new PointF(15 * TileSets.spriteMapSize.Width, 3 * TileSets.spriteMapSize.Height + TileSets.spriteMapSize.Height / 3),
+                new SizeF(20 , 20),
+                new PointF(1680, 500),
+                new EtsLevel()
+            );
+        }
+
         foreach (var entity in Memory.Entities)
         {
             if (entity.Mob != null)
                 entity.Mob.OnFrame();
-        }
+        } 
     }
 
     public void OnKeyDown(object o, KeyEventArgs e)

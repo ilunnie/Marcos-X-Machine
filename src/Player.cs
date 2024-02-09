@@ -21,6 +21,9 @@ public class Player : Mob
 
     public Player()
     {
+        var whatsapp = new WhatsappGun();
+        this.Hands.Add(new Hand(this, whatsapp, 30));
+
         var vandal = new VandalReaver();
         this.Hands.Add(new Hand(this, vandal, 30));
 
