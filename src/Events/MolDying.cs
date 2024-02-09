@@ -8,10 +8,13 @@ public class MolDying : IEvent
     private IEvent next = null;
     public IEvent Next { set => next = value; }
 
+    private static Player player = null;
     private static Mob mol = null;
 
     private static int quadro = 0;
     private static long frame = 0;
+    private static bool WaitingClick = false;
+    private static bool Clicking = false;
     private static int state = 0;
     private List<Action> states = new()  {
         () => {
@@ -20,6 +23,19 @@ public class MolDying : IEvent
 
             mol.Entity.Animation = new MolDyingAnimation() { State = quadro };
             if (frame > 100) {
+                quadro++;
+                frame = 0;
+                if (quadro >= 14) state++;
+            };
+            frame += 1 + Memory.Frame;
+        },
+        () => {
+            mol.Entity.Talk("O Rock nunca vai acabar!!!");
+            WaitingClick = true;
+        },
+        () => {
+            mol.Entity.Animation = new MolDyingAnimation() { State = quadro };
+            if (frame > 120) {
                 quadro++;
                 frame = 0;
                 if (quadro >= 28) state++;
@@ -45,15 +61,19 @@ public class MolDying : IEvent
     public IEvent OnFrame()
     {
         if (state >= states.Count) return next;
-        if (mol == null)
+        if (player == null || mol == null)
         {
             foreach (var entity in Memory.Entities)
             {
+                if (entity.Mob is Player)
+                    player = (Player)entity.Mob;
+                    
                 if (entity.Mob is MolFaseDois)
                     mol = (MolFaseDois)entity.Mob;
 
-                if (mol != null) break;
+                if (player != null && mol != null) break;
             }
+            if (player is not null) player.resetMove();
             return this;
         }
         states[state].Invoke();
@@ -72,6 +92,12 @@ public class MolDying : IEvent
 
     public void OnMouseMove(object o, MouseEventArgs e)
     {
-        
+        if (e.Button == MouseButtons.None) Clicking = false;
+        if (WaitingClick && e.Button == MouseButtons.Left && !Clicking)
+        {
+            state++;
+            WaitingClick = false;
+            Clicking = true;
+        }
     }
 }

@@ -80,6 +80,7 @@ public class MolSecondState : IEvent
 
                 if (player != null && mol != null) break;
             }
+            if (player is not null) player.resetMove();
             return this;
         }
         states[state].Invoke();

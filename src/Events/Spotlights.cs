@@ -120,6 +120,7 @@ public class Spotlights : IEvent
 
                 if (player != null) break;
             }
+            if (player is not null) player.resetMove();
             if (player is not null && !player.tp.IsEmpty)
             {
                 player.Entity.Move(player.tp);
