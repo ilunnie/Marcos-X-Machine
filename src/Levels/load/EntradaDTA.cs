@@ -40,7 +40,7 @@ public class EntradaDTAload : Loader
                 new ZagoBot () {Entity = new ZagoBotEntity(new PointF(TileSets.spriteMapSize.Width * 22.5f, TileSets.spriteMapSize.Height * 14.5f))};
             })
             .Then(() => {
-                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 10.5f, TileSets.spriteMapSize.Height * 15))};
+                new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 12.5f, TileSets.spriteMapSize.Height * 15))};
             })
             .Then(() => {
                 new Kirby () {Entity = new KirbyEntity(new PointF(TileSets.spriteMapSize.Width * 25.5f, TileSets.spriteMapSize.Height * 18))};
